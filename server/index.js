@@ -10,8 +10,26 @@ const db = mysql.createConnection({
   user: "root",
   host: "localhost",
   password: "password",
-  database: "employeeSystem",
+  database: "test_db",
+  port: "3306"
 });
+
+db.connect((err)=>{
+  if(err){
+    throw err;
+  }
+  else{
+    console.log("connected")
+  }
+})
+
+db.query("CREATE table testtable(name VARCHAR(255))",(err,rows)=>{
+  if(err){
+    throw err;
+  }
+  else{
+    console.log("created")}
+})
 
 app.post("/create", (req, res) => {
   const name = req.body.name;
