@@ -23,13 +23,13 @@ db.connect((err)=>{
   }
 })
 
-db.query("CREATE table testtable(name VARCHAR(255))",(err,rows)=>{
-  if(err){
-    throw err;
-  }
-  else{
-    console.log("created")}
-})
+// db.query("CREATE table testtable(name VARCHAR(255))",(err,rows)=>{
+//   if(err){
+//     throw err;
+//   }
+//   else{
+//     console.log("created")}
+// })
 
 app.post("/create", (req, res) => {
   const name = req.body.name;
