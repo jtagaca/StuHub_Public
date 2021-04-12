@@ -7,9 +7,11 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
+import "../index.css";
+
 function test(props) {
   return (
-    <div>
+    <div className="container">
       <Carousel>
         <Carousel.Item>
           <img
