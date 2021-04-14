@@ -23,6 +23,7 @@ db.connect((err)=>{
   }
 })
 
+console.log("hello");
 // db.query("CREATE table testtable(name VARCHAR(255))",(err,rows)=>{
 //   if(err){
 //     throw err;
