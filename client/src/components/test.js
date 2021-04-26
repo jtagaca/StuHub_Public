@@ -51,68 +51,56 @@ function Test(props) {
 
   return (
     <div>
-      <Container className="align-left ">
-
-        <Col lg={6}  >
-          <h1>Welcome</h1>
-        </Col>
-        <Col lg={6}  >
-          <h1>$name of the student</h1>
-        </Col>
-
- 
-        
+      <div>
         <Row>
-        <Col>
-          <h1>To the University of CSA, Bakersfield</h1>
-        </Col>
-      </Row>
-      </Container>
-      <div className="d-flex align-items-center justify-content-center">
-
-        Hello there
-      </div>
-     
-
-      <Row>
-        <Col>
-          <h1>To the University of CSA, Bakersfield</h1>
-        </Col>
-      </Row>
-
-
-      
-      <Row>
-        <Col>
-          <h1>Student ID: $1000001</h1>
-        </Col>
-      </Row>
-      <Buttond variant="light">View all Courses</Buttond>{" "}
-
-      <Buttond variant="light">View GPA</Buttond>{" "}
-
-      <Buttond variant="light">Show letter Grade every student got in the current semester</Buttond>{" "}
-      <FormsB>
-        <Row>
-          <Col>
-            <FormsB.Control placeholder="First name" />
+          <Col lg={6} className="border">
+            <h1>Welcome</h1>
+            <h2>$First name $last Name</h2>
           </Col>
-          <Col>
-            <FormsB.Control placeholder="Last name" />
+
+          <Col lg={6} className="border2">
+            <div>
+              <h1>To the University of CSA, Bakersfield</h1>
+            </div>
           </Col>
         </Row>
-      </FormsB>
-      <Button variant="outlined" color="primary" href="#outlined-buttons">
-        Link
-      </Button>
-      <FormControl>
-        <InputLabel htmlFor="my-input">Email address</InputLabel>
-        <Input id="my-input" aria-describedby="my-helper-text" />
-        <FormHelperText id="my-helper-text">
-          We'll never share your email.
-        </FormHelperText>
-      </FormControl>
-      <Buttond variant="dark">Find</Buttond>{" "}
+      </div>
+      <div>
+        <div className="borderhello ">
+          <div className="col align-items-center">
+            <h1>Hello there</h1>
+          </div>
+
+          <div>
+            <Row>
+              <Col xl={12}>
+                <h1>Student ID: $1000001</h1>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      </div>
+      <Row></Row>
+      <Buttond variant="light">View all Courses</Buttond>{" "}
+      <Buttond variant="light">View GPA</Buttond>{" "}
+      <Buttond variant="light">
+        Show letter Grade every student got in the current semester
+      </Buttond>{" "}
+      {/* <div className="circle-wrapper">
+        <div className="success circle"></div>
+            <div className="icon">
+               <div className="fa fa-check"></div>
+            </div>
+        <div>
+      </div> */}
+      <div className="circle-wrapper">
+        <div className="warning circle"></div>
+        <div className="icon">
+        <Buttond variant="light">View all Courses</Buttond>{" "}
+
+          <i classname="fa fa-exclamation"></i>
+        </div>
+      </div>
     </div>
   );
 }

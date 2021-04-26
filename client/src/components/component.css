@@ -1,7 +1,113 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
-.container{
-    background-color:white;
-    border:40px;
-    border-color: black;
-
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
+.container {
+  background-color: white;
+  border: 40px;
+  border-color: black;
 }
+
+.fancy {
+  /* Within a circle, centered text looks prettier. */
+  text-align: center;
+
+  /* Let's avoid our text touching the border. As
+       our text will still flow in a square, it looks
+       nicer that way, giving the feeling that it's a "real"
+       circle. */
+  padding: 1em;
+
+  /* The border will make the circle visible.
+       You could also use a background, as
+       backgrounds are clipped by border radius */
+  border: 0.5em solid black;
+
+  /* Let's make sure we have a square.
+       If it's not a square, we'll get an
+       ellipsis rather than a circle */
+  width: 4em;
+  height: 4em;
+
+  /* and let's turn the square into a circle */
+  border-radius: 100%;
+}
+
+.border {
+  border-color: aqua;
+  border-width: 2px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  background-color: white;
+  margin-right: 0;
+}
+
+.border2 {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  background-color: white;
+  border-color: aqua;
+  border-width: 2px;
+}
+.borderhello {
+  background-color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
+
+  box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 10px -10px 0px -3px,
+    rgb(31, 193, 27) 10px -10px, rgb(255, 255, 255) 20px -20px 0px -3px,
+    rgb(255, 217, 19) 20px -20px, rgb(255, 255, 255) 30px -30px 0px -3px,
+    rgb(255, 156, 85) 30px -30px, rgb(255, 255, 255) 40px -40px 0px -3px,
+    rgb(255, 85, 85) 40px -40px;
+}
+
+.circle-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 10px;
+}
+
+.icon {
+  position: absolute;
+  color: #fff;
+  font-size: 55px;
+  top: 55px;
+  left: 55px;
+  transform: translate(-50%, -50%);
+}
+
+.circle {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 2.5px;
+  background-clip: content-box;
+  animation: spin 10s linear infinite;
+}
+
+.circle-wrapper:active .circle {
+  animation: spin 2s linear infinite;
+}
+
+.success {
+  background-color: #4bb543;
+  border: 2.5px dashed #4bb543;
+}
+
+.error {
+  background-color: #ca0b00;
+  border: 2.5px dashed #ca0b00;
+}
+
+.warning {
+  background-color: #f0d500;
+  border: 2.5px dashed #f0d500;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
