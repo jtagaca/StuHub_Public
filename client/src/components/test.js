@@ -86,14 +86,14 @@ function Test(props) {
             </Col>
           </Row>
         </div>
-        <div>
-          <Row>
+        <div className="mx-5">
+          <Row className="container-fluid mx-0" >
             <Col lg={6} className="border bordercolor ">
               <h1>Welcome</h1>
               <h2>$First name $last Name</h2>
             </Col>
 
-            <Col lg={6} className="border2 bordercolor">
+            <Col lg={6} className="border bordercolor">
               <div>
                 <h1>To the University of CSA, Bakersfield</h1>
               </div>
