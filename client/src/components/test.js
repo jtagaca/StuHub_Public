@@ -54,83 +54,90 @@ function Test(props) {
   };
   var ReactFitText = require("react-fittext");
   return (
-    <div className="uicontainer">
-      <ReactFitText compressor={3}>
-        <h1>
-          <Clock format={"h:mm:ssa"} interval={1000} ticking={true} />
-        </h1>
-      </ReactFitText>
-      <div>
-        <Row>
-          <Col lg={6} className="border bordercolor ">
-            <h1>Welcome</h1>
-            <h2>$First name $last Name</h2>
-          </Col>
-
-          <Col lg={6} className="border2 bordercolor">
-            <div>
-              <h1>To the University of CSA, Bakersfield</h1>
-            </div>
-          </Col>
-        </Row>
+    <div>
+      <div className="float-start my-0">
+        <div className="cloud front">
+          <span className="left-front"></span>
+          <span className="right-front"></span>
+        </div>
+        <span className="sun sunshine"></span>
+        <span className="sun"></span>
+        <div className="cloud back">
+          <span className="left-back"></span>
+          <span className="right-back"></span>
+        </div>
       </div>
       <div>
-        <div className="borderhello bordercolor">
-          <div className="col align-items-center">
-            <h1>Hello there</h1>
-          </div>
-
-          <div>
-            <Row>
-              <Col xl={12}>
-                <h1>Student ID: $1000001</h1>
-              </Col>
-            </Row>
+        <div className="circle-wrapper">
+          <div className="warning circle"></div>
+          <div className="icon">
+            <Buttond variant="light">View all Courses</Buttond>{" "}
+            <i classname="fa fa-exclamation"></i>
           </div>
         </div>
       </div>
-      <Row></Row>
-      <Buttond variant="light">View all Courses</Buttond>{" "}
-      <Buttond variant="light">View GPA</Buttond>{" "}
-      <Buttond variant="light">
-        Show letter Grade every student got in the current semester
-      </Buttond>{" "}
-      {/* <div className="circle-wrapper">
+      <div className="uicontainer mt-5">
+        <div className="container-fluid mt-3">
+          <Row>
+            <Col lg={12}>
+              <h1>
+                <Clock format={"h:mm:ssa"} interval={1000} ticking={true} />
+              </h1>
+            </Col>
+          </Row>
+        </div>
+        <div>
+          <Row>
+            <Col lg={6} className="border bordercolor ">
+              <h1>Welcome</h1>
+              <h2>$First name $last Name</h2>
+            </Col>
+
+            <Col lg={6} className="border2 bordercolor">
+              <div>
+                <h1>To the University of CSA, Bakersfield</h1>
+              </div>
+            </Col>
+          </Row>
+        </div>
+        <div>
+          <div className="borderhello bordercolor">
+            <div className="col align-items-center">
+              <h1>Hello there</h1>
+            </div>
+
+            <div>
+              <Row>
+                <Col xl={12} className="border">
+                  <h1>Student ID: $1000001</h1>
+                </Col>
+              </Row>
+            </div>
+          </div>
+        </div>
+        <Row></Row>
+        <Buttond variant="light">View all Courses</Buttond>{" "}
+        <Buttond variant="light">View GPA</Buttond>{" "}
+        <Buttond variant="light">
+          Show letter Grade every student got in the current semester
+        </Buttond>{" "}
+        {/* <div className="circle-wrapper">
         <div className="success circle"></div>
             <div className="icon">
                <div className="fa fa-check"></div>
             </div>
         <div>
       </div> */}
-      <div className="circle-wrapper">
-        <div className="warning circle"></div>
-        <div className="icon">
-          <Buttond variant="light">View all Courses</Buttond>{" "}
-          <i classname="fa fa-exclamation"></i>
-        </div>
-      </div>
-      <div className="cloud front">
-        <span className="left-front"></span>
-        <span className="right-front"></span>
-      </div>
-      <span className="sun sunshine"></span>
-      <span className="sun"></span>
-      <div className="cloud back">
-        <span className="left-back"></span>
-        <span className="right-back"></span>
-      </div>
-      <div className="gradient-border">Rainbow border</div>
-      {/* <div className="box">Rainbow border</div> */}
-      <div class="background-img">
-        <div class="box">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div class="content">
+        {/* <div className="gradient-border">Rainbow border</div> */}
+        {/* <div className="box">Rainbow border</div> */}
+        {/* <div className="background-img">
+        <div className="box">
+       
+          <div className="content">
             <h2>My animated Border </h2>
           </div>
         </div>
+      </div> */}
       </div>
     </div>
   );
