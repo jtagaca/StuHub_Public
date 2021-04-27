@@ -6,9 +6,13 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Buttond from "react-bootstrap/Button";
-import "./component.css";
+import "./component.scss";
 import { useState } from "react";
 import Axios from "axios";
+import Moment from "react-moment";
+import "moment-timezone";
+import Clock from "react-live-clock";
+import "./animate.scss";
 import {
   FormControl,
   InputLabel,
@@ -48,17 +52,22 @@ function Test(props) {
       ]);
     });
   };
-
+  var ReactFitText = require("react-fittext");
   return (
-    <div>
+    <div className="uicontainer">
+      <ReactFitText compressor={3}>
+        <h1>
+          <Clock format={"h:mm:ssa"} interval={1000} ticking={true} />
+        </h1>
+      </ReactFitText>
       <div>
         <Row>
-          <Col lg={6} className="border">
+          <Col lg={6} className="border bordercolor ">
             <h1>Welcome</h1>
             <h2>$First name $last Name</h2>
           </Col>
 
-          <Col lg={6} className="border2">
+          <Col lg={6} className="border2 bordercolor">
             <div>
               <h1>To the University of CSA, Bakersfield</h1>
             </div>
@@ -66,7 +75,7 @@ function Test(props) {
         </Row>
       </div>
       <div>
-        <div className="borderhello ">
+        <div className="borderhello bordercolor">
           <div className="col align-items-center">
             <h1>Hello there</h1>
           </div>
@@ -109,6 +118,19 @@ function Test(props) {
       <div className="cloud back">
         <span className="left-back"></span>
         <span className="right-back"></span>
+      </div>
+      <div className="gradient-border">Rainbow border</div>
+      {/* <div className="box">Rainbow border</div> */}
+      <div class="background-img">
+        <div class="box">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <div class="content">
+            <h2>My animated Border </h2>
+          </div>
+        </div>
       </div>
     </div>
   );
