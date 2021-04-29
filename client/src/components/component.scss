@@ -4,9 +4,11 @@
   border: 40px;
   border-color: black;
 }
-// @import "../node_modules/bootstrap/scss/bootstrap";
+// @import "../node_modules/bootstrap/scss/boo";
 
-
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/_variables";
+// @import "animate.scss";
 
 .fancy {
   /* Within a circle, centered text looks prettier. */
@@ -33,19 +35,25 @@
   border-radius: 100%;
 }
 
+.animate-271724 {
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  animation-timing-function: ease;
+  animation-fill-mode: none;
+}
+
 .border {
-  
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  background-color:lightblue;
-  
- 
+  background-color: $primary;
 }
 
 .border2 {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-  background-color: white;
-
+  background-color: $gray-100;
 }
 .borderhello {
   background-color: white;
@@ -67,6 +75,32 @@
   height: 100px;
   float: left;
   margin: 10px;
+}
+
+.row > .border > h1 {
+  animation: floatX 3400ms both;
+  transform-origin: left;
+}
+
+@keyframes floatX {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-20px);
+  }
+}
+
+.animate-113990 {
+  animation-name: bounceInDown;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in;
+  animation-fill-mode: none;
 }
 
 .icon {
@@ -204,15 +238,10 @@
   box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
     rgba(0, 0, 0, 0.05) 0px 5px 10px;
   background-color: white;
-  margin-top: 2%;
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-bottom: 0%;
-  flex: 1;
 }
 
 .bordercolor {
-  background-color: #0d6efd;
+  background-color: $purple;
 }
 
 .dd {
