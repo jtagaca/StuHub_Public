@@ -1,0 +1,31 @@
+.animate-801856 {
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease;
+  animation-fill-mode: none;
+}
+.spacing1 {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.spacingforsearch {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10%;
+  margin-top: 10%;
+}
+.spacing2 {
+  margin-left: 25%;
+  margin-right: 0%;
+}
+.defaultspacing {
+  margin: 5%;
+  padding: 1%;
+}
+.bgcoloradmin {
+  background-color: white;
+}
