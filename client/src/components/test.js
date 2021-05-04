@@ -6,6 +6,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Dropdown, Row, Col } from "react-bootstrap";
 import Formb from "react-bootstrap/Form";
+import Carousel from "react-bootstrap/Carousel";
 import "./gg.css";
 function test() {
   return (
@@ -147,6 +148,10 @@ function test() {
           </div>
         </div>
       </div>
+      <Carousel.Caption>
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </Carousel.Caption>
     </div>
   );
 }

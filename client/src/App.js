@@ -7,6 +7,7 @@ import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
 import Test from "./components/test";
 import User from "./components/user";
+import ptest from "./components/ptest";
 function App() {
   return (
     <Router>
@@ -38,6 +39,11 @@ function App() {
                     Profile
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/ptest"}>
+                    ptest
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -49,6 +55,7 @@ function App() {
           <Route path="/sign-up" component={SignUp} />
           <Route path="/test" component={Test} />
           <Route path="/Profile" component={User} />
+          <Route path="/ptest" component={ptest} />
           {/* <Route path="/Profile" component={} /> */}
         </Switch>
       </div>
