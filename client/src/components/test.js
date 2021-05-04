@@ -3,6 +3,8 @@ import { Button, ButtonGroup, Fab, Form, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Buttond from "react-bootstrap/Button";
 import RemoveIcon from "@material-ui/icons/Remove";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { Dropdown } from "react-bootstrap";
 import "./gg.css";
 function test() {
   return (
@@ -21,7 +23,6 @@ function test() {
             <Fab color="primary" aria-label="add">
               <AddIcon />
             </Fab>
-
             <div className="float-none">
               <Fab color="primary" aria-label="add">
                 <RemoveIcon />
@@ -47,8 +48,7 @@ function test() {
           </div>
         </div>
       </div>
-
-      <div className="uicontainer">
+      <div className="bgcoloradmin">
         <h1>Actions</h1>
         <div>
           <h1> Common Queries</h1>
@@ -57,20 +57,37 @@ function test() {
             color="primary"
             aria-label="contained primary button group"
           >
-            <Button>Select the student ID with the highest GPA</Button>
-            <Button>Show courses that are taken by all students</Button>
+            <Button></Button>
+            <Button></Button>
             <Button>List all the courses that a student=name has taken</Button>
           </ButtonGroup>
-
-          {/* <ButtonGroup
-            variant="contained"
-            color="primary"
-            aria-label="contained primary button group"
+        </div>
+        <div>
+          <DropdownButton
+            as={ButtonGroup}
+            menuAlign={{ lg: "right" }}
+            title="More Queries"
+            id="dropdown-menu-align-responsive-1"
           >
-            <Button>Select the student ID with the highest GPA</Button>
-            <Button>Show courses that are taken by all students</Button>
-            <Button>List all the courses that a student=name has taken</Button>
-          </ButtonGroup> */}
+            <Dropdown.Item eventKey="1">
+              Show students who do not have a GPA
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="2">
+              Select the faculty that advises the most students.
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="3">
+              Show a letter grade every student has in common.
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="4">
+              Select student ID’s taking least 1 course in the current semester.
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="5">
+              Select the student ID with the highest GPA.
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="6">
+              Show courses that are taken by all students
+            </Dropdown.Item>
+          </DropdownButton>
         </div>
       </div>
     </div>
