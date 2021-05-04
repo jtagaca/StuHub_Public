@@ -8,7 +8,6 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
 import "../index.css";
-
 function test(props) {
   return (
     <div className="container">
@@ -30,7 +29,6 @@ function test(props) {
             src="holder.js/800x400?text=Second slide&bg=282c34"
             alt="Second slide"
           />
-
           <Carousel.Caption>
             <h3>Second slide label</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -42,7 +40,6 @@ function test(props) {
             src="holder.js/800x400?text=Third slide&bg=20232a"
             alt="Third slide"
           />
-
           <Carousel.Caption>
             <h3>Third slide label</h3>
             <p>
@@ -51,14 +48,12 @@ function test(props) {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      
       <h1> GPA finder... </h1>
       <Form.Control as="select">
         <option>Default select</option>
         <option>Default select</option>
         <option>Default select</option>
       </Form.Control>
-
       <h1> Find a student </h1>
       <InputGroup className="mb-3">
         <FormControl
@@ -81,7 +76,6 @@ function test(props) {
           <Form.Control type="range" />
         </Form.Group>
       </Form>
-
       <Form>
         <Form.Row>
           <Col xs={7}>
@@ -105,11 +99,8 @@ function test(props) {
           </Col>
         </Row>
       </Form>
-   
-      <Button variant="dark">Find</Button>{' '}
-      
+      <Button variant="dark">Find</Button>{" "}
     </div>
   );
 }
-
 export default test;

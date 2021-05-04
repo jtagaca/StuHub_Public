@@ -16,6 +16,7 @@ function test() {
           <div className=" float-left spacing1 ">
             {/* should be float left */}
             <div className="float-left  ">
+              <h1>New User</h1>
               <Formb>
                 <Row>
                   <Col>
@@ -40,7 +41,7 @@ function test() {
               </Formb>
             </div>
             <div className="float-none">
-              {/* this is for removing user */}
+              <h1>Delete User</h1> {/* this is for removing user */}
               <Formb>
                 <Row>
                   <Col>
@@ -61,7 +62,8 @@ function test() {
             </div>
           </div>
         </div>
-        <div className="margin:5%;">
+        <div>
+          <h2>Find a User</h2>
           <div className="float-left mx-2">
             <form>
               <TextField id="standard-basic" label="First Name" />
@@ -79,7 +81,7 @@ function test() {
           </div>
         </div>
       </div>
-      <div className="bgcoloradmin">
+      <div className="uicontainer defaultspacing bgcoloradmin">
         <h1>Actions</h1>
         <div>
           <div>
