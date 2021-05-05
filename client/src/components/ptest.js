@@ -14,7 +14,7 @@ import "../index.css";
 
 function ptest() {
   return (
-    <div style={{position: 'absolute', top: 64, marginLeft: 0}}>
+    <div style={{position: 'absolute', top: 64}}>
     <Tabs>
         <TabList>
             <Tab>Find User</Tab>
@@ -26,10 +26,10 @@ function ptest() {
           <form>
             <div className="auth-wrapper">
               <div className="auth-inner">
-                <h3>Enter User ID or enter First and Last Name</h3>
+                <h3>Enter User ID</h3>
 
                 <div className="form-group">
-                  <label>Student ID</label>
+                  <label>User ID</label>
                   <input
                     type="text"
                     className="form-control"
@@ -54,7 +54,7 @@ function ptest() {
                   />
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">
-                  Find User
+                  Search
                 </button>
               </div>
             </div>
@@ -67,7 +67,7 @@ function ptest() {
               <h3>Enter New User Profile</h3>
 
               <div className="form-group">
-                <label>Student ID</label>
+                <label>User ID</label>
                 <input
                   type="text"
                   className="form-control"
@@ -125,17 +125,46 @@ function ptest() {
         </form>
         </TabPanel>
         <TabPanel>
-            <h3>title 2 junk</h3>
+          <form>
+            <div className="auth-wrapper">
+              <div className="auth-inner">
+                <h3>Enter User ID to Update</h3>
+
+                <div className="form-group">
+                  <label>Student ID</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="e.g. 100001"
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block">
+                  Update User
+                </button>
+              </div>
+            </div>
+          </form>
         </TabPanel>
         <TabPanel>
-        <h3>Delete User Account</h3>
-              <Formb>
-                <Row>
-                  <Col>
-                    <Formb.Control placeholder="Student ID" />
-                  </Col>
-                </Row>
-              </Formb>
+        <form>
+            <div className="auth-wrapper">
+              <div className="auth-inner">
+                <h3>Enter User ID to Delete</h3>
+
+                <div className="form-group">
+                  <label>Student ID</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="e.g. 100001"
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block" style={{backgroundColor:'red'}}>
+                  Delete User
+                </button>
+              </div>
+            </div>
+          </form>
         </TabPanel>
     </Tabs>
     </div>
