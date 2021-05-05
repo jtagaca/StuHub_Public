@@ -7,9 +7,9 @@
   animation-timing-function: ease;
   animation-fill-mode: none;
 }
-:root {
+/* :root {
   margin: 30px 20px;
-}
+} */
 .spacing1 {
   margin-left: 5%;
   margin-right: 5%;
