@@ -49,7 +49,7 @@ function Test(props) {
       <div className="float-start my-0">
         <div className="cloud front">
           <span className="left-front"></span>
-          asdasdhjkasjdhkj
+
           <span className="right-front"></span>
         </div>
         <span className="sun sunshine"></span>
