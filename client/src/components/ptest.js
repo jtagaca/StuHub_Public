@@ -131,7 +131,7 @@ function ptest() {
                 <h3>Enter User ID to Update</h3>
 
                 <div className="form-group">
-                  <label>Student ID</label>
+                  <label>User ID</label>
                   <input
                     type="text"
                     className="form-control"
