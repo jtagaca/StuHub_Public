@@ -8,8 +8,13 @@
   animation-fill-mode: none;
 }
 .spacing1 {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.spacing3 {
+  margin-left: 20%;
+  margin-right: 0%;
 }
 
 .spacingforsearch {
@@ -24,9 +29,12 @@
 }
 .defaultspacing {
   margin: 5%;
-  padding: 0;
+  padding: 5%;
 }
 .bgcoloradmin {
   background-color: white;
   flex: 1;
+}
+.top {
+  margin-top: 20%;
 }

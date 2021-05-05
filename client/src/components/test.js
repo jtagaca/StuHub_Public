@@ -10,7 +10,7 @@ import Carousel from "react-bootstrap/Carousel";
 import "./gg.css";
 function test() {
   return (
-    <div>
+    <div className="top">
       <div className="uicontainer bgcoloradmin defaultspacing">
         {/* how do we use the classes that are in bootstrap in here like rounded */}
         <div>
@@ -40,6 +40,9 @@ function test() {
                   </Col>{" "}
                 </Row>
               </Formb>
+              <Fab color="primary" aria-label="add">
+                <AddIcon />
+              </Fab>
             </div>
             <div className="float-none">
               <h1>Delete User</h1> {/* this is for removing user */}
@@ -50,32 +53,27 @@ function test() {
                   </Col>
                 </Row>
               </Formb>
-            </div>
-          </div>
-          <div className="float-left  spacing2">
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
-            <div className="float-none">
               <Fab color="primary" aria-label="add">
                 <RemoveIcon />
               </Fab>
             </div>
           </div>
         </div>
-        <div>
+        <div className="mt-5">
           <h2>Find a User</h2>
-          <div className="float-left mx-2">
-            <form>
-              <TextField id="standard-basic" label="First Name" />
-            </form>
+          <div className="spacing3">
+            <div className="float-left mx-2">
+              <form>
+                <TextField id="standard-basic" label="First Name" />
+              </form>
+            </div>
+            <div className="float-left">
+              <form>
+                <TextField id="standard-basic" label="Last Name" />
+              </form>
+            </div>
           </div>
-          <div className="float-left">
-            <form>
-              <TextField id="standard-basic" label="Last Name" />
-            </form>
-          </div>
-          <div>
+          <div className="">
             <Button variant="contained" color="primary">
               Search
             </Button>
@@ -148,10 +146,6 @@ function test() {
           </div>
         </div>
       </div>
-      <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
     </div>
   );
 }
