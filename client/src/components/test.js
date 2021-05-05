@@ -84,23 +84,28 @@ function test() {
         <h1>Actions</h1>
         <div>
           <div>
-            <div className="float-left mx-2">
-              <form>
-                <TextField id="standard-basic" label="Value" />
-              </form>
+            <div className="marginleft">
+              <div className="float-left mx-2">
+                <form>
+                  <TextField id="standard-basic" label="Value" />
+                </form>
+              </div>
+              <div className="float-left ml-5">
+                <form>
+                  <TextField id="standard-basic" label="Update where" />
+                </form>
+              </div>
             </div>
-            <div className="float-left">
-              <form>
-                <TextField id="standard-basic" label="Update where" />
-              </form>
-            </div>
-            <div>
+            <div className="w-2">
               <Dropdown as={ButtonGroup}>
-                <Button variant="primary">Update</Button>
+                <Button className="w-5" variant="primary">
+                  Update
+                </Button>
                 <Dropdown.Toggle
                   split
                   variant="success"
                   id="dropdown-split-basic"
+                  // size={}
                 />
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1">User</Dropdown.Item>

@@ -7,6 +7,9 @@
   animation-timing-function: ease;
   animation-fill-mode: none;
 }
+:root {
+  margin: 30px 20px;
+}
 .spacing1 {
   margin-left: 5%;
   margin-right: 5%;
@@ -17,6 +20,13 @@
   margin-right: 0%;
 }
 
+.fontButton {
+  font-size: 10px;
+  color: white;
+}
+.marginleft {
+  margin-left: 20%;
+}
 .spacingforsearch {
   margin-left: 10%;
   margin-right: 10%;
@@ -37,4 +47,9 @@
 }
 .top {
   margin-top: 20%;
+}
+
+form {
+  font-size: 20px;
+  color: blue;
 }
