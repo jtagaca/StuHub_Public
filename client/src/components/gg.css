@@ -58,3 +58,10 @@ form {
   background-color: white;
   margin: ;
 }
+div.myClass {
+  margin: 20% 35%;
+  height: 300px;
+  width: 45%;
+}
+div.auth-inner {
+}

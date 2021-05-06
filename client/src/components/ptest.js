@@ -113,9 +113,9 @@ function ptest() {
                     placeholder="e.g. 9097284455"
                   />
                 </div>
-                <button type="submit" className="btn btn-primary btn-block">
-                  Add User
-                </button>
+                <Fab color="primary" aria-label="add">
+                  <AddIcon />
+                </Fab>
               </div>
             </div>
           </form>
@@ -185,13 +185,9 @@ function ptest() {
                     placeholder="e.g. 100001"
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-block"
-                  style={{ backgroundColor: "red" }}
-                >
-                  Delete User
-                </button>
+                <Fab color="primary" aria-label="add">
+                  <RemoveIcon />
+                </Fab>
               </div>
             </div>
           </form>
