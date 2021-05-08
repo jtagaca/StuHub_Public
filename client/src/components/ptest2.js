@@ -15,7 +15,7 @@ import "../index.css";
 function ptest2() {
   return ( 
       <div>
-            <h1 style = {{color:'green',
+            <h1 style = {{color:'orange',
                 textalign:'center'}}>module testing</h1>
               
             <div id = "leftbox" style = {{float:'left',
