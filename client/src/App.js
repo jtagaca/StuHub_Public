@@ -53,7 +53,7 @@ function App() {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={"/ktest"}>
-                    etest
+                    ktest
                   </Link>
                 </li>
               </ul>
