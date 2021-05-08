@@ -9,6 +9,7 @@ import Test from "./components/test";
 import User from "./components/user";
 import ptest from "./components/ptest";
 import etest from "./components/etest";
+import ktest from "./components/ktest";
 function App() {
   return (
     <Router>
@@ -50,6 +51,11 @@ function App() {
                     etest
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/ktest"}>
+                    etest
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -63,6 +69,7 @@ function App() {
           <Route path="/Profile" component={User} />
           <Route path="/ptest" component={ptest} />
           <Route path="/etest" component={etest} />
+          <Route path="/etest" component={ktest} />
           {/* <Route path="/Profile" component={} /> */}
         </Switch>
       </div>
