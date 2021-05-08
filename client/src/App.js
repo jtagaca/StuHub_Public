@@ -69,7 +69,7 @@ function App() {
           <Route path="/Profile" component={User} />
           <Route path="/ptest" component={ptest} />
           <Route path="/etest" component={etest} />
-          <Route path="/etest" component={ktest} />
+          <Route path="/ktest" component={ktest} />
           {/* <Route path="/Profile" component={} /> */}
         </Switch>
       </div>
