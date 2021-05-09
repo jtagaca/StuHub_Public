@@ -11,6 +11,7 @@ import ptest from "./components/ptest";
 import etest from "./components/etest";
 import ktest from "./components/ktest";
 import ptest2 from "./components/ptest2";
+import Main from "./pages/Main";
 
 function App() {
   return (
@@ -70,6 +71,9 @@ function App() {
 
         <Switch>
           <Route exact path="/" component={Login} />
+          <Route exact path="/main" component={Main} />
+          {/* <Route exact path="/" component={Login} /> */}
+          {/* <Route exact path="/" component={Login} /> */}
           <Route path="/sign-in" component={Login} />
           <Route path="/sign-up" component={SignUp} />
           <Route path="/test" component={Test} />
