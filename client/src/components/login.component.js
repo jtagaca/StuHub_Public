@@ -36,6 +36,9 @@ function LoginComponent(props) {
               type="text"
               className="form-control"
               placeholder="Enter Login ID"
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
             />
           </div>
 
@@ -45,6 +48,9 @@ function LoginComponent(props) {
               type="password"
               className="form-control"
               placeholder="Enter password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </div>
 
