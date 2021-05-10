@@ -9,9 +9,13 @@ export default function Main() {
   const [role, setRole] = useState("");
 
   Axios.defaults.withCredentials = true;
+
+  // not grabbing the data.role ↓
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn == true) {
+        console.log(response.data.user);
+        console.log("hello");
         setRole(response.data.user[0].role);
       }
     });
@@ -20,8 +24,8 @@ export default function Main() {
 
   return (
     <div>
-      <h1>hello</h1>
-      {role == "visitor" && <NormalUser />}
+      {/* <h1>hello</h1> */}
+      {role == "student" && <NormalUser />}
       {role == "admin" && <Admin />}
     </div>
   );

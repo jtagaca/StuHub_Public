@@ -93,7 +93,6 @@
 //   console.log("Yey, your server is running on port 3001");
 // });
 
-
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
@@ -129,22 +128,21 @@ app.use(
     },
   })
 );
-
 const db = mysql.createConnection({
-  user: "root",
-  host: "127.0.0.1",
-  password: "password",
-  database: "stuhub",
+  user: "admin",
+  host: "database-1.co2pklgzywdb.us-east-1.rds.amazonaws.com",
+  password: "admin12345",
+  database: "StuHub",
+  port: "3306",
 });
 
-db.connect((err)=>{
-  if(err){
+db.connect((err) => {
+  if (err) {
     throw err;
+  } else {
+    console.log("connected to database aws");
   }
-  else{
-    console.log("connected to database")
-  }
-})
+});
 
 app.post("/register", (req, res) => {
   // communicates through the name created in the method to this

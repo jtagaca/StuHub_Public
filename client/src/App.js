@@ -11,6 +11,8 @@ import ptest from "./components/ptest";
 import etest from "./components/etest";
 import ktest from "./components/ktest";
 import ptest2 from "./components/ptest2";
+import Adduser from "./components/tempadduser";
+
 import Main from "./pages/Main";
 
 function App() {
@@ -82,6 +84,8 @@ function App() {
           <Route path="/etest" component={etest} />
           <Route path="/ktest" component={ktest} />
           <Route path="/ptest2" component={ptest2} />
+          <Route path="/addusertemp" component={Adduser} />
+
           {/* <Route path="/Profile" component={} /> */}
         </Switch>
       </div>
