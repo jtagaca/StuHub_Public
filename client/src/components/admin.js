@@ -1,4 +1,4 @@
-import { React, Component } from "react";
+import { React, Component, useState } from "react";
 import { Button, ButtonGroup, Fab, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Buttond from "react-bootstrap/Button";
@@ -11,8 +11,28 @@ import "./gg.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
-import { purple } from "@material-ui/core/colors";
+import Axios from "axios";
+
 function Admin() {
+  const [usernameReg, setUsernameReg] = useState("");
+  const [passwordReg, setPasswordReg] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const register = () => {
+    Axios.post("http://localhost:3001/register", {
+      username: usernameReg,
+      first: fname,
+      lastname: lname,
+      password: passwordReg,
+      phone: phone,
+      email: email,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
   return (
     <div className="">
       <Tabs className="myClass">
@@ -71,6 +91,9 @@ function Admin() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 100001"
+                    onChange={(e) => {
+                      setUsernameReg(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -79,6 +102,9 @@ function Admin() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. John"
+                    onChange={(e) => {
+                      setFname(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -87,6 +113,9 @@ function Admin() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. Smith"
+                    onChange={(e) => {
+                      setLname(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -95,6 +124,9 @@ function Admin() {
                     type="password"
                     className="form-control"
                     placeholder="Enter password"
+                    onChange={(e) => {
+                      setPasswordReg(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -103,6 +135,9 @@ function Admin() {
                     type="email"
                     className="form-control"
                     placeholder="e.g. jsmith123@gmail.com"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -111,10 +146,13 @@ function Admin() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 9097284455"
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
                   />
                 </div>
                 <Fab color="primary" aria-label="add">
-                  <AddIcon />
+                  <AddIcon onClick={register} />
                 </Fab>
               </div>
             </div>
