@@ -156,7 +156,7 @@
 // }
 // export default test;
 import React from "react";
-import Admin from "./ka.js";
+import Admin from "./admin.js";
 
 function test(props) {
   return (
