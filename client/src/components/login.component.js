@@ -9,21 +9,23 @@ function LoginComponent(props) {
   // const
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
+
+  const history = useHistory();
   const login = () => {
     Axios.post("http://localhost:3001/login", {
       username: username,
       password: password,
-
-      // }).then((response) => {
-      //   if (response.data.message) {
-      //     setLoginStatus(response.data.message);
-      //   } else {
-      //     setLoginStatus(response.data[0].username);
-      //   }
+    }).then((response) => {
+      if (response.data.message) {
+        setLoginStatus(response.data.message);
+      } else {
+        setLoginStatus(response.data[0].username);
+      }
     });
-    history.push("/main ");
+    history.push("/main");
   };
-  const history = useHistory();
+
   return (
     <form>
       <div className="auth-wrapper">

@@ -3,7 +3,7 @@ import Axios from "axios";
 
 import NormalUser from "../components/user";
 // import Mod from "../components/Mod";
-import Admin from "../components/admin";
+import Admin from "../components/Admin";
 
 export default function Main() {
   const [role, setRole] = useState("");
@@ -19,8 +19,9 @@ export default function Main() {
 
   return (
     <div>
-      {role == "visitor" && <NormalUser />}
-      {role == "admin" && <Admin />}
+      {/* <h1>hello</h1> */}
+      {role == "admin" ? <Admin /> : "<h1> hello</h1>"}
+      {/* {role == "admin" && <Admin />} */}
     </div>
   );
 }
