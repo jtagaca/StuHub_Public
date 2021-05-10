@@ -13,14 +13,18 @@ export default function Main() {
   // not grabbing the data.role ↓
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
+      console.log(response);
+      console.log(response.data.loggedIn);
       if (response.data.loggedIn == true) {
         console.log(response.data.user);
-        console.log("hello");
-        setRole(response.data.user[0].role);
+        console.log("this is useeffect");
+
+        setRole(response.data.user);
       }
     });
   }, []);
-  console.log(role);
+  console.log("this is the role " + role);
+  console.log("hello");
 
   return (
     <div>

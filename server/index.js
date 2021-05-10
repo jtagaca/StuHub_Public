@@ -74,10 +74,14 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  console.log(req.session);
   if (req.session.user) {
+    console.log("I'm in here ");
+
     res.send({ loggedIn: true, user: req.session.user });
   } else {
-    res.send({ loggedIn: false });
+    console.log("I'm in here ");
+    res.send({ loggedIn: true, user: req.session.user });
   }
 });
 
@@ -96,7 +100,7 @@ app.post("/login", (req, res) => {
       }
       console.log(result);
       console.log(password);
-      console.log(result[0].Password);
+      // console.log(result[0].Password);
       if (result.length > 0) {
         bcrypt.compare(password, result[0].Password, (error, response) => {
           if (response) {
@@ -108,6 +112,7 @@ app.post("/login", (req, res) => {
           }
         });
       } else {
+        console.log("user don't exist");
         res.send({ message: "User doesn't exist" });
       }
     }
