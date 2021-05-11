@@ -35,6 +35,7 @@ function Admin() {
     }).then((response) => {
       console.log(response);
     });
+    alert("User was added to the database!");
   };
   const searchUser = () => {
     Axios.get("/getuser", {
