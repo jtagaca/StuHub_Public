@@ -11,6 +11,7 @@ import ptest from "./components/ptest";
 import etest from "./components/etest";
 import ktest from "./components/ktest";
 import ptest2 from "./components/ptest2";
+import Admin from "./components/admin";
 import Adduser from "./components/tempadduser";
 
 import Main from "./pages/Main";
@@ -74,6 +75,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/main" component={Main} />
+          <Route exact path="/admin" component={Admin} />
+
           {/* <Route exact path="/" component={Login} /> */}
           {/* <Route exact path="/" component={Login} /> */}
           <Route path="/sign-in" component={Login} />

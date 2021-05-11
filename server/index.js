@@ -74,15 +74,17 @@ app.post("/register", (req, res) => {
   });
 });
 app.get("/getuser", (req, res) => {
-  const login_id = req.body.LoginID;
-
+  const login_id = req.query.LoginID;
+  console.log(req.query);
+  console.log(req.body);
   db.query(
-    "SELECT * FROM User WHERE Login_ID = ?",
+    "SELECT * FROM user WHERE Login_ID = ?",
     [login_id],
     (err, result) => {
       if (err) {
         console.log(err);
       } else {
+        console.log(result);
         res.send(result);
       }
     }
