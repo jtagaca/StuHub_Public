@@ -33,6 +33,7 @@ app.use(
     },
   })
 );
+
 const db = mysql.createConnection({
   user: "admin",
   host: "database-1.co2pklgzywdb.us-east-1.rds.amazonaws.com",
@@ -71,6 +72,21 @@ app.post("/register", (req, res) => {
       }
     );
   });
+});
+app.get("/getuser", (req, res) => {
+  const login_id = req.body.LoginID;
+
+  db.query(
+    "SELECT * FROM User WHERE Login_ID = ?",
+    [login_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 app.get("/login", (req, res) => {

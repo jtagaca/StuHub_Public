@@ -20,6 +20,9 @@ function Admin() {
   const [lname, setLname] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [lID, setld] = useState("");
+
+  // const
 
   const register = () => {
     Axios.post("http://localhost:3001/register", {
@@ -29,6 +32,13 @@ function Admin() {
       password: passwordReg,
       phone: phone,
       email: email,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+  const searchUser = () => {
+    Axios.get("/getuser", {
+      LoginID: lID,
     }).then((response) => {
       console.log(response);
     });
@@ -56,7 +66,7 @@ function Admin() {
                     placeholder="e.g. 100001"
                   />
                 </div>
-                <h3> or... </h3>
+                {/* <h3> or... </h3>
                 <div className="form-group">
                   <label>First Name</label>
                   <input
@@ -72,7 +82,7 @@ function Admin() {
                     className="form-control"
                     placeholder="e.g. Smith"
                   />
-                </div>
+                </div> */}
                 <button type="submit" className="btn btn-primary btn-block">
                   Search
                 </button>
@@ -92,7 +102,7 @@ function Admin() {
                     className="form-control"
                     placeholder="e.g. 100001"
                     onChange={(e) => {
-                      setUsernameReg(e.target.value);
+                      setld(e.target.value);
                     }}
                   />
                 </div>
