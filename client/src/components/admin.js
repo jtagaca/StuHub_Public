@@ -21,6 +21,7 @@ function Admin() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [lID, setld] = useState("");
+  const [studentlist, setStudentlist] = useState([]);
 
   // const
 
@@ -35,13 +36,15 @@ function Admin() {
     }).then((response) => {
       console.log(response);
     });
-    alert("User was added to the database!");
   };
   const searchUser = () => {
+    alert(lID);
     Axios.get("/getuser", {
       params: { LoginID: lID },
     }).then((response) => {
       console.log(response);
+      setStudentlist(response.data);
+      alert(studentlist);
     });
   };
   return (
@@ -65,26 +68,17 @@ function Admin() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 100001"
+                    onChange={(e) => {
+                      setld(e.target.value);
+                    }}
                   />
                 </div>
-                {/* <h3> or... </h3>
-                <div className="form-group">
-                  <label>First Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="e.g. John"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Last Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="e.g. Smith"
-                  />
-                </div> */}
-                <button type="submit" className="btn btn-primary btn-block">
+
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                  onClick={searchUser}
+                >
                   Search
                 </button>
               </div>
@@ -103,7 +97,7 @@ function Admin() {
                     className="form-control"
                     placeholder="e.g. 100001"
                     onChange={(e) => {
-                      setld(e.target.value);
+                      setUsernameReg(e.target.value);
                     }}
                   />
                 </div>
