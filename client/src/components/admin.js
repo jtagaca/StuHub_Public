@@ -21,6 +21,8 @@ function Admin() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [lID, setld] = useState("");
+  const [logID, setloginID] = useState("");
+  const [studentlist, setStudentList] = useState([]);
 
   // const
 
@@ -44,11 +46,23 @@ function Admin() {
       console.log(response);
     });
   };
+
+  const searchUser = () => {
+    // alert(logID);
+    Axios.get("/getuser", {
+      params: { LoginID: logID },
+    }).then((response) => {
+      console.log(logID);
+      setStudentList(response.data);
+    });
+  };
+
   return (
     <div className="">
       <Tabs className="myClass">
         <TabList>
           <Tab>Find User</Tab>
+
           <Tab>Add User</Tab>
           <Tab>Update User</Tab>
           <Tab style={{ color: "red" }}>Delete User</Tab>
@@ -65,6 +79,9 @@ function Admin() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 100001"
+                    onChange={(e) => {
+                      setloginID(e.target.value);
+                    }}
                   />
                 </div>
                 {/* <h3> or... </h3>
@@ -85,6 +102,12 @@ function Admin() {
                   />
                 </div> */}
                 <button type="submit" className="btn btn-primary btn-block">
+
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                  onClick={searchUser}
+                >
                   Search
                 </button>
               </div>
