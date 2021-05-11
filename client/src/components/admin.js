@@ -32,6 +32,7 @@ function Admin() {
     }).then((response) => {
       console.log(response);
     });
+    alert("User was added to the database!");
   };
   return (
     <div className="">
