@@ -46,6 +46,8 @@ function Test(props) {
   var ReactFitText = require("react-fittext");
   return (
     <div>
+      <div class ="row">
+      </div>
       <div className="float-start my-0">
         <div className="cloud front">
           <span className="left-front"></span>
@@ -114,8 +116,39 @@ function Test(props) {
           Show letter Grade every student got in the current semester
         </Buttond>{" "}
       </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+
+            <div class="modal fade" id="myModal">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1>Title</h1>
+                  </div>
+                  <div class="modal-body">
+                    this is body
+                  </div>
+                  <div class="modal-footer">
+                    <input class="btn btn-default" value="Close"></input>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <a href="#" data-toggle="modal" data-target="#myModal">Open Modal</a>
+
+          </div>
+        </div>
+      </div>
+
     </div>
+
   );
+
+
+  
 }
 
 export default Test;
