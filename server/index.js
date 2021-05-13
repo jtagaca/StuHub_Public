@@ -92,16 +92,16 @@ app.get("/getuser", (req, res) => {
   );
 });
 
-app.put("/update", (req, res) => {
-  const updateVal: req.body.updateval;
-  const whereVal: req.body.whereval;
-  const col: req.body.column;
-  db.query(
-    "UPDATE table Set column= "value" WHERE  Login_ID= condition"
+// app.put("/update", (req, res) => {
+//   const updateVal: req.body.updateval;
+//   const whereVal: req.body.whereval;
+//   const col: req.body.column;
+//   db.query(
+//     "UPDATE table Set column= "value" WHERE  Login_ID= condition"
 
-  )
+//   )
 
-});
+// });
 app.get("/login", (req, res) => {
   console.log(req.session);
   if (req.session.user) {
