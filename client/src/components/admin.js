@@ -63,6 +63,11 @@ function Admin() {
         console.log(err);
       });
   };
+  // console.log(table);
+
+  const alert = () => {
+    console.log(table);
+  };
   const updateUSer = () => {
     Axios.put("/update", {
       updateval: updatevalue,
@@ -223,12 +228,17 @@ function Admin() {
                       </div>
                     </div>
                     <div className="w-2">
+                      <div>
+                        <Button onClick={alert}>hello</Button>
+                      </div>
+
                       <Dropdown as={ButtonGroup}>
                         <Button
                           className="w-5"
                           variant="primary
                         
                         "
+                          // onClick={updateUSer}
                           onClick={updateUSer}
                         >
                           Update
@@ -237,6 +247,8 @@ function Admin() {
                           split
                           variant="success"
                           id="dropdown-split-basic"
+                          onSelect={(value) => setTable(value)}
+
                           // size={}
                         />
                         <Dropdown.Menu>
