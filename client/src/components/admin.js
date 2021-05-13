@@ -12,6 +12,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import Axios from "axios";
+import Result from "./result.js";
 
 function Admin() {
   const [usernameReg, setUsernameReg] = useState("");
@@ -21,6 +22,12 @@ function Admin() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [lID, setld] = useState("");
+  const [updatevalue, setUpdateValue] = useState("");
+  const [col, setCol] = useState("");
+  const [table, setTable] = useState("");
+
+  const [where, setWhere] = useState("");
+
   const [studentlist, setStudentlist] = useState([]);
 
   // const
@@ -38,13 +45,33 @@ function Admin() {
     });
   };
   const searchUser = () => {
-    alert(lID);
+    // alert(lID);
     Axios.get("/getuser", {
       params: { LoginID: lID },
+    })
+      .then((response) => {
+        console.log("I'm in here");
+        // console.log(response);
+        alert("hello there");
+        // setStudentlist(response.statusText);
+
+        // alert(studentlist);
+
+        // alert(studentlist);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const updateUSer = () => {
+    Axios.put("/update", {
+      updateval: updatevalue,
+      whereval: where,
     }).then((response) => {
       console.log(response);
-      setStudentlist(response.data);
-      alert(studentlist);
+      if (response) {
+        alert("success");
+      }
     });
   };
   return (
@@ -73,7 +100,6 @@ function Admin() {
                     }}
                   />
                 </div>
-
                 <button
                   type="submit"
                   className="btn btn-primary btn-block"
@@ -81,6 +107,9 @@ function Admin() {
                 >
                   Search
                 </button>
+                <h1>{studentlist}</h1>
+                console.log(studentlist);
+                <Result student={studentlist} />
               </div>
             </div>
           </form>
@@ -172,18 +201,36 @@ function Admin() {
                     <div className="marginleft">
                       <div className="float-left mx-2">
                         <form>
-                          <TextField id="standard-basic" label="Value" />
+                          <TextField
+                            id="standard-basic"
+                            label="Value"
+                            onChange={(e) => {
+                              setUpdateValue(e.target.value);
+                            }}
+                          />
                         </form>
                       </div>
                       <div className="float-left ml-5">
                         <form>
-                          <TextField id="standard-basic" label="Update where" />
+                          <TextField
+                            id="standard-basic"
+                            label="Update where"
+                            onChange={(e) => {
+                              setWhere(e.target.value);
+                            }}
+                          />
                         </form>
                       </div>
                     </div>
                     <div className="w-2">
                       <Dropdown as={ButtonGroup}>
-                        <Button className="w-5" variant="primary">
+                        <Button
+                          className="w-5"
+                          variant="primary
+                        
+                        "
+                          onClick={updateUSer}
+                        >
                           Update
                         </Button>
                         <Dropdown.Toggle

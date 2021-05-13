@@ -65,7 +65,7 @@ app.post("/register", (req, res) => {
     }
 
     db.query(
-      "INSERT INTO user (Login_ID,First_Name,Last_Name, password, Email, Phone  ) VALUES (?,?, ? , ?, ?, ?)",
+      "INSERT INTO User (Login_ID,First_Name,Last_Name, password, Email, Phone  ) VALUES (?,?, ? , ?, ?, ?)",
       [username, firstname, lastname, hash, email, phone],
       (err, result) => {
         console.log(err);
@@ -78,27 +78,38 @@ app.get("/getuser", (req, res) => {
 
   console.log(login_id);
   db.query(
-    "SELECT * FROM user WHERE Login_ID = ?",
+    "SELECT * FROM User WHERE Login_ID = ?",
     [login_id],
 
     (err, result) => {
       if (err) {
         console.log(err);
       } else {
+        console.log(result);
         res.send(result);
       }
     }
   );
 });
 
+app.put("/update", (req, res) => {
+  const updateVal: req.body.updateval;
+  const whereVal: req.body.whereval;
+  const col: req.body.column;
+  db.query(
+    "UPDATE table Set column= "value" WHERE  Login_ID= condition"
+
+  )
+
+});
 app.get("/login", (req, res) => {
   console.log(req.session);
   if (req.session.user) {
-    console.log("I'm in here ");
+    // console.log("I'm in here ");
 
     res.send({ loggedIn: true, user: req.session.user });
   } else {
-    console.log("I'm in here ");
+    // console.log("I'm in here ");
     res.send({ loggedIn: true, user: "admin" });
   }
 });
@@ -110,7 +121,7 @@ app.post("/login", (req, res) => {
 
   console.log(username);
   db.query(
-    "SELECT * FROM user WHERE  Login_ID= ?;",
+    "SELECT * FROM User WHERE  Login_ID= ?;",
     [username],
     (err, result) => {
       if (err) {
