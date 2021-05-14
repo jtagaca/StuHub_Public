@@ -7,7 +7,7 @@ import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
 import Test from "./components/test";
 import User from "./components/user";
-import ptest from "./components/ptest";
+import Ptest from "./components/Ptest";
 import etest from "./components/etest";
 import ktest from "./components/ktest";
 import ptest2 from "./components/ptest2";

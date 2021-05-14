@@ -14,7 +14,7 @@ function Ptest() {
   // testing adding functionality to buttons, work in progress
   
   const [userID, setUserID] = useState("");
-  /*
+  
   const searchByUserID = () => {
     alert(userID);
     Axios.get("/idGetUser", {
@@ -22,7 +22,7 @@ function Ptest() {
     }).then((response) => {
       console.log(response);
     });
-  };*/
+  };
   return (
     <div className="">
       <Tabs className="myClass">
@@ -46,6 +46,10 @@ function Ptest() {
                     placeholder="e.g. 100001"
                   />
                 </div>
+                <button type="submit" className="btn btn-primary btn-block" onClick={searchByUserID}>
+                  Search
+                </button>
+                <h3></h3>
                 <h3> or... </h3>
                 <div className="form-group">
                   <label>First Name</label>
@@ -64,7 +68,7 @@ function Ptest() {
                   />
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">
-                  Search
+                  Search by Name
                 </button>
               </div>
             </div>
