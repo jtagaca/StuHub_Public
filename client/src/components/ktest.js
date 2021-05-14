@@ -120,7 +120,6 @@ function Test(props) {
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-
             <div class="modal fade" id="myModal">
               <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -139,12 +138,8 @@ function Test(props) {
     <div></div>
             <div class="container">
               <div class="row">
-          
-                  <button data-toggle="modal" data-target="#myModal">Open Modal</button>
-    
-                <button>
-                  TWO
-                </button> 
+                  <button data-toggle="modal" data-target="#myModal">First Modal</button>
+                  <button data-toggle="modal" data-target="#myModal">Second Modal</button>
                 <button>
                   THREE
                 </button> 
