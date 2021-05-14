@@ -125,10 +125,10 @@ function Test(props) {
               <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1>Title</h1>
+                    <h1>Query description</h1>
                   </div>
                   <div class="modal-body">
-                    this is body
+                    Put query data here
                   </div>
                   <div class="modal-footer">
                     <input class="btn btn-primary" data-dismiss='modal' value="Close"></input>
@@ -139,7 +139,7 @@ function Test(props) {
 
             <div class="container">
               <div class="row">
-               
+          
                   <button data-toggle="modal" data-target="#myModal">Open Modal</button>
     
                 <button>
