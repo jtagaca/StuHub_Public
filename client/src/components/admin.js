@@ -49,9 +49,11 @@ function Admin() {
     Axios.get("/getuser", {
       params: { LoginID: lID },
     })
+
+      // redirect
       .then((response) => {
         console.log("I'm in here");
-        // console.log(response);
+        console.log(response.data);
         alert("hello there");
         // setStudentlist(response.statusText);
 
@@ -106,14 +108,14 @@ function Admin() {
                   />
                 </div>
                 <button
-                  type="submit"
+                  type="button"
                   className="btn btn-primary btn-block"
                   onClick={searchUser}
                 >
                   Search
                 </button>
                 <h1>{studentlist}</h1>
-                console.log(studentlist);
+                {/* console.log(studentlist); */}
                 <Result student={studentlist} />
               </div>
             </div>
