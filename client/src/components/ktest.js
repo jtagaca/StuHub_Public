@@ -131,13 +131,26 @@ function Test(props) {
                     this is body
                   </div>
                   <div class="modal-footer">
-                    <input class="btn btn-default" value="Close"></input>
+                    <input class="btn btn-primary" data-dismiss='modal' value="Close"></input>
                   </div>
                 </div>
               </div>
             </div>
 
-            <a href="#" data-toggle="modal" data-target="#myModal">Open Modal</a>
+            <div class="container">
+              <div class="row">
+               
+                  <button data-toggle="modal" data-target="#myModal">Open Modal</button>
+    
+                <button>
+                  TWO
+                </button> 
+                <button>
+                  THREE
+                </button> 
+              </div>
+            </div>
+            
 
           </div>
         </div>
