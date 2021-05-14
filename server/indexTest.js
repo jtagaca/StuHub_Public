@@ -109,7 +109,7 @@ app.get("/user", (req, res) => {
 app.get("/idGetUser", (req, res) => {
   const login_id = req.body.Login_ID;
 
-  db.query("SELECT * FROM User WHERE Login_ID = ?", 
+  db.query("SELECT * FROM user WHERE Login_ID = ?", 
   [login_id],
   (err, result) => {
     if (err) {

@@ -7,7 +7,7 @@ import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
 import Test from "./components/test";
 import User from "./components/user";
-import ptest from "./components/ptest";
+import Ptest from "./components/Ptest";
 import etest from "./components/etest";
 import ktest from "./components/ktest";
 import ptest2 from "./components/ptest2";
@@ -48,8 +48,8 @@ function App() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to={"/ptest"}>
-                    ptest
+                  <Link className="nav-link" to={"/Ptest"}>
+                    Ptest
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -83,7 +83,7 @@ function App() {
           <Route path="/sign-up" component={SignUp} />
           <Route path="/test" component={Test} />
           <Route path="/Profile" component={User} />
-          <Route path="/ptest" component={ptest} />
+          <Route path="/Ptest" component={Ptest} />
           <Route path="/etest" component={etest} />
           <Route path="/ktest" component={ktest} />
           <Route path="/ptest2" component={ptest2} />
