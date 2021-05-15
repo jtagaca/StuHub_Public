@@ -28,7 +28,7 @@ function Admin() {
 
   const [where, setWhere] = useState("");
 
-  const [studentlist, setStudentlist] = useState([]);
+  // const [studentlist, setStudentlist] = useState([]);
 
   // const
 
@@ -44,28 +44,24 @@ function Admin() {
       console.log(response);
     });
   };
+
+  const [studentlist, setStudentList] = useState();
+
   const searchUser = () => {
-    // alert(lID);
     Axios.get("/getuser", {
       params: { LoginID: lID },
     })
-
-      // redirect
       .then((response) => {
         console.log("I'm in here");
-        console.log(response.data);
-        alert("hello there");
-        // setStudentlist(response.statusText);
-
-        // alert(studentlist);
-
-        // alert(studentlist);
+        console.log(response);
+        setStudentList(response.data); //error here
+        // console.log(fname);
+        // console.log(studentlist);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  // console.log(table);
 
   const alert = () => {
     console.log(table);
@@ -77,7 +73,7 @@ function Admin() {
     }).then((response) => {
       console.log(response);
       if (response) {
-        alert("success");
+        // alert("success");
       }
     });
   };
@@ -114,10 +110,20 @@ function Admin() {
                 >
                   Search
                 </button>
-                <h1>{studentlist}</h1>
-                {/* console.log(studentlist); */}
-                <Result student={studentlist} />
+                {/* <h1>{studentlist}</h1> */}
+                {/* <Result student={studentlist} /> */}
               </div>
+              {studentlist &&
+                studentlist.map((student) => {
+                  return (
+                    <div key={student.Login_ID}>
+                      <h1>{student.First_Name}</h1>
+                      <h1>{student.Last_Name}</h1>
+                      <h1>{student.Login_ID}</h1>
+                      <h1>{student.Email}</h1>
+                    </div>
+                  );
+                })}
             </div>
           </form>
         </TabPanel>

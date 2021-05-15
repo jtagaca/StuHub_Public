@@ -83,6 +83,7 @@ app.get("/getuser", (req, res) => {
 
     (err, result) => {
       if (err) {
+        console.log("User does not exist");
         console.log(err);
       } else {
         console.log(result);
