@@ -25,6 +25,7 @@ function Admin() {
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
 
+  let arrTable = ["User", "Department"];
   const [value, setValue] = useState("kkkk");
 
   const [col, setCol] = useState("Last_Name");
@@ -38,8 +39,9 @@ function Admin() {
   // const
 
   const handleSelect = (e) => {
-    console.log("hello");
-    setValue(e);
+    // console.log("hello");
+    setTable(e);
+    console.log(table);
   };
 
   const deleteUser = (id) => {
@@ -261,57 +263,54 @@ function Admin() {
                         <Button onClick={alert}>hello</Button>
                       </div>
 
-                      <Dropdown as={ButtonGroup}>
-                        <Button
-                          className="w-5"
-                          variant="primary
+                      <Button
+                        className="w-5"
+                        variant="primary
                         
                         "
-                          // onClick={updateUSer}
-                          onClick={updateUSer}
-                        >
-                          Update
-                        </Button>
-                        <Dropdown.Toggle
-                          split
-                          variant="success"
-                          id="dropdown-split-basic"
-                          onSelect={handleSelect}
-
-                          // size={}
-                        />
-                        <Dropdown.Menu>
-                          <Dropdown.Item eventKey="User">User</Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
-                            Department
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">Major</Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">
-                            Offers
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                        // onClick={updateUSer}
+                        onClick={updateUSer}
+                      >
+                        Update
+                      </Button>
                     </div>
 
                     <DropdownButton
                       alignRight
-                      title="Dropdown right"
+                      title="Tables"
                       id="dropdown-menu-align-right"
                       onSelect={handleSelect}
                     >
                       <Dropdown.Item eventKey="User">User</Dropdown.Item>
-                      <Dropdown.Item eventKey="option-2">
-                        option-2
+                      <Dropdown.Item eventKey="Department">
+                        Department
                       </Dropdown.Item>
-                      <Dropdown.Item eventKey="option-3">
-                        option 3
-                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="Student">Student</Dropdown.Item>
+                      <Dropdown.Item eventKey="Course">Course</Dropdown.Item>
                       <Dropdown.Divider />
-                      <Dropdown.Item eventKey="some link">
-                        some link
-                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="Major">Major</Dropdown.Item>
                     </DropdownButton>
-                    <h4>You selected {value}</h4>
+                    <DropdownButton
+                      alignRight
+                      title="Tables"
+                      id="dropdown-menu-align-right"
+                      onSelect={handleSelect}
+                    >
+                      {/* {for(let i=0; i< arrTable.length; {
+                        <Dropdown.Item eventKey="{ arrTable[i]}">User</Dropdown.Item>
+
+                      }} */}
+
+                      <Dropdown.Item eventKey="User">User</Dropdown.Item>
+                      <Dropdown.Item eventKey="Department">
+                        Department
+                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="Student">Student</Dropdown.Item>
+                      <Dropdown.Item eventKey="Course">Course</Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item eventKey="Major">Major</Dropdown.Item>
+                    </DropdownButton>
+                    {/* <h4>You selected {value}</h4> */}
                   </div>
 
                   <div>
