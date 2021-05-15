@@ -13,7 +13,6 @@ import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import Axios from "axios";
 import Result from "./result.js";
-
 //refactor code- JT
 function Admin() {
   const [usernameReg, setUsernameReg] = useState("");
@@ -24,20 +23,16 @@ function Admin() {
   const [email, setEmail] = useState("");
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
-
   let arrTable = ["User", "Department", "Major", "Courses", "Student"];
   const [value, setValue] = useState("kkkk");
-
   const [col, setCol] = useState("Last_Name");
   const [table, setTable] = useState("");
-
   const [arrCol, setArrcol] = useState([]);
   const [conditionValue, setconditionValue] = useState("6532");
   const [conditioncol, setConditioncol] = useState("Login_ID");
-
   const [allstudentlist, setAllStudentlist] = useState([]);
-
   const handleSelect = (e) => {
+    console.log(e);
     setTable(e);
     Axios.get("/col", {
       params: { table: table },
@@ -49,9 +44,7 @@ function Admin() {
       .catch((err) => {
         console.log(err);
       });
-
   };
-
   const deleteUser = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
       // setAllStudentlist(
@@ -62,7 +55,6 @@ function Admin() {
       console.log("success");
     });
   };
-
   const register = () => {
     Axios.post("http://localhost:3001/register", {
       username: usernameReg,
@@ -75,9 +67,7 @@ function Admin() {
       console.log(response);
     });
   };
-
   const [studentlist, setStudentList] = useState();
-
   const searchUser = () => {
     Axios.get("/getuser", {
       params: { LoginID: lID },
@@ -93,7 +83,6 @@ function Admin() {
         console.log(err);
       });
   };
-
   const alert = () => {
     console.log(table);
   };
@@ -270,11 +259,9 @@ function Admin() {
                       <div>
                         <Button onClick={alert}>hello</Button>
                       </div>
-
                       <Button
                         className="w-5"
                         variant="primary
-                        
                         "
                         // onClick={updateUSer}
                         onClick={updateUSer}
@@ -282,7 +269,6 @@ function Admin() {
                         Update
                       </Button>
                     </div>
-
                     <DropdownButton
                       alignRight
                       title="Tables"
@@ -304,20 +290,39 @@ function Admin() {
                       id="dropdown-menu-align-right"
                       onSelect={(g) => setCol(g)}
                     >
-                     
-
                      {arrCol &&
-                arrCol.map((tb) => {
+                        arrCol.map((tb) => {
                   return (
                        <Dropdown.Item key={tb.COLUMN_NAME} eventKey={tb.COLUMN_NAME}>{tb.COLUMN_NAME}</Dropdown.Item>
-                  
                   );
                 })}
-                      
                     </DropdownButton>
-                    <h4>You selected {col}</h4>
+                    {/* <h4>You selected {col}</h4> */}
+                    <DropdownButton
+                      alignRight
+                      title="Condition Column"
+                      id="dropdown-menu-align-right"
+                      onSelect={(g) => setConditioncol(g)}
+                    >
+                     {arrCol &&
+                       arrCol.map((tb) => {
+                  return (
+                       <Dropdown.Item key={tb.COLUMN_NAME} eventKey={tb.COLUMN_NAME}>{tb.COLUMN_NAME}</Dropdown.Item>
+                  );
+                })}
+                    </DropdownButton>
                   </div>
 
+                  <h5> This is the table: {table}, This is the column that we want to change {col}, this is the value that will be used to change the conditional value: {value
+                  }
+                 
+                  </h5> 
+                  <h5>
+
+                  this is where we want the update to happen:{conditionValue}
+                  ,
+                  what column are we trying to update: {conditioncol}
+                  </h5>
                   <div>
                     {/* <div>
               <Buttond variant="primary"></Buttond>{" "}

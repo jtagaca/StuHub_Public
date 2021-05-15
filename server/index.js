@@ -93,8 +93,10 @@ app.get("/getuser", (req, res) => {
   );
 });
 
+
+//slow to update whenever passing in requires two time clicks before updating value?
 app.get("/col", (req, res) => {
-  const table = req.query.table;
+  var table = req.query.table;
 
   console.log(table);
   db.query(
@@ -106,10 +108,12 @@ app.get("/col", (req, res) => {
         console.log(err);
       } else {
         console.log(result);
+        delete table; // tried to force delete in order to update instant
         res.send(result);
       }
     }
   );
+  
 });
 
 app.delete("/delete/:id", (req, res) => {
