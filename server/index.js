@@ -95,6 +95,25 @@ app.get("/getuser", (req, res) => {
   );
 });
 
+app.get("/getStuCourses", (req, res) => {
+  const login_id = req.query.LoginID;
+
+  console.log(login_id);
+  db.query(
+    "SELECT Takes.CRN, Course.Course_ID, Course_Info.Course_Name, Course.Term, Takes.Grade FROM Takes INNER JOIN Course ON Course.CRN = Takes.CRN INNER JOIN Course_Info ON Course_Info.Course_ID = Course.Course_ID WHERE sLogin_ID = ?;",
+    [login_id],
+
+    (err, result) => {
+      if (err) {
+        console.log("ERROR");
+        console.log(err);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  )
+});
 
 //slow to update whenever passing in requires two time clicks before updating value?
 app.get("/col", (req, res) => {
