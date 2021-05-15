@@ -21,13 +21,17 @@ function Admin() {
   const [lname, setLname] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [eventKey, setEventKey] = useState(0);
+
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
-  let arrTable = ["User", "Department", "Major", "Courses", "Student"];
+  // let arrTable = ["User", "Department", "Major", "Courses", "Student"];
   const [value, setValue] = useState("kkkk");
   const [col, setCol] = useState("Last_Name");
   const [table, setTable] = useState("");
   const [arrCol, setArrcol] = useState([]);
+  const [actionQuery, setActionQuery] = useState([]);
+
   const [conditionValue, setconditionValue] = useState("6532");
   const [conditioncol, setConditioncol] = useState("Login_ID");
   const [allstudentlist, setAllStudentlist] = useState([]);
@@ -55,6 +59,20 @@ function Admin() {
       console.log("success");
     });
   };
+  const QuerySelect = (h) => {
+    setEventKey(h)
+    Axios.get("/query", {
+      params: { eventKey: eventKey },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setActionQuery(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const register = () => {
     Axios.post("http://localhost:3001/register", {
       username: usernameReg,
@@ -372,6 +390,7 @@ function Admin() {
                       menuAlign={{ lg: "right" }}
                       title="More Queries"
                       id="dropdown-menu-align-responsive-1"
+                      onSelect={QuerySelect}
                     >
                       <Dropdown.Item eventKey="1">
                         Show students who do not have a GPA
@@ -393,6 +412,9 @@ function Admin() {
                         Show courses that are taken by all students
                       </Dropdown.Item>
                     </DropdownButton>
+                    <h1>
+                      {eventKey}
+                    </h1>
                   </div>
                 </div>
               </div>

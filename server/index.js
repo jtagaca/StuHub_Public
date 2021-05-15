@@ -11,6 +11,8 @@ const saltRounds = 10;
 // const cv = require("opencv4nodejs");
 const app = express();
 
+
+
 app.use(express.json());
 app.use(
   cors({
@@ -102,6 +104,28 @@ app.get("/col", (req, res) => {
   db.query(
     "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'StuHub' AND `TABLE_NAME` = ? ;",
     [table],
+
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        delete table; // tried to force delete in order to update instant
+        res.send(result);
+      }
+    }
+  );
+  
+});
+
+app.get("/query", (req, res) => {
+  var eventKey = req.query.eventKey;
+  let sqlQueries=["SELECT * FROM Student WHERE NOT EXISTS (SELECT * FROM StudentGPA WHERE StudentGPA.Login_ID = Student.sLogin_ID)", "SELECT u.* FROM User AS u NATURAL JOIN( SELECT fLogin_ID AS Login_ID, COUNT(sLogin_ID) AS numberofStudents FROM Advises GROUP BY fLogin_ID HAVING COUNT(sLogin_ID) >= 1 ORDER BY numberofStudents DESC LIMIT 1) AS k", "SELECT t.Grade, COUNT(DISTINCT sLogin_ID) AS number_per_student_grade FROM Takes as t WHERE t.Grade IS NOT NULL GROUP BY t.Grade HAVING number_per_student_grade= (SELECT COUNT(DISTINCT sLogin_ID) FROM Student)","SELECT sLogin_ID FROM Takes WHERE Grade IS NULL GROUP BY sLogin_ID HAVING COUNT(*) >=1", "SELECT User.*, OverallGPA FROM StudentGPA NATURAL JOIN User WHERE OverallGPA = (SELECT MAX(OverallGPA) FROM StudentGPA)", "SELECT c_info.* FROM Course_Info as c_info NATURAL JOIN	(SELECT Course_ID, COUNT(*) AS perCourseID FROM Takes NATURAL JOIN Course GROUP BY Course_ID HAVING perCourseID= (SELECT COUNT(*) FROM Student)) AS pertable" ];
+  eventKey=eventKey-1;
+  console.log(eventKey);
+  console.log(sqlQueries[0]);
+
+  db.query(sqlQueries[eventKey],
 
     (err, result) => {
       if (err) {
