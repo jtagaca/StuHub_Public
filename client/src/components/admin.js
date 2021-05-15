@@ -25,11 +25,12 @@ function Admin() {
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
 
-  const [updatevalue, setUpdateValue] = useState("");
-  const [col, setCol] = useState("");
-  const [table, setTable] = useState("");
+  const [value, setValue] = useState("kkkk");
+  const [col, setCol] = useState("Last_Name");
+  const [table, setTable] = useState("User");
 
-  const [where, setWhere] = useState("");
+  const [conditionValue, setconditionValue] = useState("6532");
+  const [conditioncol, setConditioncol] = useState("Login_ID");
 
   const [allstudentlist, setAllStudentlist] = useState([]);
 
@@ -45,6 +46,7 @@ function Admin() {
       console.log("success");
     });
   };
+
   const register = () => {
     Axios.post("http://localhost:3001/register", {
       username: usernameReg,
@@ -81,13 +83,13 @@ function Admin() {
   };
   const updateUSer = () => {
     Axios.put("/update", {
-      updateval: updatevalue,
-      whereval: where,
+      conditionValue: conditionValue,
+      conditioncol: conditioncol,
+      updateval: value,
+      table: table,
+      col: col,
     }).then((response) => {
-      console.log(response);
-      if (response) {
-        // alert("success");
-      }
+      console.log("success");
     });
   };
   return (
@@ -231,7 +233,7 @@ function Admin() {
                             id="standard-basic"
                             label="Value"
                             onChange={(e) => {
-                              setUpdateValue(e.target.value);
+                              setValue(e.target.value);
                             }}
                           />
                         </form>
@@ -240,9 +242,9 @@ function Admin() {
                         <form>
                           <TextField
                             id="standard-basic"
-                            label="Update where"
+                            label="Update conditionValue"
                             onChange={(e) => {
-                              setWhere(e.target.value);
+                              setconditionValue(e.target.value);
                             }}
                           />
                         </form>

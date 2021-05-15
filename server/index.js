@@ -105,16 +105,25 @@ app.delete("/delete/:id", (req, res) => {
   });
 });
 
-// app.put("/update", (req, res) => {
-//   const updateVal: req.body.updateval;
-//   const whereVal: req.body.whereval;
-//   const col: req.body.column;
-//   db.query(
-//     "UPDATE table Set column= "value" WHERE  Login_ID= condition"
-
-//   )
-
-// });
+app.put("/update", (req, res) => {
+  const value = req.body.updateval;
+  const table = req.body.table;
+  const conditioncol = req.body.conditioncol;
+  const conditionvalue = req.body.conditionValue;
+  const column = req.body.col;
+  console.log("this is running");
+  db.query(
+    "UPDATE ?? SET ?? = ? WHERE ?? = ?",
+    [table, column, value, conditioncol, conditionvalue],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
 app.get("/login", (req, res) => {
   console.log(req.session);
   if (req.session.user) {
