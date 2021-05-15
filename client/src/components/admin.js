@@ -301,14 +301,13 @@ function Admin() {
 
                       }} */}
 
-                      <Dropdown.Item eventKey="User">User</Dropdown.Item>
-                      <Dropdown.Item eventKey="Department">
-                        Department
-                      </Dropdown.Item>
-                      <Dropdown.Item eventKey="Student">Student</Dropdown.Item>
-                      <Dropdown.Item eventKey="Course">Course</Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item eventKey="Major">Major</Dropdown.Item>
+                      {arrTable.map((tb) => {
+                        return (
+                          <div key={tb}>
+                            <h1>{tb}</h1>
+                          </div>
+                        );
+                      })}
                     </DropdownButton>
                     {/* <h4>You selected {value}</h4> */}
                   </div>
