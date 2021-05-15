@@ -26,14 +26,14 @@ function Admin() {
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
   // let arrTable = ["User", "Department", "Major", "Courses", "Student"];
-  const [value, setValue] = useState("kkkk");
-  const [col, setCol] = useState("Last_Name");
+  const [value, setValue] = useState("");
+  const [col, setCol] = useState("");
   const [table, setTable] = useState("");
   const [arrCol, setArrcol] = useState([]);
-  const [actionQuery, setActionQuery] = useState([]);
+  const [actionQuery, setActionQuery] = useState({});
 
-  const [conditionValue, setconditionValue] = useState("6532");
-  const [conditioncol, setConditioncol] = useState("Login_ID");
+  const [conditionValue, setconditionValue] = useState("");
+  const [conditioncol, setConditioncol] = useState("");
   const [allstudentlist, setAllStudentlist] = useState([]);
   const handleSelect = (e) => {
     console.log(e);
@@ -427,19 +427,6 @@ function Admin() {
                       </Dropdown.Item>
                     </DropdownButton>
                     <h1>{eventKey}</h1>
-                    {actionQuery &&
-                      actionQuery.map((data, index) => {
-                        return (
-                          <div key={index}>
-                            {/* have an array and on this array have the object structure that we want to display */}
-                            {/* console.log(index); */}
-                            {/* <h1>{data.}</h1>w */}
-                            {/* <h1>{idcounter}</h1> */}
-                            {/* {idcounter} */}
-                            {/* {eventKey} */}
-                          </div>
-                        );
-                      })}
                   </div>
                 </div>
               </div>
