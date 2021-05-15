@@ -93,6 +93,18 @@ app.get("/getuser", (req, res) => {
   );
 });
 
+app.delete("/delete/:id", (req, res) => {
+  const id = req.params.id;
+  console.log("running this" + id);
+  db.query("DELETE FROM User WHERE Login_ID = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 // app.put("/update", (req, res) => {
 //   const updateVal: req.body.updateval;
 //   const whereVal: req.body.whereval;

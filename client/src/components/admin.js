@@ -14,6 +14,7 @@ import "../index.css";
 import Axios from "axios";
 import Result from "./result.js";
 
+//refactor code- JT
 function Admin() {
   const [usernameReg, setUsernameReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
@@ -22,16 +23,28 @@ function Admin() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [lID, setld] = useState("");
+  const [delId, setDeleteid] = useState("");
+
   const [updatevalue, setUpdateValue] = useState("");
   const [col, setCol] = useState("");
   const [table, setTable] = useState("");
 
   const [where, setWhere] = useState("");
 
-  // const [studentlist, setStudentlist] = useState([]);
+  const [allstudentlist, setAllStudentlist] = useState([]);
 
   // const
 
+  const deleteUser = (id) => {
+    Axios.delete(`/delete/${id}`).then((response) => {
+      // setAllStudentlist(
+      //   allstudentlist.filter((val) => {
+      //     return val.sLogin_ID != id;
+      //   })
+      // );
+      console.log("success");
+    });
+  };
   const register = () => {
     Axios.post("http://localhost:3001/register", {
       username: usernameReg,
@@ -293,9 +306,16 @@ function Admin() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 100001"
+                    onChange={(e) => {
+                      setDeleteid(e.target.value);
+                    }}
                   />
                 </div>
-                <Fab color="primary" aria-label="add">
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => deleteUser(delId)}
+                >
                   <RemoveIcon />
                 </Fab>
               </div>
