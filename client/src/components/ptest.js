@@ -1,26 +1,122 @@
 import { React, Component, useState } from "react";
-import { Button, ButtonGroup, Fab, StylesProvider, TextField } from "@material-ui/core";
+import { Button, ButtonGroup, Fab, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import Buttond from "react-bootstrap/Button";
 import RemoveIcon from "@material-ui/icons/Remove";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Dropdown, Row, Col } from "react-bootstrap";
+import Formb from "react-bootstrap/Form";
+import Carousel from "react-bootstrap/Carousel";
 import "./gg.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import Axios from "axios";
-
+import Result from "./result.js";
+//refactor code- JT
 function Ptest() {
-  // testing adding functionality to buttons, work in progress
-  
-  const [userID, setUserID] = useState("");
-  
-  const searchByUserID = () => {
-    alert(userID);
-    Axios.get("/idGetUser", {
-      params: { LoginID: userID },
+  const [usernameReg, setUsernameReg] = useState("");
+  const [passwordReg, setPasswordReg] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [eventKey, setEventKey] = useState(0);
+
+  const [lID, setld] = useState("");
+  const [delId, setDeleteid] = useState("");
+  // let arrTable = ["User", "Department", "Major", "Courses", "Student"];
+  const [value, setValue] = useState("");
+  const [col, setCol] = useState("");
+  const [table, setTable] = useState("");
+  const [arrCol, setArrcol] = useState([]);
+  const [actionQuery, setActionQuery] = useState({});
+
+  const [conditionValue, setconditionValue] = useState("");
+  const [conditioncol, setConditioncol] = useState("");
+  const [allstudentlist, setAllStudentlist] = useState([]);
+  const handleSelect = (e) => {
+    console.log(e);
+    setTable(e);
+    Axios.get("/col", {
+      params: { table: table },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setArrcol(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  var objectStructure = ["sLogin_ID"];
+  const deleteUser = (id) => {
+    Axios.delete(`/delete/${id}`).then((response) => {
+      // setAllStudentlist(
+      //   allstudentlist.filter((val) => {
+      //     return val.sLogin_ID != id;
+      //   })
+      // );
+      console.log("success");
+    });
+  };
+
+  // var idcounter = 0;
+  const QuerySelect = (h) => {
+    setEventKey(h);
+    Axios.get("/query", {
+      params: { eventKey: eventKey },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setActionQuery(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const register = () => {
+    Axios.post("http://localhost:3001/register", {
+      username: usernameReg,
+      first: fname,
+      lastname: lname,
+      password: passwordReg,
+      phone: phone,
+      email: email,
     }).then((response) => {
       console.log(response);
+    });
+  };
+  const [studentlist, setStudentList] = useState();
+  const searchUser = () => {
+    Axios.get("/getuser", {
+      params: { LoginID: lID },
+    })
+      .then((response) => {
+        console.log("I'm in here");
+        console.log(response);
+        setStudentList(response.data); //error here
+        // console.log(fname);
+        // console.log(studentlist);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const alert = () => {
+    console.log(table);
+  };
+  const updateUSer = () => {
+    Axios.put("/update", {
+      conditionValue: conditionValue,
+      conditioncol: conditioncol,
+      updateval: value,
+      table: table,
+      col: col,
+    }).then((response) => {
+      console.log("success");
     });
   };
   return (
@@ -44,33 +140,32 @@ function Ptest() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 100001"
+                    onChange={(e) => {
+                      setld(e.target.value);
+                    }}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary btn-block" onClick={searchByUserID}>
+                <button
+                  type="button"
+                  className="btn btn-primary btn-block"
+                  onClick={searchUser}
+                >
                   Search
                 </button>
-                <h3></h3>
-                <h3> or... </h3>
-                <div className="form-group">
-                  <label>First Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="e.g. John"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Last Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="e.g. Smith"
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary btn-block">
-                  Search by Name
-                </button>
+                {/* <h1>{studentlist}</h1> */}
+                {/* <Result student={studentlist} /> */}
               </div>
+              {studentlist &&
+                studentlist.map((student) => {
+                  return (
+                    <div key={student.Login_ID}>
+                      <h1>{student.First_Name}</h1>
+                      <h1>{student.Last_Name}</h1>
+                      <h1>{student.Login_ID}</h1>
+                      <h1>{student.Email}</h1>
+                    </div>
+                  );
+                })}
             </div>
           </form>
         </TabPanel>
@@ -85,6 +180,9 @@ function Ptest() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 100001"
+                    onChange={(e) => {
+                      setUsernameReg(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -93,6 +191,9 @@ function Ptest() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. John"
+                    onChange={(e) => {
+                      setFname(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -101,6 +202,9 @@ function Ptest() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. Smith"
+                    onChange={(e) => {
+                      setLname(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -109,6 +213,9 @@ function Ptest() {
                     type="password"
                     className="form-control"
                     placeholder="Enter password"
+                    onChange={(e) => {
+                      setPasswordReg(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -117,6 +224,9 @@ function Ptest() {
                     type="email"
                     className="form-control"
                     placeholder="e.g. jsmith123@gmail.com"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -125,10 +235,13 @@ function Ptest() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 9097284455"
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
                   />
                 </div>
                 <Fab color="primary" aria-label="add">
-                  <AddIcon />
+                  <AddIcon onClick={register} />
                 </Fab>
               </div>
             </div>
@@ -143,39 +256,105 @@ function Ptest() {
                     <div className="marginleft">
                       <div className="float-left mx-2">
                         <form>
-                          <TextField id="standard-basic" label="Value" />
+                          <TextField
+                            id="standard-basic"
+                            label="Value"
+                            onChange={(e) => {
+                              setValue(e.target.value);
+                            }}
+                          />
                         </form>
                       </div>
                       <div className="float-left ml-5">
                         <form>
-                          <TextField id="standard-basic" label="Update where" />
+                          <TextField
+                            id="standard-basic"
+                            label="Update conditionValue"
+                            onChange={(e) => {
+                              setconditionValue(e.target.value);
+                            }}
+                          />
                         </form>
                       </div>
                     </div>
                     <div className="w-2">
-                      <Dropdown as={ButtonGroup}>
-                        <Button className="w-5" variant="primary">
-                          Update
-                        </Button>
-                        <Dropdown.Toggle
-                          split
-                          variant="success"
-                          id="dropdown-split-basic"
-                          // size={}
-                        />
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">User</Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
-                            Department
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">Major</Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">
-                            Offers
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                      <div>
+                        <Button onClick={alert}>hello</Button>
+                      </div>
+                      <Button
+                        className="w-5"
+                        variant="primary
+                        "
+                        // onClick={updateUSer}
+                        onClick={updateUSer}
+                      >
+                        Update
+                      </Button>
                     </div>
+                    <DropdownButton
+                      alignRight
+                      title="Tables"
+                      id="dropdown-menu-align-right"
+                      onSelect={handleSelect}
+                    >
+                      <Dropdown.Item eventKey="User">User</Dropdown.Item>
+                      <Dropdown.Item eventKey="Department">
+                        Department
+                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="Student">Student</Dropdown.Item>
+                      <Dropdown.Item eventKey="Course">Course</Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item eventKey="Major">Major</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton
+                      alignRight
+                      title="Column"
+                      id="dropdown-menu-align-right"
+                      onSelect={(g) => setCol(g)}
+                    >
+                      {arrCol &&
+                        arrCol.map((tb) => {
+                          return (
+                            <Dropdown.Item
+                              key={tb.COLUMN_NAME}
+                              eventKey={tb.COLUMN_NAME}
+                            >
+                              {tb.COLUMN_NAME}
+                            </Dropdown.Item>
+                          );
+                        })}
+                    </DropdownButton>
+                    {/* <h4>You selected {col}</h4> */}
+                    <DropdownButton
+                      alignRight
+                      title="Condition Column"
+                      id="dropdown-menu-align-right"
+                      onSelect={(g) => setConditioncol(g)}
+                    >
+                      {arrCol &&
+                        arrCol.map((tb) => {
+                          return (
+                            <Dropdown.Item
+                              key={tb.COLUMN_NAME}
+                              eventKey={tb.COLUMN_NAME}
+                            >
+                              {tb.COLUMN_NAME}
+                            </Dropdown.Item>
+                          );
+                        })}
+                    </DropdownButton>
                   </div>
+
+                  <h5>
+                    {" "}
+                    This is the table: {table}, This is the column that we want
+                    to change {col}, this is the value that will be used to
+                    change the conditional value: {value}
+                  </h5>
+                  <h5>
+                    this is where we want the update to happen:{conditionValue},
+                    what column are we trying to update: {conditioncol}
+                  </h5>
                   <div>
                     {/* <div>
               <Buttond variant="primary"></Buttond>{" "}
@@ -197,9 +376,16 @@ function Ptest() {
                     type="text"
                     className="form-control"
                     placeholder="e.g. 100001"
+                    onChange={(e) => {
+                      setDeleteid(e.target.value);
+                    }}
                   />
                 </div>
-                <Fab color="primary" aria-label="add">
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => deleteUser(delId)}
+                >
                   <RemoveIcon />
                 </Fab>
               </div>
@@ -218,6 +404,7 @@ function Ptest() {
                       menuAlign={{ lg: "right" }}
                       title="More Queries"
                       id="dropdown-menu-align-responsive-1"
+                      onSelect={QuerySelect}
                     >
                       <Dropdown.Item eventKey="1">
                         Show students who do not have a GPA
@@ -239,6 +426,7 @@ function Ptest() {
                         Show courses that are taken by all students
                       </Dropdown.Item>
                     </DropdownButton>
+                    <h1>{eventKey}</h1>
                   </div>
                 </div>
               </div>
