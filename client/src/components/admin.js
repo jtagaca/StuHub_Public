@@ -39,7 +39,7 @@ function Admin() {
 
   const handleSelect = (e) => {
     setTable(e);
-    Axios.get("/column", {
+    Axios.get("/col", {
       params: { table: table },
     })
       .then((response) => {
@@ -49,8 +49,7 @@ function Admin() {
       .catch((err) => {
         console.log(err);
       });
-    // console.log(table);
-    // console.log(arrCol)
+
   };
 
   const deleteUser = (id) => {
@@ -305,11 +304,16 @@ function Admin() {
                       id="dropdown-menu-align-right"
                       onSelect={(g) => setCol(g)}
                     >
-                      {arrTable.map((tb) => {
-                        return (
-                          <Dropdown.Item eventKey={tb}>{tb}</Dropdown.Item>
-                        );
-                      })}
+                     
+
+                     {arrCol &&
+                arrCol.map((tb) => {
+                  return (
+                       <Dropdown.Item key={tb.COLUMN_NAME} eventKey={tb.COLUMN_NAME}>{tb.COLUMN_NAME}</Dropdown.Item>
+                  
+                  );
+                })}
+                      
                     </DropdownButton>
                     <h4>You selected {col}</h4>
                   </div>

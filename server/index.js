@@ -93,6 +93,25 @@ app.get("/getuser", (req, res) => {
   );
 });
 
+app.get("/col", (req, res) => {
+  const table = req.query.table;
+
+  console.log(table);
+  db.query(
+    "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'StuHub' AND `TABLE_NAME` = ? ;",
+    [table],
+
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
   console.log("running this" + id);
