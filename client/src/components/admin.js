@@ -25,23 +25,32 @@ function Admin() {
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
 
-  let arrTable = ["User", "Department"];
+  let arrTable = ["User", "Department", "Major", "Courses", "Student"];
   const [value, setValue] = useState("kkkk");
 
   const [col, setCol] = useState("Last_Name");
   const [table, setTable] = useState("");
 
+  const [arrCol, setArrcol] = useState([]);
   const [conditionValue, setconditionValue] = useState("6532");
   const [conditioncol, setConditioncol] = useState("Login_ID");
 
   const [allstudentlist, setAllStudentlist] = useState([]);
 
-  // const
-
   const handleSelect = (e) => {
-    // console.log("hello");
     setTable(e);
-    console.log(table);
+    Axios.get("/column", {
+      params: { table: table },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setArrcol(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // console.log(table);
+    // console.log(arrCol)
   };
 
   const deleteUser = (id) => {
@@ -292,24 +301,17 @@ function Admin() {
                     </DropdownButton>
                     <DropdownButton
                       alignRight
-                      title="Tables"
+                      title="Column"
                       id="dropdown-menu-align-right"
-                      onSelect={handleSelect}
+                      onSelect={(g) => setCol(g)}
                     >
-                      {/* {for(let i=0; i< arrTable.length; {
-                        <Dropdown.Item eventKey="{ arrTable[i]}">User</Dropdown.Item>
-
-                      }} */}
-
                       {arrTable.map((tb) => {
                         return (
-                          <div key={tb}>
-                            <h1>{tb}</h1>
-                          </div>
+                          <Dropdown.Item eventKey={tb}>{tb}</Dropdown.Item>
                         );
                       })}
                     </DropdownButton>
-                    {/* <h4>You selected {value}</h4> */}
+                    <h4>You selected {col}</h4>
                   </div>
 
                   <div>
