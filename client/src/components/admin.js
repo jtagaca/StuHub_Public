@@ -49,6 +49,8 @@ function Admin() {
         console.log(err);
       });
   };
+
+  var objectStructure = ["sLogin_ID"];
   const deleteUser = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
       // setAllStudentlist(
@@ -59,8 +61,10 @@ function Admin() {
       console.log("success");
     });
   };
+
+  // var idcounter = 0;
   const QuerySelect = (h) => {
-    setEventKey(h)
+    setEventKey(h);
     Axios.get("/query", {
       params: { eventKey: eventKey },
     })
@@ -308,12 +312,17 @@ function Admin() {
                       id="dropdown-menu-align-right"
                       onSelect={(g) => setCol(g)}
                     >
-                     {arrCol &&
+                      {arrCol &&
                         arrCol.map((tb) => {
-                  return (
-                       <Dropdown.Item key={tb.COLUMN_NAME} eventKey={tb.COLUMN_NAME}>{tb.COLUMN_NAME}</Dropdown.Item>
-                  );
-                })}
+                          return (
+                            <Dropdown.Item
+                              key={tb.COLUMN_NAME}
+                              eventKey={tb.COLUMN_NAME}
+                            >
+                              {tb.COLUMN_NAME}
+                            </Dropdown.Item>
+                          );
+                        })}
                     </DropdownButton>
                     {/* <h4>You selected {col}</h4> */}
                     <DropdownButton
@@ -322,24 +331,29 @@ function Admin() {
                       id="dropdown-menu-align-right"
                       onSelect={(g) => setConditioncol(g)}
                     >
-                     {arrCol &&
-                       arrCol.map((tb) => {
-                  return (
-                       <Dropdown.Item key={tb.COLUMN_NAME} eventKey={tb.COLUMN_NAME}>{tb.COLUMN_NAME}</Dropdown.Item>
-                  );
-                })}
+                      {arrCol &&
+                        arrCol.map((tb) => {
+                          return (
+                            <Dropdown.Item
+                              key={tb.COLUMN_NAME}
+                              eventKey={tb.COLUMN_NAME}
+                            >
+                              {tb.COLUMN_NAME}
+                            </Dropdown.Item>
+                          );
+                        })}
                     </DropdownButton>
                   </div>
 
-                  <h5> This is the table: {table}, This is the column that we want to change {col}, this is the value that will be used to change the conditional value: {value
-                  }
-                 
-                  </h5> 
                   <h5>
-
-                  this is where we want the update to happen:{conditionValue}
-                  ,
-                  what column are we trying to update: {conditioncol}
+                    {" "}
+                    This is the table: {table}, This is the column that we want
+                    to change {col}, this is the value that will be used to
+                    change the conditional value: {value}
+                  </h5>
+                  <h5>
+                    this is where we want the update to happen:{conditionValue},
+                    what column are we trying to update: {conditioncol}
                   </h5>
                   <div>
                     {/* <div>
@@ -412,9 +426,20 @@ function Admin() {
                         Show courses that are taken by all students
                       </Dropdown.Item>
                     </DropdownButton>
-                    <h1>
-                      {eventKey}
-                    </h1>
+                    <h1>{eventKey}</h1>
+                    {actionQuery &&
+                      actionQuery.map((data, index) => {
+                        return (
+                          <div key={index}>
+                            {/* have an array and on this array have the object structure that we want to display */}
+                            {/* console.log(index); */}
+                            {/* <h1>{data.}</h1>w */}
+                            {/* <h1>{idcounter}</h1> */}
+                            {/* {idcounter} */}
+                            {/* {eventKey} */}
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
               </div>
