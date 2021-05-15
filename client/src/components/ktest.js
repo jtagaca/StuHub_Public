@@ -110,7 +110,7 @@ function Test(props) {
       </div>
 
       <div className="my-5">
-        <Buttond variant="light">View all Courses</Buttond>{" "}
+        <Buttond variant="light" >View all Courses</Buttond>{" "}
         <Buttond variant="light">View GPA</Buttond>{" "}
         <Buttond variant="light">
           Show letter Grade every student got in the current semester
@@ -135,23 +135,57 @@ function Test(props) {
                 </div>
               </div>
             </div>
-    <div></div>
-            <div class="container">
-              <div class="row">
-                  <button data-toggle="modal" data-target="#myModal">First Modal</button>
-                  <button data-toggle="modal" data-target="#myModal">Second Modal</button>
-                <button>
-                  THREE
-                </button> 
+          </div>
+      
+          <div class="col-md-12">
+            <div class="modal fade" id="secondModal">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1>New Query</h1>
+                  </div>
+                  <div class="modal-body">
+                    Put query data here
+                  </div>
+                  <div class="modal-footer">
+                    <input class="btn btn-primary" data-dismiss='modal' value="Close"></input>
+                  </div>
+                </div>
               </div>
             </div>
-            
-
           </div>
+
+          <div class="col-md-12">
+            <div class="modal fade" id="thirdModal">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1>New Query</h1>
+                  </div>
+                  <div class="modal-body">
+                    Put query data here
+                  </div>
+                  <div class="modal-footer">
+                    <input class="btn btn-primary" data-dismiss='modal' value="Close"></input>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-    </div>
+      <div className="container">
+        <div className="row">
+            <button data-toggle="modal" data-target="#myModal">First Modal</button>
+            <button data-toggle="modal" data-target="#secondModal">Second Modal</button>
+            <button data-toggle="modal" data-target="#thirdModal">Third Modal</button>
+        </div>
+      </div>
+            
+
+          </div>
 
   );
 
