@@ -26,8 +26,9 @@ function Admin() {
   const [delId, setDeleteid] = useState("");
 
   const [value, setValue] = useState("kkkk");
+
   const [col, setCol] = useState("Last_Name");
-  const [table, setTable] = useState("User");
+  const [table, setTable] = useState("");
 
   const [conditionValue, setconditionValue] = useState("6532");
   const [conditioncol, setConditioncol] = useState("Login_ID");
@@ -35,6 +36,11 @@ function Admin() {
   const [allstudentlist, setAllStudentlist] = useState([]);
 
   // const
+
+  const handleSelect = (e) => {
+    console.log("hello");
+    setValue(e);
+  };
 
   const deleteUser = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
@@ -270,12 +276,12 @@ function Admin() {
                           split
                           variant="success"
                           id="dropdown-split-basic"
-                          onSelect={(value) => setTable(value)}
+                          onSelect={handleSelect}
 
                           // size={}
                         />
                         <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">User</Dropdown.Item>
+                          <Dropdown.Item eventKey="User">User</Dropdown.Item>
                           <Dropdown.Item href="#/action-2">
                             Department
                           </Dropdown.Item>
@@ -286,7 +292,28 @@ function Admin() {
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
+
+                    <DropdownButton
+                      alignRight
+                      title="Dropdown right"
+                      id="dropdown-menu-align-right"
+                      onSelect={handleSelect}
+                    >
+                      <Dropdown.Item eventKey="User">User</Dropdown.Item>
+                      <Dropdown.Item eventKey="option-2">
+                        option-2
+                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="option-3">
+                        option 3
+                      </Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item eventKey="some link">
+                        some link
+                      </Dropdown.Item>
+                    </DropdownButton>
+                    <h4>You selected {value}</h4>
                   </div>
+
                   <div>
                     {/* <div>
               <Buttond variant="primary"></Buttond>{" "}
