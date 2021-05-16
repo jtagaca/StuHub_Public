@@ -7,20 +7,22 @@ import NormalUser from "../components/user";
 import Admin from "../components/admin";
 
 export default function Main() {
-  const [role, setRole] = useState("admin");
+  const [role, setRole] = useState("");
 
   Axios.defaults.withCredentials = true;
 
   const history = useHistory();
   // not grabbing the data.role ↓
   useEffect(() => {
-    Axios.get("/login").then((response) => {});
+    Axios.get("/login").then((response) => {
+      setRole(response.data.user[0].role);
+    });
   }, []);
 
   return (
     <div>
       {/* <h1>hello</h1> */}
-      {role == "student"}
+      {role == "student" ? history.push("/Profile") : null}
       {role == "admin" ? history.push("/admin") : null}
     </div>
   );

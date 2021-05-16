@@ -13,18 +13,20 @@ function LoginComponent(props) {
 
   const history = useHistory();
   const login = () => {
-    Axios.post("http://localhost:3001/login", {
+    Axios.post("/login", {
       username: username,
       password: password,
     }).then((response) => {
+      console.log("dhkja");
       if (response.data.message) {
-        setLoginStatus(response.data.message);
-        console.log(loginStatus);
+        console.log(response.data);
+        // console.log(loginStatus);
       } else {
-        setLoginStatus(response.data[0].username);
+        // setLoginStatus(response.data[0].username);
+        console.log("I'm in here");
+        history.push("/main");
       }
     });
-    history.push("/main");
   };
 
   return (
@@ -64,9 +66,6 @@ function LoginComponent(props) {
           >
             Submit
           </button>
-          <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a>
-          </p>
         </div>
       </div>
     </form>

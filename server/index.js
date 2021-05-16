@@ -235,7 +235,8 @@ app.get("/login", (req, res) => {
     res.send({ loggedIn: true, user: req.session.user });
   } else {
     // console.log("I'm in here ");
-    res.send({ loggedIn: true, user: "admin" });
+    // res.send({ loggedIn: true, user: "" });
+    console.log("err")
   }
 });
 
@@ -244,7 +245,7 @@ app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  console.log(username);
+  // console.log(username);
   db.query(
     "SELECT * FROM User WHERE  Login_ID= ?;",
     [username],
@@ -252,11 +253,12 @@ app.post("/login", (req, res) => {
       if (err) {
         res.send({ err: err });
       }
-      console.log(result);
-      console.log(password);
+   
       // console.log(result[0].Password);
       if (result.length > 0) {
         bcrypt.compare(password, result[0].Password, (error, response) => {
+
+          // console.log(response.session);
           if (response) {
             req.session.user = result;
             console.log(req.session.user);
