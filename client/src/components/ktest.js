@@ -16,9 +16,9 @@ function Test(props) {
   
   //hooks here
  
-  const QueryViewCourse = () => {
+  const QueryViewCoursesTaken = () => {
     Axios.get("/getStuCourses", {
-      params: { LoginID: 100001 }
+      params: { LoginID: 100002 }
     })
       .then((response) => {
         console.log(response.data);
@@ -27,6 +27,28 @@ function Test(props) {
         console.log(err);
       });
   }; 
+  const QueryViewGPA = () => {
+    Axios.get("/getOwnGPA", {
+      params: { LoginID: 100002 }
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const QueryViewCoursesAv = () => {
+    Axios.get("/getAllCourses", {
+      params: { LoginID: 100002 }
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   var ReactFitText = require("react-fittext");
   return (
@@ -156,14 +178,14 @@ function Test(props) {
       </div>
 
       <div className="my-5">
-        <Buttond variant="light" data-toggle="modal" data-target="#myModal"  onClick = {QueryViewCourse}>
-          View all Courses
+        <Buttond variant="light" data-toggle="modal" data-target="#myModal"  onClick = {QueryViewCoursesTaken}>
+          View all Courses taken
           </Buttond>{" "}
-        <Buttond variant="light" data-toggle="modal" data-target="#secondModal">
+        <Buttond variant="light" data-toggle="modal" data-target="#secondModal" onClick = {QueryViewGPA}>
           View GPA
           </Buttond>{" "}
-        <Buttond variant="light" data-toggle="modal" data-target="#thirdModal">
-          Show letter Grade every student got in the current semester
+        <Buttond variant="light" data-toggle="modal" data-target="#thirdModal" onClick = {QueryViewCoursesAv}>
+          Search Courses
         </Buttond>{" "}
       </div>
 
