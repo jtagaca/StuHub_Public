@@ -4,48 +4,62 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Buttond from "react-bootstrap/Button";
 import "./component.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 import Moment from "react-moment";
 import "moment-timezone";
 import Clock from "react-live-clock";
 // import "./animate.scss";
 import "./gg.css";
+import Table from "react-bootstrap/Table";
 
 function Test(props) {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-  const [country, setCountry] = useState("");
-  const [position, setPosition] = useState("");
-  const [wage, setWage] = useState(0);
+  //hooks here
+  const [coursesTaken, setCoursesTaken] = useState([]);
+  const [ownGPA, setOwnGPA] = useState();
+  const [coursesAv, setCoursesAv] = useState([]);
 
-  const [newWage, setNewWage] = useState(0);
-
-  const [employeeList, setEmployeeList] = useState([]);
-
-  const addEmployee = () => {
-    Axios.post("/create", {
-      name: name,
-      age: age,
-      country: country,
-      position: position,
-      wage: wage,
-    }).then(() => {
-      setEmployeeList([
-        ...employeeList,
-        {
-          name: name,
-          age: age,
-          country: country,
-          position: position,
-          wage: wage,
-        },
-      ]);
-    });
+  const QueryViewCoursesTaken = () => {
+    Axios.get("/getStuCourses", {
+      params: { LoginID: 100002 },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setCoursesTaken(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+  const QueryViewGPA = () => {
+    Axios.get("/getOwnGPA", {
+      params: { LoginID: 100002 },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setOwnGPA(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const QueryViewCoursesAv = () => {
+    Axios.get("/getAllCourses", {
+      params: { LoginID: 100002 },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setCoursesAv(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   var ReactFitText = require("react-fittext");
   return (
     <div>
+      <div class="row"></div>
       <div className="float-start my-0">
         <div className="cloud front">
           <span className="left-front"></span>
@@ -107,11 +121,181 @@ function Test(props) {
         </div>
       </div>
 
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="modal fade" id="myModal">
+              <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1>Course History</h1>
+                  </div>
+                  <div class="modal-body">
+                    <p style={{ textAlign: "center", fontWeight: "bold" }}>
+                      *WIP = Work in Progress
+                    </p>
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>CRN</th>
+                          <th>Course ID</th>
+                          <th>Course Name</th>
+                          <th>Term</th>
+                          <th>Grade</th>
+                        </tr>
+                      </thead>
+
+                      {coursesTaken &&
+                        coursesTaken.map((student) => {
+                          return (
+                            <tbody
+                              key={student.Login_ID}
+                              style={{ textAlign: "left" }}
+                            >
+                              <tr>
+                                <td>{student.CRN}</td>
+                                <td>{student.Course_ID}</td>
+                                <td>{student.Course_Name}</td>
+                                <td>{student.Term}</td>
+                                {student.Grade ? (
+                                  <td>{student.Grade}</td>
+                                ) : (
+                                  <td>WIP</td>
+                                )}
+                              </tr>
+                            </tbody>
+                          );
+                        })}
+                    </Table>
+                  </div>
+                  <div class="modal-footer">
+                    <div className="col align-items-center">
+                      <button
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                        value="Close"
+                      >
+                        Exit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="modal fade" id="secondModal">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1>GPA</h1>
+                  </div>
+                  <div class="modal-body">
+                    {ownGPA &&
+                      ownGPA.map((student) => {
+                        return (
+                          <div
+                            key={student.Login_ID}
+                            style={{ textAlign: "left" }}
+                          >
+                            <p> {student.OverallGPA} </p>
+                          </div>
+                        );
+                      })}
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      class="btn btn-primary"
+                      data-dismiss="modal"
+                      value="Close"
+                    >
+                      Exit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="modal fade" id="thirdModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1>All Courses</h1>
+                  </div>
+                  <div class="modal-body">
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>CRN</th>
+                          <th>Course ID</th>
+                          <th>Course Name</th>
+                          <th>Term</th>
+                        </tr>
+                      </thead>
+
+                      {coursesAv &&
+                        coursesAv.map((all) => {
+                          return (
+                            <tbody
+                              key={all.Login_ID}
+                              style={{ textAlign: "left" }}
+                            >
+                              <tr>
+                                <td>{all.CRN}</td>
+                                <td>{all.Course_ID}</td>
+                                <td>{all.Course_Name}</td>
+                                <td>{all.Term}</td>
+                              </tr>
+                            </tbody>
+                          );
+                        })}
+                    </Table>
+                  </div>
+                  <div class="modal-footer">
+                    <div className="col align-items-center">
+                      <button
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                        value="Close"
+                      >
+                        Exit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="my-5">
-        <Buttond variant="light">View all Courses</Buttond>{" "}
-        <Buttond variant="light">View GPA</Buttond>{" "}
-        <Buttond variant="light">
-          Show letter Grade every student got in the current semester
+        <Buttond
+          variant="light"
+          data-toggle="modal"
+          data-target="#myModal"
+          onClick={QueryViewCoursesTaken}
+        >
+          View all Courses taken
+        </Buttond>{" "}
+        <Buttond
+          variant="light"
+          data-toggle="modal"
+          data-target="#secondModal"
+          onClick={QueryViewGPA}
+        >
+          View GPA
+        </Buttond>{" "}
+        <Buttond
+          variant="light"
+          data-toggle="modal"
+          data-target="#thirdModal"
+          onClick={QueryViewCoursesAv}
+        >
+          Search Courses
         </Buttond>{" "}
       </div>
     </div>
