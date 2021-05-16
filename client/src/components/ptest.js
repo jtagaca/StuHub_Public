@@ -120,7 +120,8 @@ function Ptest() {
     });
   };
   return (
-    <div className="">
+    <div>
+    <div id = "leftbox" style = {{float:'left', background: "#4c9beb", width:'50%',height:'100%'}}>
       <Tabs className="myClass">
         <TabList>
           <Tab>Find User</Tab>
@@ -155,17 +156,6 @@ function Ptest() {
                 {/* <h1>{studentlist}</h1> */}
                 {/* <Result student={studentlist} /> */}
               </div>
-              {studentlist &&
-                studentlist.map((student) => {
-                  return (
-                    <div key={student.Login_ID}>
-                      <h1>{student.First_Name}</h1>
-                      <h1>{student.Last_Name}</h1>
-                      <h1>{student.Login_ID}</h1>
-                      <h1>{student.Email}</h1>
-                    </div>
-                  );
-                })}
             </div>
           </form>
         </TabPanel>
@@ -434,6 +424,17 @@ function Ptest() {
           </form>
         </TabPanel>
       </Tabs>
+    </div>
+      <div id = "rightbox" style = {{float:'right', background:'white', width:'50%', height:'100%'}}>
+                <h3>Query Results</h3>
+                {studentlist && studentlist.map((student) => {
+                  return (
+                    <div key={student.Login_ID} style={{textAlign: 'left'}}>
+                      <p>{student.First_Name} {student.Last_Name} {student.Login_ID} {student.Email}</p>
+                    </div>
+                  );
+                })}
+      </div>
     </div>
   );
 }
