@@ -137,15 +137,15 @@ function Test(props) {
                   <div class="modal-body">
                   <p style={{textAlign: "center", fontWeight: "bold"}}>*WIP = Work in Progress</p>
                   <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>CRN</th>
-                      <th>Course ID</th>
-                      <th>Course Name</th>
-                      <th>Term</th>
-                      <th>Grade</th>
-                    </tr>
-                  </thead>
+                    <thead>
+                      <tr>
+                        <th>CRN</th>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Term</th>
+                        <th>Grade</th>
+                      </tr>
+                    </thead>
 
                     {coursesTaken && coursesTaken.map((student) => {
                       return (
@@ -210,15 +210,31 @@ function Test(props) {
                   <div class="modal-header">
                     <h1>All Courses</h1>
                   </div>
-                  <div class="modal-body">
-                  {coursesAv && coursesAv.map((all) => {
-                    return (
-                      <div key={all.Login_ID} style={{textAlign: 'left'}}>
-                        <table> {all.CRN} {all.Course_ID} {all.Course_Name} {all.Term} </table>
-                      </div>
-                    );
-                  })}
-                  </div>
+                    <div class="modal-body">
+                      <Table striped bordered hover>
+                        <thead>
+                          <tr>
+                            <th>CRN</th>
+                            <th>Course ID</th>
+                            <th>Course Name</th>
+                            <th>Term</th>
+                          </tr>
+                        </thead>
+
+                        {coursesAv && coursesAv.map((all) => {
+                          return (
+                            <tbody key={all.Login_ID} style={{textAlign: 'left'}}>
+                              <tr> 
+                                <td>{all.CRN}</td> 
+                                <td>{all.Course_ID}</td> 
+                                <td>{all.Course_Name}</td> 
+                                <td>{all.Term}</td> 
+                              </tr>
+                            </tbody>
+                          );
+                        })}
+                      </Table>
+                    </div>
                   <div class="modal-footer">
                     <div className="col align-items-center">
                       <button class="btn btn-primary" data-dismiss='modal' value="Close">
