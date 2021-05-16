@@ -7,26 +7,15 @@ import NormalUser from "../components/user";
 import Admin from "../components/admin";
 
 export default function Main() {
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("admin");
 
   Axios.defaults.withCredentials = true;
 
   const history = useHistory();
   // not grabbing the data.role ↓
   useEffect(() => {
-    Axios.get("http://localhost:3001/login").then((response) => {
-      // console.log(response);
-      // console.log(response.data.loggedIn);
-      if (response.data.loggedIn == true) {
-        // console.log(response.data.user);
-        // console.log("this is useeffect");
-
-        setRole(response.data.user);
-      }
-    });
+    Axios.get("/login").then((response) => {});
   }, []);
-  // console.log("this is the role " + role);
-  // console.log("hello");
 
   return (
     <div>

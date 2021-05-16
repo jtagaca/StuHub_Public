@@ -19,6 +19,7 @@ function LoginComponent(props) {
     }).then((response) => {
       if (response.data.message) {
         setLoginStatus(response.data.message);
+        console.log(loginStatus);
       } else {
         setLoginStatus(response.data[0].username);
       }
@@ -58,7 +59,7 @@ function LoginComponent(props) {
 
           <button
             onClick={login}
-            type="submit"
+            type="button"
             className="btn btn-primary btn-block"
           >
             Submit

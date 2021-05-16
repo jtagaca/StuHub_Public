@@ -30,7 +30,7 @@ function Ptest() {
   const [col, setCol] = useState("");
   const [table, setTable] = useState("");
   const [arrCol, setArrcol] = useState([]);
-  const [actionQuery, setActionQuery] = useState({});
+  const [actionQuery, setActionQuery] = useState([]);
 
   const [conditionValue, setconditionValue] = useState("");
   const [conditioncol, setConditioncol] = useState("");
@@ -457,6 +457,80 @@ function Ptest() {
               </div>
             );
           })}
+
+        {actionQuery.length == 0 ? (
+          <h1>Empty Result</h1>
+        ) : (
+          actionQuery &&
+          actionQuery.map((student) => {
+            console.log(student);
+            return (
+              <div key={student.Login_ID} style={{ textAlign: "left" }}>
+                {student.sLogin_ID ? <h1>{student.sLogin_ID}</h1> : <div></div>}
+
+                {student.Address ? (
+                  <div>
+                    {/* <h1>{student.sLogin_ID}</h1> */}
+                    <h1>{student.Address}</h1>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+
+                {student.Login_ID ? (
+                  <div>
+                    {/* <h1>{student.sLogin_ID}</h1> */}
+                    <h1>{student.Login_ID}</h1>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+                {student.First_Name ? (
+                  <div>
+                    {/* <h1>{student.sLogin_ID}</h1> */}
+                    <h1>{student.First_Name}</h1>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+
+                {student.Last_Name ? (
+                  <div>
+                    {/* <h1>{student.sLogin_ID}</h1> */}
+                    <h1>{student.Last_Name}</h1>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+
+                {student.Email ? (
+                  <div>
+                    {/* <h1>{student.sLogin_ID}</h1> */}
+                    <h1>{student.Email}</h1>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+                {student.Phone ? (
+                  <div>
+                    {/* <h1>{student.sLogin_ID}</h1> */}
+                    <h1>{student.Phone}</h1>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+                {student.OverallGPA ? (
+                  <div>
+                    {/* <h1>{student.sLogin_ID}</h1> */}
+                    <h1>{student.OverallGPA}</h1>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );
