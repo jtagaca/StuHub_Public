@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Buttond from "react-bootstrap/Button";
 import "./component.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 import Moment from "react-moment";
 import "moment-timezone";
@@ -13,36 +13,21 @@ import Clock from "react-live-clock";
 import "./gg.css";
 
 function Test(props) {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-  const [country, setCountry] = useState("");
-  const [position, setPosition] = useState("");
-  const [wage, setWage] = useState(0);
+  
+  //hooks here
+ 
+  const QueryViewCourse = () => {
+    Axios.get("/getStuCourses", {
+      params: { LoginID: 100001 }
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }; 
 
-  const [newWage, setNewWage] = useState(0);
-
-  const [employeeList, setEmployeeList] = useState([]);
-
-  const addEmployee = () => {
-    Axios.post("/create", {
-      name: name,
-      age: age,
-      country: country,
-      position: position,
-      wage: wage,
-    }).then(() => {
-      setEmployeeList([
-        ...employeeList,
-        {
-          name: name,
-          age: age,
-          country: country,
-          position: position,
-          wage: wage,
-        },
-      ]);
-    });
-  };
   var ReactFitText = require("react-fittext");
   return (
     <div>
@@ -109,13 +94,7 @@ function Test(props) {
         </div>
       </div>
 
-      <div className="my-5">
-        <Buttond variant="light" >View all Courses</Buttond>{" "}
-        <Buttond variant="light">View GPA</Buttond>{" "}
-        <Buttond variant="light">
-          Show letter Grade every student got in the current semester
-        </Buttond>{" "}
-      </div>
+      
 
       <div class="container">
         <div class="row">
@@ -176,21 +155,21 @@ function Test(props) {
         </div>
       </div>
 
-      <div className="container">
-        <div className="row">
-            <button data-toggle="modal" data-target="#myModal">First Modal</button>
-            <button data-toggle="modal" data-target="#secondModal">Second Modal</button>
-            <button data-toggle="modal" data-target="#thirdModal">Third Modal</button>
-        </div>
+      <div className="my-5">
+        <Buttond variant="light" data-toggle="modal" data-target="#myModal"  onClick = {QueryViewCourse}>
+          View all Courses
+          </Buttond>{" "}
+        <Buttond variant="light" data-toggle="modal" data-target="#secondModal">
+          View GPA
+          </Buttond>{" "}
+        <Buttond variant="light" data-toggle="modal" data-target="#thirdModal">
+          Show letter Grade every student got in the current semester
+        </Buttond>{" "}
       </div>
-            
 
-          </div>
+    </div>
 
   );
-
-
-  
 }
 
 export default Test;
