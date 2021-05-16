@@ -11,6 +11,7 @@ import "moment-timezone";
 import Clock from "react-live-clock";
 // import "./animate.scss";
 import "./gg.css";
+import Table from "react-bootstrap/Table";
 
 function Test(props) {
   
@@ -128,19 +129,40 @@ function Test(props) {
         <div class="row">
           <div class="col-md-12">
             <div class="modal fade" id="myModal">
-              <div class="modal-dialog modal-lg">
+              <div class="modal-dialog modal-md">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h1>Course History</h1>
                   </div>
                   <div class="modal-body">
-                  {coursesTaken && coursesTaken.map((student) => {
-                    return (
-                      <div key={student.Login_ID} style={{textAlign: 'left'}}>
-                        <p>{student.CRN} {student.Course_ID} {student.Course_Name} {student.Term} {student.Grade}</p>
-                      </div>
-                    );
-                  })}
+                  <p style={{textAlign: "center", fontWeight: "bold"}}>*WIP = Work in Progress</p>
+                  <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>CRN</th>
+                      <th>Course ID</th>
+                      <th>Course Name</th>
+                      <th>Term</th>
+                      <th>Grade</th>
+                    </tr>
+                  </thead>
+
+                    {coursesTaken && coursesTaken.map((student) => {
+                      return (
+                        
+                          <tbody key={student.Login_ID} style={{textAlign: 'left'}}>
+                            <tr>
+                              <td>{student.CRN}</td> 
+                              <td>{student.Course_ID}</td> 
+                              <td>{student.Course_Name}</td> 
+                              <td>{student.Term}</td>
+                              {student.Grade ? <td>{student.Grade}</td> : <td>WIP</td> }
+                            </tr>
+                          </tbody>
+                  
+                      );
+                    })}
+                  </Table>
                   
                   </div>
                   <div class="modal-footer">
@@ -157,7 +179,7 @@ function Test(props) {
       
           <div class="col-md-12">
             <div class="modal fade" id="secondModal">
-              <div class="modal-dialog modal-lg">
+              <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h1>GPA</h1>
@@ -172,11 +194,9 @@ function Test(props) {
                   })}
                   </div>
                   <div class="modal-footer">
-                    <div className="col align-items-center">
                       <button class="btn btn-primary" data-dismiss='modal' value="Close">
                         Exit
                       </button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -188,13 +208,13 @@ function Test(props) {
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1>New Query</h1>
+                    <h1>All Courses</h1>
                   </div>
                   <div class="modal-body">
                   {coursesAv && coursesAv.map((all) => {
                     return (
                       <div key={all.Login_ID} style={{textAlign: 'left'}}>
-                        <p> {all.CRN} {all.Course_ID} {all.Course_Name} {all.Term} </p>
+                        <table> {all.CRN} {all.Course_ID} {all.Course_Name} {all.Term} </table>
                       </div>
                     );
                   })}
