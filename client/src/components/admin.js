@@ -22,7 +22,6 @@ function Admin() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [eventKey, setEventKey] = useState(0);
-
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
   // let arrTable = ["User", "Department", "Major", "Courses", "Student"];
@@ -39,7 +38,7 @@ function Admin() {
     console.log(e);
     setTable(e);
     Axios.get("/col", {
-      params: { table: table },
+      params: { newtable: table },
     })
       .then((response) => {
         console.log(response.data);

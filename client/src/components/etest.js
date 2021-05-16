@@ -13,7 +13,7 @@ import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import Axios from "axios";
 import Result from "./result.js";
-import alert from 'alert';
+// import alert from 'alert';
 //refactor code- JT
 function Etest() {
   const [usernameReg, setUsernameReg] = useState("");
@@ -60,7 +60,7 @@ function Etest() {
       //   })
       // );
       console.log("success");
-    });  
+    });
   };
 
   // var idcounter = 0;
@@ -87,7 +87,7 @@ function Etest() {
       phone: phone,
       email: email,
     }).then((response) => {
-      alert('User was successfully added to the database!');
+      alert("User was successfully added to the database!");
       console.log(response);
     });
   };
