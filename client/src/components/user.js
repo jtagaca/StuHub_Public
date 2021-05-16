@@ -13,11 +13,24 @@ import Clock from "react-live-clock";
 import "./gg.css";
 import Table from "react-bootstrap/Table";
 
-function Test(props) {
+function User(props) {
   //hooks here
   const [coursesTaken, setCoursesTaken] = useState([]);
   const [ownGPA, setOwnGPA] = useState();
   const [coursesAv, setCoursesAv] = useState([]);
+  const [studentfname, setStudentfname] = useState("");
+  const [lname, setStudentlname] = useState("");
+  const [id, setStudentID] = useState("");
+
+  useEffect(() => {
+    console.log("in");
+    Axios.get("/getStudentinfo").then((response) => {
+      console.log(response.data[0].First_Name);
+      setStudentfname(response.data[0].First_Name);
+      setStudentlname(response.data[0].Last_Name);
+      setStudentID(response.data[0].Login_ID);
+    });
+  }, []);
 
   const QueryViewCoursesTaken = () => {
     Axios.get("/getStuCourses", {
@@ -94,7 +107,9 @@ function Test(props) {
           <Row className="container-fluid mx-0 animate-271724">
             <Col lg={6} className="border bordercolor ">
               <h1>Welcome</h1>
-              <h2>$First name $last Name</h2>
+              <h2>
+                {studentfname} {lname}{" "}
+              </h2>
             </Col>
 
             <Col lg={6} className="border bordercolor">
@@ -113,7 +128,7 @@ function Test(props) {
             <div>
               <Row>
                 <Col xl={12} className="border">
-                  <h1>Student ID: $1000001</h1>
+                  <h1>Student ID: {id}</h1>
                 </Col>
               </Row>
             </div>
@@ -302,4 +317,4 @@ function Test(props) {
   );
 }
 
-export default Test;
+export default User;

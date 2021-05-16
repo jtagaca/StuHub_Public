@@ -240,6 +240,17 @@ app.get("/login", (req, res) => {
   }
 });
 
+app.get("/getStudentinfo", (req, res) => {
+  // console.log(req.session.user);
+  console.log("inhere")
+  console.log(req.session.user)
+
+  res.send(req.session.user)
+ 
+});
+
+
+
 // used to login from front to backend
 app.post("/login", (req, res) => {
   const username = req.body.username;
