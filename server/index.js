@@ -99,7 +99,7 @@ app.get("/getStuCourses", (req, res) => {
   const login_id = req.query.LoginID;
 
   db.query(
-    "SELECT Takes.CRN, Course.Course_ID, Course_Info.Course_Name, Course.Term, Takes.Grade FROM Takes INNER JOIN Course ON Course.CRN = Takes.CRN INNER JOIN Course_Info ON Course_Info.Course_ID = Course.Course_ID WHERE sLogin_ID = ?;",
+    "SELECT Takes.sLogin_ID, Takes.CRN, Course.Course_ID, Course_Info.Course_Name, Course.Term, Takes.Grade FROM Takes INNER JOIN Course ON Course.CRN = Takes.CRN INNER JOIN Course_Info ON Course_Info.Course_ID = Course.Course_ID WHERE sLogin_ID = ?;",
     [login_id],
 
     (err, result) => {

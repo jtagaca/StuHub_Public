@@ -15,6 +15,9 @@ import "./gg.css";
 function Test(props) {
   
   //hooks here 
+  const [coursesTaken, setCoursesTaken] = useState([]);
+  const [ownGPA, setOwnGPA] = useState();
+  const [coursesAv, setCoursesAv] = useState([]);
  
   const QueryViewCoursesTaken = () => {
     Axios.get("/getStuCourses", {
@@ -22,6 +25,7 @@ function Test(props) {
     })
       .then((response) => {
         console.log(response.data);
+        setCoursesTaken(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -33,6 +37,7 @@ function Test(props) {
     })
       .then((response) => {
         console.log(response.data);
+        setOwnGPA(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -44,6 +49,7 @@ function Test(props) {
     })
       .then((response) => {
         console.log(response.data);
+        setCoursesAv(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -122,16 +128,27 @@ function Test(props) {
         <div class="row">
           <div class="col-md-12">
             <div class="modal fade" id="myModal">
-              <div class="modal-dialog modal-sm">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1>Query description</h1>
+                    <h1>Course History</h1>
                   </div>
                   <div class="modal-body">
-                    Put query data here
+                  {coursesTaken && coursesTaken.map((student) => {
+                    return (
+                      <div key={student.Login_ID} style={{textAlign: 'left'}}>
+                        <p>{student.CRN} {student.Course_ID} {student.Course_Name} {student.Term} {student.Grade}</p>
+                      </div>
+                    );
+                  })}
+                  
                   </div>
                   <div class="modal-footer">
-                    <input class="btn btn-primary" data-dismiss='modal' value="Close"></input>
+                    <div className="col align-items-center">
+                      <button class="btn btn-primary" data-dismiss='modal' value="Close">
+                        Exit
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -140,16 +157,26 @@ function Test(props) {
       
           <div class="col-md-12">
             <div class="modal fade" id="secondModal">
-              <div class="modal-dialog modal-sm">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1>New Query</h1>
+                    <h1>GPA</h1>
                   </div>
                   <div class="modal-body">
-                    Put query data here
+                  {ownGPA && ownGPA.map((student) => {
+                    return (
+                      <div key={student.Login_ID} style={{textAlign: 'left'}}>
+                        <p> {student.OverallGPA} </p>
+                      </div>
+                    );
+                  })}
                   </div>
                   <div class="modal-footer">
-                    <input class="btn btn-primary" data-dismiss='modal' value="Close"></input>
+                    <div className="col align-items-center">
+                      <button class="btn btn-primary" data-dismiss='modal' value="Close">
+                        Exit
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -158,16 +185,26 @@ function Test(props) {
 
           <div class="col-md-12">
             <div class="modal fade" id="thirdModal">
-              <div class="modal-dialog modal-sm">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h1>New Query</h1>
                   </div>
                   <div class="modal-body">
-                    Put query data here
+                  {coursesAv && coursesAv.map((all) => {
+                    return (
+                      <div key={all.Login_ID} style={{textAlign: 'left'}}>
+                        <p> {all.CRN} {all.Course_ID} {all.Course_Name} {all.Term} </p>
+                      </div>
+                    );
+                  })}
                   </div>
                   <div class="modal-footer">
-                    <input class="btn btn-primary" data-dismiss='modal' value="Close"></input>
+                    <div className="col align-items-center">
+                      <button class="btn btn-primary" data-dismiss='modal' value="Close">
+                        Exit
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
