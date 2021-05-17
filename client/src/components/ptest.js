@@ -35,6 +35,8 @@ function Ptest() {
   const [conditionValue, setconditionValue] = useState("");
   const [conditioncol, setConditioncol] = useState("");
   const [allstudentlist, setAllStudentlist] = useState([]);
+
+
   const handleSelect = (e) => {
     console.log(e);
     setTable(e);
@@ -51,6 +53,8 @@ function Ptest() {
   };
 
   var objectStructure = ["sLogin_ID"];
+  
+  let deleteConfirm = false;
   const deleteUser = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
       // setAllStudentlist(
@@ -58,8 +62,13 @@ function Ptest() {
       //     return val.sLogin_ID != id;
       //   })
       // );
+      deleteConfirm = true;
       console.log("success");
     });
+    if(deleteConfirm)
+    {
+      console.log("worked")
+    };
   };
 
   // var idcounter = 0;
@@ -230,9 +239,13 @@ function Ptest() {
                     }}
                   />
                 </div>
-                <Fab color="primary" aria-label="add">
-                  <AddIcon onClick={register} />
-                </Fab>
+                <button
+                  type="button"
+                  className="btn btn-primary btn-block"
+                  onClick={register}
+                >
+                  Add User
+                </button>
               </div>
             </div>
           </form>
@@ -267,20 +280,13 @@ function Ptest() {
                         </form>
                       </div>
                     </div>
-                    <div className="w-2">
-                      <div>
-                        <Button onClick={alert}>hello</Button>
-                      </div>
-                      <Button
-                        className="w-5"
-                        variant="primary
-                        "
-                        // onClick={updateUSer}
+                      <button
+                        type="button"
+                        className="btn btn-primary btn-block"
                         onClick={updateUSer}
-                      >
+                        >
                         Update
-                      </Button>
-                    </div>
+                      </button>
                     <DropdownButton
                       alignRight
                       title="Tables"
@@ -371,13 +377,14 @@ function Ptest() {
                     }}
                   />
                 </div>
-                <Fab
-                  color="primary"
-                  aria-label="add"
+                <button
+                  style={{backgroundColor: 'red'}}
+                  type="button"
+                  className="btn btn-primary btn-block"
                   onClick={() => deleteUser(delId)}
                 >
-                  <RemoveIcon />
-                </Fab>
+                  Delete
+                </button>
               </div>
             </div>
           </form>
