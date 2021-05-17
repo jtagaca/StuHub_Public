@@ -1,18 +1,13 @@
 import { React, Component, useState } from "react";
 import { Button, ButtonGroup, Fab, TextField } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import Buttond from "react-bootstrap/Button";
-import RemoveIcon from "@material-ui/icons/Remove";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Dropdown, Row, Col } from "react-bootstrap";
-import Formb from "react-bootstrap/Form";
-import Carousel from "react-bootstrap/Carousel";
 import "./gg.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import Axios from "axios";
-import Result from "./result.js";
+import Table from "react-bootstrap/Table";
 //refactor code- JT
 function Ptest() {
   const [usernameReg, setUsernameReg] = useState("");
@@ -432,15 +427,40 @@ function Ptest() {
         </TabPanel>
       </Tabs>
     </div>
-      <div id = "rightbox" style = {{float:'right', background:'white', width:'50%', height:'100%'}}>
-                <h3>Query Results</h3>
-                {studentlist && studentlist.map((student) => {
-                  return (
-                    <div key={student.Login_ID} style={{textAlign: 'left'}}>
-                      <p>{student.First_Name} {student.Last_Name} {student.Login_ID} {student.Email}</p>
-                    </div>
+      <div id = "rightbox" style = {{
+        float:'right', 
+        background:'white', 
+        width:'50%', 
+        height:'100%', 
+        borderStyle: 'solid', 
+        borderColor: 'green', 
+        paddingTop: '10px', 
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        overflowY: 'auto'}}>
+        <h3>Query Results</h3>
+          <Table striped bordered hover size="sm">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+              {studentlist && studentlist.map((student) => {
+                return (
+                  <tbody key={student.Login_ID} style={{textAlign: 'left'}}>
+                    <tr>
+                      <td>{student.Login_ID}</td> 
+                      <td>{student.First_Name}</td> 
+                      <td>{student.Last_Name}</td> 
+                      <td>{student.Email}</td>
+                    </tr>
+                  </tbody>
                   );
                 })}
+            </Table>
       </div>
     </div>
   );
