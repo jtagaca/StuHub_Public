@@ -36,6 +36,9 @@ function Ptest() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [eventKey, setEventKey] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
 
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
@@ -48,7 +51,6 @@ function Ptest() {
 
   const [conditionValue, setconditionValue] = useState("");
   const [conditioncol, setConditioncol] = useState("");
-  const [allstudentlist, setAllStudentlist] = useState([]);
 
   const [isOpen, toggle] = useState(false);
 
@@ -99,16 +101,20 @@ function Ptest() {
   };
 
   const register = () => {
-    Axios.post("http://localhost:3001/register", {
+    Axios.post("/register", {
       username: usernameReg,
       first: fname,
       lastname: lname,
       password: passwordReg,
       phone: phone,
       email: email,
-    }).then((response) => {
-      console.log(response);
-    });
+    })
+      .then((response) => {
+        console.log("aKhjsdh");
+      })
+      .catch((err) => {
+        console.log("gg");
+      });
   };
   const [studentlist, setStudentList] = useState();
   const searchUser = () => {
@@ -124,9 +130,7 @@ function Ptest() {
         console.log(err);
       });
   };
-  const alert = () => {
-    console.log(table);
-  };
+
   const updateUSer = () => {
     Axios.put("/update", {
       conditionValue: conditionValue,
@@ -140,6 +144,40 @@ function Ptest() {
   };
   return (
     <div>
+      <div>
+        {showModal ? (
+          <Modal.Dialog show={handleShow} onHide={handleClose}>
+            <Modal className="modal fade" id="myModal">
+              <Modal.Header className="modal-header">
+                <h5 className="modal-title">Private Booking Email Sent</h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </Modal.Header>
+              <Modal.Body className="modal-body">
+                <p>
+                  A message about your private event has been sent, we will get
+                  back to you as soon as possible.{" "}
+                </p>
+              </Modal.Body>
+              <Modal.Footer className="modal-footer">
+                <button
+                  className="btn btn-primary"
+                  data-dismiss="modal"
+                  onClick={handleClose}
+                >
+                  Close
+                </button>
+              </Modal.Footer>
+            </Modal>
+          </Modal.Dialog>
+        ) : null}
+      </div>
       <div>
         <Tabs className="myClass">
           <TabList>
