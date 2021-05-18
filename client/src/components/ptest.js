@@ -57,7 +57,6 @@ function Ptest() {
       //     return val.sLogin_ID != id;
       //   })
       // );
-      deleteConfirm = true;
       console.log("success");
     });
     if(deleteConfirm)
@@ -123,16 +122,65 @@ function Ptest() {
       console.log("success");
     });
   };
+
+  const [currentDivID, setCurrentDivID] = useState("");
+  const showDiv = (divID) => {
+    if(currentDivID !== "" || currentDivID != divID)
+    {
+      // search div
+      if(divID === "searchDiv")
+      {
+        document.getElementById("addDiv").style.display="none";
+        document.getElementById("deleteDiv").style.display="none";
+        document.getElementById("updateDiv").style.display="none";
+        document.getElementById("queryDiv").style.display="none";
+        document.getElementById(divID).style.display="inline";
+      }
+      else if(divID === "addDiv")
+      {
+        document.getElementById("searchDiv").style.display="none";
+        document.getElementById("deleteDiv").style.display="none";
+        document.getElementById("updateDiv").style.display="none";
+        document.getElementById("queryDiv").style.display="none";
+        document.getElementById(divID).style.display="inline";
+      }
+      else if(divID === "updateDiv")
+      {
+        document.getElementById("searchDiv").style.display="none";
+        document.getElementById("deleteDiv").style.display="none";
+        document.getElementById("addDiv").style.display="none";
+        document.getElementById("queryDiv").style.display="none";
+        document.getElementById(divID).style.display="inline";
+      }
+      else if(divID === "deleteDiv")
+      {
+        document.getElementById("searchDiv").style.display="none";
+        document.getElementById("addDiv").style.display="none";
+        document.getElementById("updateDiv").style.display="none";
+        document.getElementById("queryDiv").style.display="none";
+        document.getElementById(divID).style.display="inline";
+      }
+      else if(divID === "queryDiv")
+      {
+        document.getElementById("searchDiv").style.display="none";
+        document.getElementById("addDiv").style.display="none";
+        document.getElementById("updateDiv").style.display="none";
+        document.getElementById("deleteDiv").style.display="none";
+        document.getElementById(divID).style.display="inline";
+      }
+      setCurrentDivID(divID);
+    }
+  };
   return (
     <div>
     <div id = "leftbox" style = {{float:'left', background: "#4c9beb", width:'50%',height:'100%'}}>
       <Tabs className="myClass">
         <TabList>
-          <Tab>Find User</Tab>
-          <Tab>Add User</Tab>
-          <Tab>Update User</Tab>
-          <Tab style={{ color: "red" }}>Delete User</Tab>
-          <Tab>Actions</Tab>
+          <Tab onClick={() => {showDiv("searchDiv");}}>Find User</Tab>
+          <Tab onClick={() => {showDiv("addDiv");}}>Add User</Tab>
+          <Tab onClick={() => {showDiv("updateDiv");}}>Update User</Tab>
+          <Tab onClick={() => {showDiv("deleteDiv");}} style={{ color: "red" }}>Delete User</Tab>
+          <Tab onClick={() => {showDiv("queryDiv");}}>Actions</Tab>
         </TabList>
         <TabPanel>
           <form>
@@ -378,7 +426,7 @@ function Ptest() {
                   className="btn btn-primary btn-block"
                   onClick={() => deleteUser(delId)}
                 >
-                  Delete
+                  Delete User
                 </button>
               </div>
             </div>
@@ -439,17 +487,18 @@ function Ptest() {
         paddingRight: '20px',
         overflowY: 'auto'}}>
         <h3>Query Results</h3>
-          <Table striped bordered hover size="sm">
-            <thead>
-              <tr>
-                <th>User ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-              </tr>
-            </thead>
+        <div id="searchDiv">
               {studentlist && studentlist.map((student) => {
                 return (
+                  <Table striped bordered hover size="sm">
+                  <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                  </tr>
+                  </thead>
                   <tbody key={student.Login_ID} style={{textAlign: 'left'}}>
                     <tr>
                       <td>{student.Login_ID}</td> 
@@ -458,9 +507,23 @@ function Ptest() {
                       <td>{student.Email}</td>
                     </tr>
                   </tbody>
+                  </Table>
                   );
                 })}
-            </Table>
+
+        </div>
+        <div id="deleteDiv">
+          delete Test
+        </div>
+        <div id="addDiv">
+          add Test
+        </div>
+        <div id="updateDiv">
+          update Test
+        </div>
+        <div id="queryDiv">
+          query Test
+        </div>
       </div>
     </div>
   );
