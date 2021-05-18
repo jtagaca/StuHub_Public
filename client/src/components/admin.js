@@ -312,9 +312,7 @@ function Admin() {
                         </div>
                       </div>
                       <div className="w-2">
-                        <div>
-                          <Button onClick={alert}>hello</Button>
-                        </div>
+                        
                         <Button
                           className="w-5"
                           variant="primary

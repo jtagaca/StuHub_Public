@@ -28,6 +28,8 @@
     "react-moment": "^1.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+    "react-to-pdf": "0.0.13",
+    "react-to-print": "^2.12.4",
     "sass-loader": "^11.0.1",
     "setstate": "^1.0.2",
     "styled-components": "^5.3.0",

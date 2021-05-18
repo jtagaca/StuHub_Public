@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -9,20 +9,25 @@ import Axios from "axios";
 import Moment from "react-moment";
 import "moment-timezone";
 import Clock from "react-live-clock";
-// import "./animate.scss";
+import { useReactToPrint } from "react-to-print";
+import ReactToPrint from "react-to-print";
+
 import "./gg.css";
 import Table from "react-bootstrap/Table";
 
+import Pdf from "react-to-pdf";
+
 function Test(props) {
-  
-  //hooks here 
+  const ref = React.createRef();
+
+  //hooks here
   const [coursesTaken, setCoursesTaken] = useState([]);
   const [ownGPA, setOwnGPA] = useState();
   const [coursesAv, setCoursesAv] = useState([]);
- 
+
   const QueryViewCoursesTaken = () => {
     Axios.get("/getStuCourses", {
-      params: { LoginID: 100002 }
+      params: { LoginID: 100002 },
     })
       .then((response) => {
         console.log(response.data);
@@ -31,10 +36,10 @@ function Test(props) {
       .catch((err) => {
         console.log(err);
       });
-  }; 
+  };
   const QueryViewGPA = () => {
     Axios.get("/getOwnGPA", {
-      params: { LoginID: 100002 }
+      params: { LoginID: 100002 },
     })
       .then((response) => {
         console.log(response.data);
@@ -46,7 +51,7 @@ function Test(props) {
   };
   const QueryViewCoursesAv = () => {
     Axios.get("/getAllCourses", {
-      params: { LoginID: 100002 }
+      params: { LoginID: 100002 },
     })
       .then((response) => {
         console.log(response.data);
@@ -57,11 +62,12 @@ function Test(props) {
       });
   };
 
+  const componentRef = useRef();
+
   var ReactFitText = require("react-fittext");
   return (
     <div>
-      <div class ="row">
-      </div>
+      <div class="row"></div>
       <div className="float-start my-0">
         <div className="cloud front">
           <span className="left-front"></span>
@@ -122,9 +128,6 @@ function Test(props) {
           </div>
         </div>
       </div>
-
-      
-
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -135,39 +138,57 @@ function Test(props) {
                     <h1>Course History</h1>
                   </div>
                   <div class="modal-body">
-                  <p style={{textAlign: "center", fontWeight: "bold"}}>*WIP = Work in Progress</p>
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>CRN</th>
-                        <th>Course ID</th>
-                        <th>Course Name</th>
-                        <th>Term</th>
-                        <th>Grade</th>
-                      </tr>
-                    </thead>
+                    <p style={{ textAlign: "center", fontWeight: "bold" }}>
+                      *WIP = Work in Progress
+                    </p>
+                    <Table striped bordered hover ref={componentRef}>
+                      <thead>
+                        <tr>
+                          <th>CRN</th>
+                          <th>Course ID</th>
+                          <th>Course Name</th>
+                          <th>Term</th>
+                          <th>Grade</th>
+                        </tr>
+                      </thead>
 
-                    {coursesTaken && coursesTaken.map((student) => {
-                      return (
-                        
-                          <tbody key={student.Login_ID} style={{textAlign: 'left'}}>
-                            <tr>
-                              <td>{student.CRN}</td> 
-                              <td>{student.Course_ID}</td> 
-                              <td>{student.Course_Name}</td> 
-                              <td>{student.Term}</td>
-                              {student.Grade ? <td>{student.Grade}</td> : <td>WIP</td> }
-                            </tr>
-                          </tbody>
-                  
-                      );
-                    })}
-                  </Table>
-                  
+                      {coursesTaken &&
+                        coursesTaken.map((student) => {
+                          return (
+                            <tbody
+                              key={student.Login_ID}
+                              style={{ textAlign: "left" }}
+                            >
+                              <tr>
+                                <td>{student.CRN}</td>
+                                <td>{student.Course_ID}</td>
+                                <td>{student.Course_Name}</td>
+                                <td>{student.Term}</td>
+                                {student.Grade ? (
+                                  <td>{student.Grade}</td>
+                                ) : (
+                                  <td>WIP</td>
+                                )}
+                              </tr>
+                            </tbody>
+                          );
+                        })}
+                    </Table>
+
+                    <div>
+                      <ReactToPrint
+                        trigger={() => <button>Print this out!</button>}
+                        content={() => componentRef.current}
+                      />
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <div className="col align-items-center">
-                      <button class="btn btn-primary" data-dismiss='modal' value="Close">
+                      <button
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                        value="Close"
+                      >
                         Exit
                       </button>
                     </div>
@@ -176,7 +197,7 @@ function Test(props) {
               </div>
             </div>
           </div>
-      
+
           <div class="col-md-12">
             <div class="modal fade" id="secondModal">
               <div class="modal-dialog modal-sm">
@@ -185,18 +206,26 @@ function Test(props) {
                     <h1>GPA</h1>
                   </div>
                   <div class="modal-body">
-                  {ownGPA && ownGPA.map((student) => {
-                    return (
-                      <div key={student.Login_ID} style={{textAlign: 'left'}}>
-                        <p> {student.OverallGPA} </p>
-                      </div>
-                    );
-                  })}
+                    {ownGPA &&
+                      ownGPA.map((student) => {
+                        return (
+                          <div
+                            key={student.Login_ID}
+                            style={{ textAlign: "left" }}
+                          >
+                            <p> {student.OverallGPA} </p>
+                          </div>
+                        );
+                      })}
                   </div>
                   <div class="modal-footer">
-                      <button class="btn btn-primary" data-dismiss='modal' value="Close">
-                        Exit
-                      </button>
+                    <button
+                      class="btn btn-primary"
+                      data-dismiss="modal"
+                      value="Close"
+                    >
+                      Exit
+                    </button>
                   </div>
                 </div>
               </div>
@@ -210,60 +239,88 @@ function Test(props) {
                   <div class="modal-header">
                     <h1>All Courses</h1>
                   </div>
-                    <div class="modal-body">
-                      <Table striped bordered hover>
-                        <thead>
-                          <tr>
-                            <th>CRN</th>
-                            <th>Course ID</th>
-                            <th>Course Name</th>
-                            <th>Term</th>
-                          </tr>
-                        </thead>
+                  <div class="modal-body">
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>CRN</th>
+                          <th>Course ID</th>
+                          <th>Course Name</th>
+                          <th>Term</th>
+                        </tr>
+                      </thead>
 
-                        {coursesAv && coursesAv.map((all) => {
+                      {coursesAv &&
+                        coursesAv.map((all) => {
                           return (
-                            <tbody key={all.Login_ID} style={{textAlign: 'left'}}>
-                              <tr> 
-                                <td>{all.CRN}</td> 
-                                <td>{all.Course_ID}</td> 
-                                <td>{all.Course_Name}</td> 
-                                <td>{all.Term}</td> 
+                            <tbody
+                              key={all.Login_ID}
+                              style={{ textAlign: "left" }}
+                            >
+                              <tr>
+                                <td>{all.CRN}</td>
+                                <td>{all.Course_ID}</td>
+                                <td>{all.Course_Name}</td>
+                                <td>{all.Term}</td>
                               </tr>
                             </tbody>
                           );
                         })}
-                      </Table>
-                    </div>
+                    </Table>
+
+                    <button>heelo</button>
+                  </div>
                   <div class="modal-footer">
                     <div className="col align-items-center">
-                      <button class="btn btn-primary" data-dismiss='modal' value="Close">
+                      <button
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                        value="Close"
+                      >
                         Exit
                       </button>
+                      <button>gg</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-
       <div className="my-5">
-        <Buttond variant="light" data-toggle="modal" data-target="#myModal"  onClick = {QueryViewCoursesTaken}>
+        <Buttond
+          variant="light"
+          data-toggle="modal"
+          data-target="#myModal"
+          onClick={QueryViewCoursesTaken}
+        >
           View all Courses taken
-          </Buttond>{" "}
-        <Buttond variant="light" data-toggle="modal" data-target="#secondModal" onClick = {QueryViewGPA}>
+        </Buttond>{" "}
+        <Buttond
+          variant="light"
+          data-toggle="modal"
+          data-target="#secondModal"
+          onClick={QueryViewGPA}
+        >
           View GPA
-          </Buttond>{" "}
-        <Buttond variant="light" data-toggle="modal" data-target="#thirdModal" onClick = {QueryViewCoursesAv}>
+        </Buttond>{" "}
+        <Buttond
+          variant="light"
+          data-toggle="modal"
+          data-target="#thirdModal"
+          onClick={QueryViewCoursesAv}
+        >
           Search Courses
         </Buttond>{" "}
       </div>
-
+      {/* <div className="Post" styles={{ backgroundColor: "green" }} ref={ref}>
+        <h1>hello</h1>
+      </div>
+      <Pdf targetRef={ref} filename="post.pdf">
+        {({ toPdf }) => <button onClick={toPdf}>Capture as PDF</button>}
+      </Pdf> */}
     </div>
-
   );
 }
 
