@@ -70,6 +70,24 @@ function Admin() {
       });
   };
 
+  const handleClear = () => {
+    // setFname("");
+    // debugger
+    // console.log("hello");
+    // setLname("");
+    // setPasswordReg("");
+    // setPhone("");
+    // setEmail("");
+    // setUsernameReg("");
+    // console.log(usernameReg)
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = "")
+    );
+    this.setState({
+      itemvalues: [{}]
+    });
+  };
+
   var objectStructure = ["sLogin_ID"];
   const deleteUser = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
@@ -101,8 +119,6 @@ function Admin() {
     // debugger
     // handleShow();
 
-   
-    debugger
     Axios.post("/register", {
       username: usernameReg,
       first: fname,
@@ -111,14 +127,17 @@ function Admin() {
       phone: phone,
       email: email,
     })
-    
+
       .then((response) => {
-        alert("User was added successfully")
+        debugger;
+        setUsernameReg("");
+        console.log(usernameReg);
+
+        alert("User was added successfully");
       })
       .catch((err) => {
-        alert("Please make sure to fill all the input boxes")
-        
-});
+        alert("Please make sure to fill all the input boxes");
+      });
   };
   const [studentlist, setStudentList] = useState();
   const searchUser = () => {
@@ -258,8 +277,8 @@ function Admin() {
                   <Fab color="primary" aria-label="add">
                     <AddIcon onClick={register} />
                   </Fab>
+                  <Button onClick={handleClear}>clear</Button>
                 </div>
-      
               </div>
             </form>
           </TabPanel>
