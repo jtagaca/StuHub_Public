@@ -71,21 +71,10 @@ function Admin() {
   };
 
   const handleClear = () => {
-    // setFname("");
-    // debugger
-    // console.log("hello");
-    // setLname("");
-    // setPasswordReg("");
-    // setPhone("");
-    // setEmail("");
-    // setUsernameReg("");
-    // console.log(usernameReg)
     Array.from(document.querySelectorAll("input")).forEach(
       input => (input.value = "")
     );
-    this.setState({
-      itemvalues: [{}]
-    });
+
   };
 
   var objectStructure = ["sLogin_ID"];
@@ -129,11 +118,11 @@ function Admin() {
     })
 
       .then((response) => {
-        debugger;
-        setUsernameReg("");
+        
         console.log(usernameReg);
 
         alert("User was added successfully");
+        handleClear();
       })
       .catch((err) => {
         alert("Please make sure to fill all the input boxes");
