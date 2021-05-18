@@ -70,6 +70,17 @@ function Admin() {
       });
   };
 
+
+  const inputValidation =()=>{
+    if(usernameReg.length>6 && passwordReg.length>7 && phone.length>5  ){
+      register();
+    }
+    else{
+
+      alert("Username or Password or Phone does not adhear to our Security Policy")
+    }
+
+  }
   const handleClear = () => {
     Array.from(document.querySelectorAll("input")).forEach(
       input => (input.value = "")
@@ -79,6 +90,7 @@ function Admin() {
 
   var objectStructure = ["sLogin_ID"];
   const deleteUser = (id) => {
+
     Axios.delete(`/delete/${id}`).then((response) => {
       // setAllStudentlist(
       //   allstudentlist.filter((val) => {
@@ -105,9 +117,6 @@ function Admin() {
   };
 
   const register = () => {
-    // debugger
-    // handleShow();
-
     Axios.post("/register", {
       username: usernameReg,
       first: fname,
@@ -176,6 +185,7 @@ function Admin() {
                       type="text"
                       className="form-control"
                       placeholder="e.g. 100001"
+                      
                       onChange={(e) => {
                         setld(e.target.value);
                       }}
@@ -264,7 +274,7 @@ function Admin() {
                     />
                   </div>
                   <Fab color="primary" aria-label="add">
-                    <AddIcon onClick={register} />
+                    <AddIcon onClick={inputValidation} />
                   </Fab>
                   <Button onClick={handleClear}>clear</Button>
                 </div>
