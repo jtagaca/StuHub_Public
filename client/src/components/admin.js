@@ -4,15 +4,29 @@ import AddIcon from "@material-ui/icons/Add";
 import Buttond from "react-bootstrap/Button";
 import RemoveIcon from "@material-ui/icons/Remove";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { Dropdown, Row, Col } from "react-bootstrap";
+import { Dropdown, Row, Col, Table } from "react-bootstrap";
 import Formb from "react-bootstrap/Form";
 import Carousel from "react-bootstrap/Carousel";
 import "./gg.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
+import styled from "styled-components";
+import Modal from "./Modal";
 import Axios from "axios";
 import Result from "./result.js";
+import OpenModalButton from "./OpenModalButton";
+
+const ModalContent = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: #5c3aff;
+  }
+`;
 //refactor code- JT
 function Ptest() {
   const [usernameReg, setUsernameReg] = useState("");
@@ -35,6 +49,13 @@ function Ptest() {
   const [conditionValue, setconditionValue] = useState("");
   const [conditioncol, setConditioncol] = useState("");
   const [allstudentlist, setAllStudentlist] = useState([]);
+
+  const [isOpen, toggle] = useState(false);
+
+  function handlOpenModal(open) {
+    searchUser();
+    toggle(open);
+  }
   const handleSelect = (e) => {
     console.log(e);
     setTable(e);
@@ -95,8 +116,6 @@ function Ptest() {
       params: { LoginID: lID },
     })
       .then((response) => {
-        console.log("I'm in here");
-        console.log(response);
         setStudentList(response.data); //error here
         // console.log(fname);
         // console.log(studentlist);
@@ -121,15 +140,7 @@ function Ptest() {
   };
   return (
     <div>
-      <div
-        id="leftbox"
-        style={{
-          float: "left",
-          background: "#4c9beb",
-          width: "50%",
-          height: "100%",
-        }}
-      >
+      <div>
         <Tabs className="myClass">
           <TabList>
             <Tab>Find User</Tab>
@@ -154,18 +165,16 @@ function Ptest() {
                       }}
                     />
                   </div>
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-block"
-                    onClick={searchUser}
-                  >
-                    Search
-                  </button>
+
                   {/* <h1>{studentlist}</h1> */}
                   {/* <Result student={studentlist} /> */}
                 </div>
               </div>
             </form>
+
+            <OpenModalButton handlClick={() => handlOpenModal(true)}>
+              Open modal
+            </OpenModalButton>
           </TabPanel>
           <TabPanel>
             <form>
@@ -446,17 +455,6 @@ function Ptest() {
         }}
       >
         <h3>Query Results</h3>
-        {studentlist &&
-          studentlist.map((student) => {
-            return (
-              <div key={student.Login_ID} style={{ textAlign: "left" }}>
-                <p>
-                  {student.First_Name} {student.Last_Name} {student.Login_ID}{" "}
-                  {student.Email}
-                </p>
-              </div>
-            );
-          })}
 
         {actionQuery.length == 0 ? (
           <h1>Empty Result</h1>
@@ -479,7 +477,7 @@ function Ptest() {
 
                 {student.Login_ID ? (
                   <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
+                    s{/* <h1>{student.sLogin_ID}</h1> */}
                     <h1>{student.Login_ID}</h1>
                   </div>
                 ) : (
@@ -532,6 +530,37 @@ function Ptest() {
           })
         )}
       </div>
+
+      <Modal isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
+        <h1>Query Result</h1>
+
+        <ModalContent>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Student ID</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+
+            {studentlist &&
+              studentlist.map((student) => {
+                return (
+                  <tbody key={student.Login_ID} style={{ textAlign: "left" }}>
+                    <tr>
+                      <td>
+                        {student.First_Name} {student.Last_Name}
+                      </td>
+                      <td>{student.Login_ID}</td>
+                      <td>{student.Email}</td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+          </Table>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

@@ -71,7 +71,6 @@ function App() {
             </div>
           </div>
         </nav>
-
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/main" component={Main} />

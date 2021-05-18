@@ -255,6 +255,7 @@ app.get("/getStudentinfo", (req, res) => {
 app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
+  console.log(username);
 
   // console.log(username);
   db.query(

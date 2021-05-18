@@ -21,6 +21,7 @@ export default function Main() {
 
   return (
     <div>
+      
       {/* <h1>hello</h1> */}
       {role == "student" ? history.push("/Profile") : null}
       {role == "admin" ? history.push("/admin") : null}
