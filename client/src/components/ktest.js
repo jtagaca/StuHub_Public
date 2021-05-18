@@ -133,7 +133,7 @@ function Test(props) {
           <div class="col-md-12">
             <div class="modal fade" id="myModal">
               <div class="modal-dialog modal-md">
-                <div class="modal-content">
+                <div class="modal-content" ref={componentRef}>
                   <div class="modal-header">
                     <h1>Course History</h1>
                   </div>
@@ -141,7 +141,7 @@ function Test(props) {
                     <p style={{ textAlign: "center", fontWeight: "bold" }}>
                       *WIP = Work in Progress
                     </p>
-                    <Table striped bordered hover ref={componentRef}>
+                    <Table striped bordered hover>
                       <thead>
                         <tr>
                           <th>CRN</th>
@@ -174,13 +174,6 @@ function Test(props) {
                           );
                         })}
                     </Table>
-
-                    <div>
-                      <ReactToPrint
-                        trigger={() => <button>Print this out!</button>}
-                        content={() => componentRef.current}
-                      />
-                    </div>
                   </div>
                   <div class="modal-footer">
                     <div className="col align-items-center">
@@ -191,6 +184,12 @@ function Test(props) {
                       >
                         Exit
                       </button>
+                      <div>
+                        <ReactToPrint
+                          trigger={() => <button>Print this out!</button>}
+                          content={() => componentRef.current}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

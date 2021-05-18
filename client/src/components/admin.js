@@ -70,27 +70,23 @@ function Admin() {
       });
   };
 
-
-  const inputValidation =()=>{
-    if(usernameReg.length>6 && passwordReg.length>7 && phone.length>5  ){
+  const inputValidation = () => {
+    if (usernameReg.length > 6 && passwordReg.length > 7 && phone.length > 5) {
       register();
+    } else {
+      alert(
+        "Username or Password or Phone does not adhear to our Security Policy"
+      );
     }
-    else{
-
-      alert("Username or Password or Phone does not adhear to our Security Policy")
-    }
-
-  }
+  };
   const handleClear = () => {
     Array.from(document.querySelectorAll("input")).forEach(
-      input => (input.value = "")
+      (input) => (input.value = "")
     );
-
   };
 
   var objectStructure = ["sLogin_ID"];
   const deleteUser = (id) => {
-
     Axios.delete(`/delete/${id}`).then((response) => {
       // setAllStudentlist(
       //   allstudentlist.filter((val) => {
@@ -127,7 +123,6 @@ function Admin() {
     })
 
       .then((response) => {
-        
         console.log(usernameReg);
 
         alert("User was added successfully");
@@ -185,7 +180,6 @@ function Admin() {
                       type="text"
                       className="form-control"
                       placeholder="e.g. 100001"
-                      
                       onChange={(e) => {
                         setld(e.target.value);
                       }}
@@ -312,7 +306,6 @@ function Admin() {
                         </div>
                       </div>
                       <div className="w-2">
-                        
                         <Button
                           className="w-5"
                           variant="primary

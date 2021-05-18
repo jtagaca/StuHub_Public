@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -9,11 +9,16 @@ import Axios from "axios";
 import Moment from "react-moment";
 import "moment-timezone";
 import Clock from "react-live-clock";
-// import "./animate.scss";
+import { useReactToPrint } from "react-to-print";
+import ReactToPrint from "react-to-print";
+
 import "./gg.css";
 import Table from "react-bootstrap/Table";
 
+import Pdf from "react-to-pdf";
+
 function User(props) {
+  const ref = React.createRef();
   //hooks here
   const [coursesTaken, setCoursesTaken] = useState([]);
   const [ownGPA, setOwnGPA] = useState();
@@ -21,7 +26,7 @@ function User(props) {
   const [studentfname, setStudentfname] = useState("");
   const [lname, setStudentlname] = useState("");
   const [id, setStudentID] = useState("");
-
+  const componentRef = useRef();
   useEffect(() => {
     console.log("in");
     Axios.get("/getStudentinfo").then((response) => {
@@ -142,46 +147,48 @@ function User(props) {
             <div class="modal fade" id="myModal">
               <div class="modal-dialog modal-md">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h1>Course History</h1>
-                  </div>
-                  <div class="modal-body">
-                    <p style={{ textAlign: "center", fontWeight: "bold" }}>
-                      *WIP = Work in Progress
-                    </p>
-                    <Table striped bordered hover>
-                      <thead>
-                        <tr>
-                          <th>CRN</th>
-                          <th>Course ID</th>
-                          <th>Course Name</th>
-                          <th>Term</th>
-                          <th>Grade</th>
-                        </tr>
-                      </thead>
+                  <div>
+                    <div class="modal-header">
+                      <h1>Course History</h1>
+                    </div>
+                    <div class="modal-body">
+                      <p style={{ textAlign: "center", fontWeight: "bold" }}>
+                        *WIP = Work in Progress
+                      </p>
+                      <Table striped bordered hover>
+                        <thead>
+                          <tr>
+                            <th>CRN</th>
+                            <th>Course ID</th>
+                            <th>Course Name</th>
+                            <th>Term</th>
+                            <th>Grade</th>
+                          </tr>
+                        </thead>
 
-                      {coursesTaken &&
-                        coursesTaken.map((student) => {
-                          return (
-                            <tbody
-                              key={student.Login_ID}
-                              style={{ textAlign: "left" }}
-                            >
-                              <tr>
-                                <td>{student.CRN}</td>
-                                <td>{student.Course_ID}</td>
-                                <td>{student.Course_Name}</td>
-                                <td>{student.Term}</td>
-                                {student.Grade ? (
-                                  <td>{student.Grade}</td>
-                                ) : (
-                                  <td>WIP</td>
-                                )}
-                              </tr>
-                            </tbody>
-                          );
-                        })}
-                    </Table>
+                        {coursesTaken &&
+                          coursesTaken.map((student) => {
+                            return (
+                              <tbody
+                                key={student.Login_ID}
+                                style={{ textAlign: "left" }}
+                              >
+                                <tr>
+                                  <td>{student.CRN}</td>
+                                  <td>{student.Course_ID}</td>
+                                  <td>{student.Course_Name}</td>
+                                  <td>{student.Term}</td>
+                                  {student.Grade ? (
+                                    <td>{student.Grade}</td>
+                                  ) : (
+                                    <td>WIP</td>
+                                  )}
+                                </tr>
+                              </tbody>
+                            );
+                          })}
+                      </Table>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <div className="col align-items-center">
@@ -192,6 +199,12 @@ function User(props) {
                       >
                         Exit
                       </button>
+                      <div>
+                        <ReactToPrint
+                          trigger={() => <button>Print this out!</button>}
+                          content={() => componentRef.current}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
