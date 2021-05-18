@@ -70,10 +70,18 @@ app.post("/register", (req, res) => {
       "INSERT INTO User (Login_ID,First_Name,Last_Name, password, Email, Phone  ) VALUES (?,?, ? , ?, ?, ?)",
       [username, firstname, lastname, hash, email, phone],
       (err, result) => {
-        console.log(err);
+        if (err) {
+          // console.log("User does not exist");
+          console.log(err);
+        } else {
+          console.log(result);
+          // res.send(result);
+        }
       }
     );
   });
+
+  res.send();
 });
 app.get("/getuser", (req, res) => {
   const login_id = req.query.LoginID;

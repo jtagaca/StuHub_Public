@@ -28,7 +28,7 @@ const ModalContent = styled.div`
   }
 `;
 //refactor code- JT
-function Ptest() {
+function Admin() {
   const [usernameReg, setUsernameReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
   const [fname, setFname] = useState("");
@@ -36,9 +36,6 @@ function Ptest() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [eventKey, setEventKey] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-  const handleShow = () => setShowModal(true);
-  const handleClose = () => setShowModal(false);
 
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
@@ -101,6 +98,11 @@ function Ptest() {
   };
 
   const register = () => {
+    // debugger
+    // handleShow();
+
+   
+    debugger
     Axios.post("/register", {
       username: usernameReg,
       first: fname,
@@ -109,12 +111,14 @@ function Ptest() {
       phone: phone,
       email: email,
     })
+    
       .then((response) => {
-        console.log("aKhjsdh");
+        alert("User was added successfully")
       })
       .catch((err) => {
-        console.log("gg");
-      });
+        alert("Please make sure to fill all the input boxes")
+        
+});
   };
   const [studentlist, setStudentList] = useState();
   const searchUser = () => {
@@ -144,40 +148,6 @@ function Ptest() {
   };
   return (
     <div>
-      <div>
-        {showModal ? (
-          <Modal.Dialog show={handleShow} onHide={handleClose}>
-            <Modal className="modal fade" id="myModal">
-              <Modal.Header className="modal-header">
-                <h5 className="modal-title">Private Booking Email Sent</h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </Modal.Header>
-              <Modal.Body className="modal-body">
-                <p>
-                  A message about your private event has been sent, we will get
-                  back to you as soon as possible.{" "}
-                </p>
-              </Modal.Body>
-              <Modal.Footer className="modal-footer">
-                <button
-                  className="btn btn-primary"
-                  data-dismiss="modal"
-                  onClick={handleClose}
-                >
-                  Close
-                </button>
-              </Modal.Footer>
-            </Modal>
-          </Modal.Dialog>
-        ) : null}
-      </div>
       <div>
         <Tabs className="myClass">
           <TabList>
@@ -289,6 +259,7 @@ function Ptest() {
                     <AddIcon onClick={register} />
                   </Fab>
                 </div>
+      
               </div>
             </form>
           </TabPanel>
@@ -602,4 +573,4 @@ function Ptest() {
     </div>
   );
 }
-export default Ptest;
+export default Admin;
