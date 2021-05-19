@@ -204,6 +204,23 @@ app.get("/query", (req, res) => {
   
 });
 
+app.get("/studentUser", (req, res) => {
+
+  db.query("SELECT * FROM StuHub.StudentUsers ",
+
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  );
+});
+
+
+
 app.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
   console.log("running this" + id);

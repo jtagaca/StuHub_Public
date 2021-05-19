@@ -45,6 +45,7 @@ function Admin() {
   const [table, setTable] = useState("");
   const [arrCol, setArrcol] = useState([]);
   const [actionQuery, setActionQuery] = useState([]);
+  const [allstudentlist, setAllStudentlist] = useState([]);
 
   const [conditionValue, setconditionValue] = useState("");
   const [conditioncol, setConditioncol] = useState("");
@@ -70,6 +71,15 @@ function Admin() {
       });
   };
 
+  const getAllUsers = () => {
+    Axios.get("/studentUser", {})
+      .then((response) => {
+        setAllStudentlist(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const inputValidation = () => {
     if (usernameReg.length > 6 && passwordReg.length > 7 && phone.length > 5) {
       register();
@@ -87,14 +97,19 @@ function Admin() {
 
   var objectStructure = ["sLogin_ID"];
   const deleteUser = (id) => {
-    Axios.delete(`/delete/${id}`).then((response) => {
-      // setAllStudentlist(
-      //   allstudentlist.filter((val) => {
-      //     return val.sLogin_ID != id;
-      //   })
-      // );
-      console.log("success");
-    });
+    Axios.delete(`/delete/${id}`)
+      .then((response) => {
+        console.log("gg");
+        debugger;
+        getAllUsers();
+      })
+      .then((response) => {
+        setAllStudentlist(
+          allstudentlist.filter((val) => {
+            return val.sLogin_ID != id;
+          })
+        );
+      });
   };
 
   // var idcounter = 0;
@@ -416,6 +431,15 @@ function Admin() {
                   >
                     <RemoveIcon />
                   </Fab>
+
+                  <button
+                    type="button"
+                    class="btn btn-demo"
+                    data-toggle="modal"
+                    data-target="#myModal2"
+                  >
+                    Right Sidebar Modal
+                  </button>
                 </div>
               </div>
             </form>
@@ -579,6 +603,51 @@ function Admin() {
           </Table>
         </ModalContent>
       </Modal>
+
+      <div
+        class="modal right fade"
+        id="myModal2"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel2"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel2">
+                Right Sidebar
+              </h4>
+            </div>
+
+            <div class="modal-body">
+              {allstudentlist &&
+                allstudentlist.map((student) => {
+                  return (
+                    <tbody key={student.Login_ID} style={{ textAlign: "left" }}>
+                      <tr>
+                        <td>
+                          {student.First_Name} {student.Last_Name}
+                        </td>
+                        <td>{student.Login_ID}</td>
+                        <td>{student.Email}</td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div></div>
     </div>
   );
 }
