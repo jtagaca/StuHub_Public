@@ -231,7 +231,7 @@ app.get("/studentUser", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(result);
+        // console.log(result);
         res.send(result);
       }
     }
@@ -243,10 +243,11 @@ app.get("/studentUser", (req, res) => {
 app.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
   console.log("running this" + id);
-  db.query("DELETE FROM User WHERE Login_ID = ?", id, (err, result) => {
+  db.query("DELETE FROM User WHERE Login_ID = ?", [id], (err, result) => {
     if (err) {
       console.log(err);
     } else {
+      console.log(result);
       res.send(result);
     }
   });

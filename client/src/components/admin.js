@@ -100,9 +100,10 @@ function Admin() {
 
   var objectStructure = ["sLogin_ID"];
   const deleteUser = (id) => {
-    Axios.delete(`/delete/${id}`)
+    Axios.delete(`http://localhost:3001/delete/${id}`)
       .then((response) => {
         console.log("gg");
+
         getAllUsers();
       })
       .then((response) => {
