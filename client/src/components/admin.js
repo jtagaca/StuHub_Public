@@ -70,7 +70,7 @@ function Admin() {
   const handleSelect = (e) => {
     console.log(e);
     setTable(e);
-    Axios.get("/col", {
+    Axios.get("http://localhost:3001/col", {
       params: { table: table },
     })
       .then((response) => {
@@ -83,7 +83,7 @@ function Admin() {
   };
 
   const getAllUsers = () => {
-    Axios.get("/studentUser", {})
+    Axios.get("http://localhost:3001/studentUser", {})
       .then((response) => {
         setAllStudentlist(response.data);
       })
@@ -128,7 +128,7 @@ function Admin() {
   // var idcounter = 0;
   const QuerySelect = (h) => {
     setEventKey(h);
-    Axios.get("/query", {
+    Axios.get("http://localhost:3001/query", {
       params: { eventKey: eventKey },
     })
       .then((response) => {
@@ -141,7 +141,7 @@ function Admin() {
   };
 
   const register = () => {
-    Axios.post("/register", {
+    Axios.post("http://localhost:3001/register", {
       username: usernameReg,
       first: fname,
       lastname: lname,
@@ -162,7 +162,7 @@ function Admin() {
   };
   const [studentlist, setStudentList] = useState();
   const searchUser = () => {
-    Axios.get("/getuser", {
+    Axios.get("http://localhost:3001/getuser", {
       params: { LoginID: lID },
     })
       .then((response) => {
