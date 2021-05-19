@@ -41,7 +41,7 @@ function User(props) {
 
   const QueryViewCoursesTaken = () => {
     Axios.get("/getStuCourses", {
-      params: { LoginID: 100002 },
+      params: { LoginID: id },
     })
       .then((response) => {
         console.log(response.data);
@@ -53,7 +53,7 @@ function User(props) {
   };
   const QueryViewGPA = () => {
     Axios.get("/getOwnGPA", {
-      params: { LoginID: 100002 },
+      params: { LoginID: id },
     })
       .then((response) => {
         console.log(response.data);
@@ -65,7 +65,7 @@ function User(props) {
   };
   const QueryViewCoursesAv = () => {
     Axios.get("/getAllCourses", {
-      params: { LoginID: 100002 },
+      params: { LoginID: id },
     })
       .then((response) => {
         console.log(response.data);
@@ -115,7 +115,7 @@ function User(props) {
             <Col lg={6} className="border bordercolor ">
               <h1>Welcome</h1>
               <h2>
-                {/*{studentfname} {lname}{" "}*/}
+                {studentfname} {lname}{" "}
               </h2>
             </Col>
 
@@ -135,7 +135,7 @@ function User(props) {
             <div>
               <Row>
                 <Col xl={12} className="border">
-                  {/* <h1>Student ID: {id}</h1> */}
+                  <h1>Student ID: {id}</h1> 
                 </Col>
               </Row>
             </div>
@@ -227,7 +227,7 @@ function User(props) {
                             key={student.Login_ID}
                             style={{ textAlign: "left" }}
                           >
-                            <p styles={{ fontSize: 128 }}> You have a {student.OverallGPA} GPA </p>
+                            <p style={{ fontSize: 32, textAlign: "center", fontWeight: "bold" }}> Overall GPA: {student.OverallGPA}</p>
                           </div>
                         );
                       })}
@@ -242,7 +242,7 @@ function User(props) {
                     </button>
                     <ReactToPrint
                       trigger={() => <button>Print</button>}
-                      content={() => componentRef1.current}
+                      content={() => componentRef2.current}
                     />
                   </div>
                 </div>
@@ -297,7 +297,7 @@ function User(props) {
                       </button>
                         <ReactToPrint
                           trigger={() => <button>Print</button>}
-                          content={() => componentRef1.current}
+                          content={() => componentRef3.current}
                         />
                     </div>
                   </div>
