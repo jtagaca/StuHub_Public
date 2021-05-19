@@ -116,11 +116,7 @@ function Admin() {
       });
   };
   const confirmation = (id) => {
-    if (
-      window.confirm(
-        "Are you sure you want to delete this user?"
-      )
-    ) {
+    if (window.confirm("Are you sure you want to delete this user?")) {
       // Save it!
       deleteUser(id);
     } else {
@@ -193,55 +189,56 @@ function Admin() {
 
   //input validation for add user
   const regEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-  const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const regPassword =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const regInt = /\d/;
   const regChar = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
   const regLetter = /[a-zA-Z]/;
 
   const inputValidation = () => {
     //userID validator
-    if (usernameReg.length === 0)
-    {
+    if (usernameReg.length === 0) {
       alert("Invalid User ID. Field cannot be empty.");
       return;
-    }
-    else if (regLetter.test(usernameReg) || parseInt(usernameReg) < 1)
-    {
+    } else if (regLetter.test(usernameReg) || parseInt(usernameReg) < 1) {
       alert("Invalid User ID. Field can only contain positive integers.");
       return;
     }
     //first and last name validator
-    if (fname.length === 0 || lname.length === 0)
-    {
+    if (fname.length === 0 || lname.length === 0) {
       alert("Invalid First or Last Name. Fields cannot be empty.");
       return;
-    }
-    else if (regInt.test(fname) || regInt.test(lname) || regChar.test(fname) || regChar.test(lname))
-    {
-      alert("Invalid First or Last Name. First and last names cannot contain numbers or special characters.");
+    } else if (
+      regInt.test(fname) ||
+      regInt.test(lname) ||
+      regChar.test(fname) ||
+      regChar.test(lname)
+    ) {
+      alert(
+        "Invalid First or Last Name. First and last names cannot contain numbers or special characters."
+      );
       return;
     }
     //password validator
-    if (!regPassword.test(passwordReg))
-    {
-      alert("Invalid Password. Your password must have at least 8 characters, 1 uppercase letter, 1 lowercase letter, a number, and a special character.");
+    if (!regPassword.test(passwordReg)) {
+      alert(
+        "Invalid Password. Your password must have at least 8 characters, 1 uppercase letter, 1 lowercase letter, a number, and a special character."
+      );
       return;
     }
     //email validator
-    if (email.length === 0)
-    {
+    if (email.length === 0) {
       alert("Invalid Email. Field cannot be empty.");
       return;
-    }
-    else if (!regEmail.test(email))
-    {
+    } else if (!regEmail.test(email)) {
       alert("Invalid Email");
       return;
     }
     //phone validator
-    if (phone.length !== 10 || regChar.test(phone) || regLetter.test(phone))
-    {
-      alert("Invalid Phone Number. Phone numbers cannot contain letters or special characters.");
+    if (phone.length !== 10 || regChar.test(phone) || regLetter.test(phone)) {
+      alert(
+        "Invalid Phone Number. Phone numbers cannot contain letters or special characters."
+      );
       return;
     }
     register();
@@ -249,13 +246,10 @@ function Admin() {
 
   //find user validator
   const findUserValidation = () => {
-    if (lID.length === 0)
-    {
+    if (lID.length === 0) {
       alert("Invalid User ID. Field cannot be empty");
       return;
-    }
-    else if (regLetter.test(lID) || parseInt(lID) < 1)
-    {
+    } else if (regLetter.test(lID) || parseInt(lID) < 1) {
       alert("Invalid User ID. Field can only contain positive integers");
       return;
     }
@@ -264,13 +258,10 @@ function Admin() {
 
   //delete user validation
   const deleteUserValidation = () => {
-    if (delId.length === 0)
-    {
+    if (delId.length === 0) {
       alert("Invalid User ID. Field cannot be empty");
       return;
-    }
-    else if (regLetter.test(delId) || parseInt(delId) < 1)
-    {
+    } else if (regLetter.test(delId) || parseInt(delId) < 1) {
       alert("Invalid User ID. Field can only contain positive integers");
       return;
     }
@@ -305,8 +296,8 @@ function Admin() {
           </TabList>
           <TabPanel>
             <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
+              <div className="admin-wrapper">
+                <div className="admin-inner">
                   <h3>Enter User ID</h3>
                   <div className="form-group">
                     <label>User ID</label>
@@ -327,13 +318,13 @@ function Admin() {
             </form>
 
             <OpenModalButton handlClick={() => findUserValidation()}>
-              Open modal
+              Find
             </OpenModalButton>
           </TabPanel>
           <TabPanel>
             <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
+              <div className="admin-wrapper">
+                <div className="admin-inner">
                   <h3>Enter New User Profile</h3>
                   <div className="form-group">
                     <label>User ID</label>
@@ -411,8 +402,8 @@ function Admin() {
           </TabPanel>
           <TabPanel>
             <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
+              <div className="admin-wrapper">
+                <div className="admin-inner">
                   <div>
                     <div>
                       <div className="marginleft">
@@ -533,8 +524,8 @@ function Admin() {
           </TabPanel>
           <TabPanel>
             <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
+              <div className="admin-wrapper">
+                <div className="admin-inner">
                   <h3>Enter User ID to Delete</h3>
                   <div className="form-group">
                     <label>Student ID</label>
@@ -570,8 +561,8 @@ function Admin() {
           </TabPanel>
           <TabPanel>
             <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
+              <div className="admin-wrapper">
+                <div className="admin-inner">
                   <h3>Queries</h3>
                   <div className="form-group">
                     <div>

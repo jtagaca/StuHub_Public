@@ -3,6 +3,8 @@ import React, { Component, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 // import Profile from '../pages/forms';
+import { Link } from "react-router-dom";
+
 import "../index.css";
 
 function LoginComponent(props) {
@@ -12,6 +14,7 @@ function LoginComponent(props) {
   const [loginStatus, setLoginStatus] = useState("");
 
   const history = useHistory();
+
   const login = () => {
     Axios.post("/login", {
       username: username,
@@ -30,13 +33,11 @@ function LoginComponent(props) {
   };
   //login validator
   const loginValidate = () => {
-    if(username.length === 0)
-    {
+    if (username.length === 0) {
       alert("Username cannot be empty.");
       return;
     }
-    if(password.length === 0)
-    {
+    if (password.length === 0) {
       alert("Password cannot be empty.");
       return;
     }
@@ -45,6 +46,15 @@ function LoginComponent(props) {
 
   return (
     <form>
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+        <div className="container">
+          <Link className="navbar-brand fs-1">StuHuB</Link>
+          <div
+            className="collapse navbar-collapse"
+            id="navbarTogglerDemo02"
+          ></div>
+        </div>
+      </nav>
       <div className="auth-wrapper">
         <div className="auth-inner">
           <h3>Sign In</h3>
