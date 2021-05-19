@@ -44,18 +44,18 @@ function User(props) {
     });
   }, []);
 
-
   const QueryViewPersonalInfo = () => {
     Axios.get("/getPersonalinfo", {
-      params: { LoginID: id }, 
-    }).then((response) => {
-      console.log(response.data);
-      setPersonalInfo(response.data);
-    }).catch((err) => {
-      console.log(err);
-    });
+      params: { LoginID: id },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setPersonalInfo(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-const [per
 
   const QueryViewCoursesTaken = () => {
     Axios.get("/getStuCourses", {
