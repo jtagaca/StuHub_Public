@@ -68,6 +68,10 @@ div.myClass {
   width: 45%;
 }
 
+.customButton {
+  margin-left: 100px;
+}
+
 .modal.right .modal-dialog {
   position: absolute;
   margin: auto;
@@ -147,6 +151,21 @@ a.navbar-brand.fs-1 {
 }
 
 /* animation */
+
+#myModal2 > .modal-dialog > .modal-content {
+  animation: fadeBigInDown 3500ms both;
+}
+@keyframes fadeBigInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
 
 .App > div > div {
   animation: rotateInRight 4000ms both;

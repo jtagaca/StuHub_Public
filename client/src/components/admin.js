@@ -396,7 +396,13 @@ function Admin() {
                   <Fab color="primary" aria-label="add">
                     <AddIcon onClick={inputValidation} />
                   </Fab>
-                  <Button onClick={handleClear}>clear</Button>
+                  <Button
+                    className="float-end customButton "
+                    onClick={handleClear}
+                    variant="primary"
+                  >
+                    Clear
+                  </Button>{" "}
                 </div>
               </div>
             </form>
@@ -442,45 +448,52 @@ function Admin() {
                           Update
                         </Button>
                       </div>
-                      <div className="float-start">
-                        <DropdownButton
-                          alignRight
-                          title="Tables"
-                          id="dropdown-menu-align-right"
-                          onSelect={handleSelect}
-                        >
-                          <Dropdown.Item eventKey="User">User</Dropdown.Item>
-                          <Dropdown.Item eventKey="Department">
-                            Department
-                          </Dropdown.Item>
-                          <Dropdown.Item eventKey="Student">
-                            Student
-                          </Dropdown.Item>
-                          <Dropdown.Item eventKey="Course">
-                            Course
-                          </Dropdown.Item>
-                          <Dropdown.Divider />
-                          <Dropdown.Item eventKey="Major">Major</Dropdown.Item>
-                        </DropdownButton>
-                        <DropdownButton
-                          alignRight
-                          title="Column"
-                          id="dropdown-menu-align-right"
-                          onSelect={(g) => setCol(g)}
-                        >
-                          {arrCol &&
-                            arrCol.map((tb) => {
-                              return (
-                                <Dropdown.Item
-                                  key={tb.COLUMN_NAME}
-                                  eventKey={tb.COLUMN_NAME}
-                                >
-                                  {tb.COLUMN_NAME}
-                                </Dropdown.Item>
-                              );
-                            })}
-                        </DropdownButton>
+                      <div className="">
+                        <div className="float-start">
+                          <DropdownButton
+                            alignRight
+                            title="Tables"
+                            id="dropdown-menu-align-right"
+                            onSelect={handleSelect}
+                          >
+                            <Dropdown.Item eventKey="User">User</Dropdown.Item>
+                            <Dropdown.Item eventKey="Department">
+                              Department
+                            </Dropdown.Item>
+                            <Dropdown.Item eventKey="Student">
+                              Student
+                            </Dropdown.Item>
+                            <Dropdown.Item eventKey="Course">
+                              Course
+                            </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item eventKey="Major">
+                              Major
+                            </Dropdown.Item>
+                          </DropdownButton>
+                        </div>
+                        <div className="float-start">
+                          <DropdownButton
+                            alignRight
+                            title="Column"
+                            id="dropdown-menu-align-right"
+                            onSelect={(g) => setCol(g)}
+                          >
+                            {arrCol &&
+                              arrCol.map((tb) => {
+                                return (
+                                  <Dropdown.Item
+                                    key={tb.COLUMN_NAME}
+                                    eventKey={tb.COLUMN_NAME}
+                                  >
+                                    {tb.COLUMN_NAME}
+                                  </Dropdown.Item>
+                                );
+                              })}
+                          </DropdownButton>
+                        </div>
                         {/* <h4>You selected {col}</h4> */}
+
                         <DropdownButton
                           alignRight
                           title="Condition Column"
@@ -504,8 +517,8 @@ function Admin() {
                     <div>
                       <h5>Selected table: {table}</h5>
                       <h5>
-                        {col}
                         Selected Column:
+                        {col}
                       </h5>
 
                       <h5>
@@ -643,55 +656,54 @@ function Admin() {
         </ModalContent>
       </Modal>
 
-      {/* not working float */}
-      <div className="alignnerRight">
-        <div
-          class="modal right fade"
-          id="myModal2"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="myModalLabel2"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel2">
-                  Students
-                </h4>
-              </div>
+      <div
+        class="modal "
+        id="myModal2"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel2"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">
+                Students
+              </h4>
+            </div>
 
-              <div class="modal-body">
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Login ID</th>
-                      <th>Email</th>
-                    </tr>
-                  </thead>
-                  {allstudentlist &&
-                    allstudentlist.map((student) => {
-                      return (
-                        <tbody
-                          key={student.Login_ID}
-                          style={{ textAlign: "left" }}
-                        >
-                          <tr>
-                            <td>
-                              {student.First_Name} {student.Last_Name}
-                            </td>
-                            <td>{student.Login_ID}</td>
-                            <td>{student.email}</td>
-                          </tr>
-                        </tbody>
-                      );
-                    })}
-                </Table>
-              </div>
+            <div class="modal-body">
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Login ID</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                {allstudentlist &&
+                  allstudentlist.map((student) => {
+                    return (
+                      <tbody
+                        key={student.Login_ID}
+                        style={{ textAlign: "left" }}
+                      >
+                        <tr>
+                          <td>
+                            {student.First_Name} {student.Last_Name}
+                          </td>
+                          <td>{student.Login_ID}</td>
+                          <td>{student.email}</td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+              </Table>
             </div>
           </div>
         </div>
       </div>
+
+      {/* not working float */}
 
       <div
         class="modal "
