@@ -18,6 +18,7 @@ import Table from "react-bootstrap/Table";
 
 import Pdf from "react-to-pdf";
 import { Dropdown } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
 
 function User(props) {
   //hooks here
@@ -94,10 +95,25 @@ function User(props) {
       });
   };
 
-
   var ReactFitText = require("react-fittext");
   return (
     <div>
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+        <div className="container">
+          <Link className="navbar-brand" to={"/sign-in"}>
+            StuHuB
+          </Link>
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to={"/"}>
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <div class="row"></div>
       <div className="float-start my-0">
         <div className="cloud front">
@@ -293,9 +309,10 @@ function User(props) {
                       <Dropdown.Item eventKey="1">English</Dropdown.Item>
                       <Dropdown.Item eventKey="2">Calculus</Dropdown.Item>
                       <Dropdown.Item eventKey="3">Business</Dropdown.Item>
-                      <Dropdown.Item eventKey="4">Computer Science</Dropdown.Item>
+                      <Dropdown.Item eventKey="4">
+                        Computer Science
+                      </Dropdown.Item>
                       <Dropdown.Item eventKey="5">Science</Dropdown.Item>
-                     
                     </DropdownButton>
                   </div>
                   <div class="modal-body">
