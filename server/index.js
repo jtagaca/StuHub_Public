@@ -122,6 +122,25 @@ app.get("/getStuCourses", (req, res) => {
   )
 });
 
+app.get("/getSpecificCourse", (req, res) => {
+  const depID = req.query.depID;
+
+  db.query(
+    "SELECT Course.CRN, Course.Course_ID, Course_Info.Course_Name, Course.Term FROM Course INNER JOIN Course_Info ON Course.Course_ID = Course_Info.Course_ID WHERE Course_Info.Department_ID = ?;",
+    [depID],
+
+    (err, result) => {
+      if (err) {
+        console.log("ERROR");
+        console.log(err);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  )
+});
+
 app.get("/getAllCourses", (req, res) => {
   const login_id = req.query.LoginID;
 
@@ -179,13 +198,13 @@ app.get("/col", (req, res) => {
       }
     }
   );
-  
+
 });
 
 app.get("/query", (req, res) => {
   var eventKey = req.query.eventKey;
-  let sqlQueries=["SELECT * FROM Student WHERE NOT EXISTS (SELECT * FROM StudentGPA WHERE StudentGPA.Login_ID = Student.sLogin_ID)", "SELECT u.* FROM User AS u NATURAL JOIN( SELECT fLogin_ID AS Login_ID, COUNT(sLogin_ID) AS numberofStudents FROM Advises GROUP BY fLogin_ID HAVING COUNT(sLogin_ID) >= 1 ORDER BY numberofStudents DESC LIMIT 1) AS k", "SELECT t.Grade, COUNT(DISTINCT sLogin_ID) AS number_per_student_grade FROM Takes as t WHERE t.Grade IS NOT NULL GROUP BY t.Grade HAVING number_per_student_grade= (SELECT COUNT(DISTINCT sLogin_ID) FROM Student)","SELECT sLogin_ID FROM Takes WHERE Grade IS NULL GROUP BY sLogin_ID HAVING COUNT(*) >=1", "SELECT User.*, OverallGPA FROM StudentGPA NATURAL JOIN User WHERE OverallGPA = (SELECT MAX(OverallGPA) FROM StudentGPA)", "SELECT c_info.* FROM Course_Info as c_info NATURAL JOIN	(SELECT Course_ID, COUNT(*) AS perCourseID FROM Takes NATURAL JOIN Course GROUP BY Course_ID HAVING perCourseID= (SELECT COUNT(*) FROM Student)) AS pertable" ];
-  eventKey=eventKey-1;
+  let sqlQueries = ["SELECT * FROM Student WHERE NOT EXISTS (SELECT * FROM StudentGPA WHERE StudentGPA.Login_ID = Student.sLogin_ID)", "SELECT u.* FROM User AS u NATURAL JOIN( SELECT fLogin_ID AS Login_ID, COUNT(sLogin_ID) AS numberofStudents FROM Advises GROUP BY fLogin_ID HAVING COUNT(sLogin_ID) >= 1 ORDER BY numberofStudents DESC LIMIT 1) AS k", "SELECT t.Grade, COUNT(DISTINCT sLogin_ID) AS number_per_student_grade FROM Takes as t WHERE t.Grade IS NOT NULL GROUP BY t.Grade HAVING number_per_student_grade= (SELECT COUNT(DISTINCT sLogin_ID) FROM Student)", "SELECT sLogin_ID FROM Takes WHERE Grade IS NULL GROUP BY sLogin_ID HAVING COUNT(*) >=1", "SELECT User.*, OverallGPA FROM StudentGPA NATURAL JOIN User WHERE OverallGPA = (SELECT MAX(OverallGPA) FROM StudentGPA)", "SELECT c_info.* FROM Course_Info as c_info NATURAL JOIN	(SELECT Course_ID, COUNT(*) AS perCourseID FROM Takes NATURAL JOIN Course GROUP BY Course_ID HAVING perCourseID= (SELECT COUNT(*) FROM Student)) AS pertable"];
+  eventKey = eventKey - 1;
   console.log(eventKey);
   console.log(sqlQueries[0]);
 
@@ -201,7 +220,7 @@ app.get("/query", (req, res) => {
       }
     }
   );
-  
+
 });
 
 app.get("/studentUser", (req, res) => {
@@ -271,7 +290,7 @@ app.get("/getStudentinfo", (req, res) => {
   console.log(req.session.user)
 
   res.send(req.session.user)
- 
+
 });
 
 
@@ -290,7 +309,7 @@ app.post("/login", (req, res) => {
       if (err) {
         res.send({ err: err });
       }
-   
+
       // console.log(result[0].Password);
       if (result.length > 0) {
         bcrypt.compare(password, result[0].Password, (error, response) => {

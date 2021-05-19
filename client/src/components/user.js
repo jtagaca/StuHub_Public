@@ -27,6 +27,7 @@ function User(props) {
   const [studentfname, setStudentfname] = useState("");
   const [lname, setStudentlname] = useState("");
   const [id, setStudentID] = useState("");
+  const [depID, setDepID] = useState("");
   const componentRef1 = useRef();
   const componentRef2 = useRef();
   const componentRef3 = useRef();
@@ -68,6 +69,21 @@ function User(props) {
   const QueryViewCoursesAv = () => {
     Axios.get("/getAllCourses", {
       params: { LoginID: id },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setCoursesAv(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDropDown = (e) => {
+    console.log(e);
+    setDepID(e);
+    Axios.get("getSpecificCourse", {
+      params: { depID: depID },
     })
       .then((response) => {
         console.log(response.data);
@@ -263,13 +279,13 @@ function User(props) {
                       size="sm"
                       id="dropdown-basic-button" 
                       title="Course Subject"
-                      //onSelect={handleSelect}
+                      onSelect={handleDropDown}
                     >
-                      <Dropdown.Item eventKey="MTH">Math</Dropdown.Item>
-                      <Dropdown.Item eventKey="ENG">English</Dropdown.Item>
-                      <Dropdown.Item eventKey="SCI">Science</Dropdown.Item>
-                      <Dropdown.Item eventKey="CS">Computer Science</Dropdown.Item>
-                      <Dropdown.Item eventKey="BS">Business</Dropdown.Item>
+                      <Dropdown.Item eventKey="1">English</Dropdown.Item>
+                      <Dropdown.Item eventKey="2">Calculus</Dropdown.Item>
+                      <Dropdown.Item eventKey="3">Business</Dropdown.Item>
+                      <Dropdown.Item eventKey="4">Computer Science</Dropdown.Item>
+                      <Dropdown.Item eventKey="5">Science</Dropdown.Item>
                      
                     </DropdownButton>
                   </div>
