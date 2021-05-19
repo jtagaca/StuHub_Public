@@ -202,23 +202,23 @@ function Admin() {
     //userID validator
     if (usernameReg.length === 0)
     {
-      alert("Invalid User ID. Field cannot be empty");
+      alert("Invalid User ID. Field cannot be empty.");
       return;
     }
     else if (regLetter.test(usernameReg) || parseInt(usernameReg) < 1)
     {
-      alert("Invalid User ID. Field can only contain positive integers");
+      alert("Invalid User ID. Field can only contain positive integers.");
       return;
     }
     //first and last name validator
     if (fname.length === 0 || lname.length === 0)
     {
-      alert("Invalid First or Last Name. Fields cannot be empty");
+      alert("Invalid First or Last Name. Fields cannot be empty.");
       return;
     }
     else if (regInt.test(fname) || regInt.test(lname) || regChar.test(fname) || regChar.test(lname))
     {
-      alert("Invalid First or Last Name. First and last names cannot contain numbers or special characters");
+      alert("Invalid First or Last Name. First and last names cannot contain numbers or special characters.");
       return;
     }
     //password validator
@@ -228,7 +228,12 @@ function Admin() {
       return;
     }
     //email validator
-    if (!regEmail.test(email))
+    if (email.length === 0)
+    {
+      alert("Invalid Email. Field cannot be empty.");
+      return;
+    }
+    else if (!regEmail.test(email))
     {
       alert("Invalid Email");
       return;
