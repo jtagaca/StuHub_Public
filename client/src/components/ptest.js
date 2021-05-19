@@ -76,7 +76,6 @@ function Ptest() {
   const regChar = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
   const regLetter = /[a-zA-Z]/;
 
-
   const inputValidation = () => {
     //userID validator
     if (usernameReg.length === 0)
@@ -126,6 +125,33 @@ function Ptest() {
     );
   };
 
+  const findUserValidation = () => {
+    if (lID.length === 0)
+    {
+      alert("Invalid User ID. Field cannot be empty");
+      return;
+    }
+    else if (regLetter.test(lID) || parseInt(lID) < 1)
+    {
+      alert("Invalid User ID. Field can only contain positive integers");
+      return;
+    }
+    handlOpenModal(true);
+  };
+
+  const deleteUserValidation = () => {
+    if (delId.length === 0)
+    {
+      alert("Invalid User ID. Field cannot be empty");
+      return;
+    }
+    else if (regLetter.test(delId) || parseInt(delId) < 1)
+    {
+      alert("Invalid User ID. Field can only contain positive integers");
+      return;
+    }
+    deleteUser(delId);
+  };
   var objectStructure = ["sLogin_ID"];
   const deleteUser = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
@@ -233,7 +259,8 @@ function Ptest() {
               </div>
             </form>
 
-            <OpenModalButton handlClick={() => handlOpenModal(true)}>
+           {/* <OpenModalButton handlClick={() => handlOpenModal(true)}> */}
+           <OpenModalButton handlClick={() => findUserValidation()}>
               Open modal
             </OpenModalButton>
           </TabPanel>
@@ -453,7 +480,7 @@ function Ptest() {
                   <Fab
                     color="primary"
                     aria-label="add"
-                    onClick={() => deleteUser(delId)}
+                    onClick={() => deleteUserValidation()}
                   >
                     <RemoveIcon />
                   </Fab>
