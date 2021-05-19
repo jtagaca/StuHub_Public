@@ -45,7 +45,7 @@ function User(props) {
   }, []);
 
   const QueryViewPersonalInfo = () => {
-    Axios.get("/getPersonalinfo", {
+    Axios.get("http://localhost:3001/getPersonalinfo", {
       params: { LoginID: id },
     })
       .then((response) => {
@@ -58,7 +58,7 @@ function User(props) {
   };
 
   const QueryViewCoursesTaken = () => {
-    Axios.get("/getStuCourses", {
+    Axios.get("http://localhost:3001/getStuCourses", {
       params: { LoginID: id },
     })
       .then((response) => {
@@ -70,7 +70,7 @@ function User(props) {
       });
   };
   const QueryViewGPA = () => {
-    Axios.get("/getOwnGPA", {
+    Axios.get("http://localhost:3001/getOwnGPA", {
       params: { LoginID: id },
     })
       .then((response) => {
@@ -82,7 +82,7 @@ function User(props) {
       });
   };
   const QueryViewCoursesAv = () => {
-    Axios.get("/getAllCourses", {
+    Axios.get("http://localhost:3001/getAllCourses", {
       params: { LoginID: id },
     })
       .then((response) => {
@@ -97,7 +97,7 @@ function User(props) {
   const handleDropDown = (e) => {
     console.log(e);
     setDepID(e);
-    Axios.get("getSpecificCourse", {
+    Axios.get("http://localhost:3001/getSpecificCourse", {
       params: { depID: depID },
     })
       .then((response) => {
