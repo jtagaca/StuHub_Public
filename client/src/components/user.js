@@ -18,7 +18,6 @@ import Table from "react-bootstrap/Table";
 import Pdf from "react-to-pdf";
 
 function User(props) {
-  const ref = React.createRef();
   //hooks here
   const [coursesTaken, setCoursesTaken] = useState([]);
   const [ownGPA, setOwnGPA] = useState();
@@ -26,7 +25,10 @@ function User(props) {
   const [studentfname, setStudentfname] = useState("");
   const [lname, setStudentlname] = useState("");
   const [id, setStudentID] = useState("");
-  const componentRef = useRef();
+  const componentRef1 = useRef();
+  const componentRef2 = useRef();
+  const componentRef3 = useRef();
+
   useEffect(() => {
     console.log("in");
     Axios.get("/getStudentinfo").then((response) => {
@@ -113,7 +115,7 @@ function User(props) {
             <Col lg={6} className="border bordercolor ">
               <h1>Welcome</h1>
               <h2>
-                {studentfname} {lname}{" "}
+                {/*{studentfname} {lname}{" "}*/}
               </h2>
             </Col>
 
@@ -133,7 +135,7 @@ function User(props) {
             <div>
               <Row>
                 <Col xl={12} className="border">
-                  <h1>Student ID: {id}</h1>
+                  {/* <h1>Student ID: {id}</h1> */}
                 </Col>
               </Row>
             </div>
@@ -146,7 +148,7 @@ function User(props) {
           <div class="col-md-12">
             <div class="modal fade" id="myModal">
               <div class="modal-dialog modal-md">
-                <div class="modal-content">
+                <div class="modal-content" ref={componentRef1}>
                   <div>
                     <div class="modal-header">
                       <h1>Course History</h1>
@@ -199,12 +201,10 @@ function User(props) {
                       >
                         Exit
                       </button>
-                      <div>
                         <ReactToPrint
-                          trigger={() => <button>Print this out!</button>}
-                          content={() => componentRef.current}
+                          trigger={() => <button>Print</button>}
+                          content={() => componentRef1.current}
                         />
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -215,7 +215,7 @@ function User(props) {
           <div class="col-md-12">
             <div class="modal fade" id="secondModal">
               <div class="modal-dialog modal-sm">
-                <div class="modal-content">
+                <div class="modal-content" ref={componentRef2}>
                   <div class="modal-header">
                     <h1>GPA</h1>
                   </div>
@@ -227,7 +227,7 @@ function User(props) {
                             key={student.Login_ID}
                             style={{ textAlign: "left" }}
                           >
-                            <p> {student.OverallGPA} </p>
+                            <p styles={{ fontSize: 128 }}> You have a {student.OverallGPA} GPA </p>
                           </div>
                         );
                       })}
@@ -240,6 +240,10 @@ function User(props) {
                     >
                       Exit
                     </button>
+                    <ReactToPrint
+                      trigger={() => <button>Print</button>}
+                      content={() => componentRef1.current}
+                    />
                   </div>
                 </div>
               </div>
@@ -249,7 +253,7 @@ function User(props) {
           <div class="col-md-12">
             <div class="modal fade" id="thirdModal">
               <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+                <div class="modal-content" ref={componentRef3}>
                   <div class="modal-header">
                     <h1>All Courses</h1>
                   </div>
@@ -291,6 +295,10 @@ function User(props) {
                       >
                         Exit
                       </button>
+                        <ReactToPrint
+                          trigger={() => <button>Print</button>}
+                          content={() => componentRef1.current}
+                        />
                     </div>
                   </div>
                 </div>
@@ -325,6 +333,11 @@ function User(props) {
         >
           Search Courses
         </Buttond>{" "}
+        <Buttond
+          variant="light"
+        >
+          View Personal Information
+        </Buttond>
       </div>
     </div>
   );

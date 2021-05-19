@@ -18,8 +18,6 @@ import Table from "react-bootstrap/Table";
 import Pdf from "react-to-pdf";
 
 function Test(props) {
-  const ref = React.createRef();
-
   //hooks here
   const [coursesTaken, setCoursesTaken] = useState([]);
   const [ownGPA, setOwnGPA] = useState();
@@ -62,7 +60,9 @@ function Test(props) {
       });
   };
 
-  const componentRef = useRef();
+  const componentRef1 = useRef();
+  const componentRef2 = useRef();
+  const componentRef3 = useRef();
 
   var ReactFitText = require("react-fittext");
   return (
@@ -133,7 +133,7 @@ function Test(props) {
           <div class="col-md-12">
             <div class="modal fade" id="myModal">
               <div class="modal-dialog modal-md">
-                <div class="modal-content" ref={componentRef}>
+                <div class="modal-content" ref={componentRef1}>
                   <div class="modal-header">
                     <h1>Course History</h1>
                   </div>
@@ -187,7 +187,7 @@ function Test(props) {
                       <div>
                         <ReactToPrint
                           trigger={() => <button>Print this out!</button>}
-                          content={() => componentRef.current}
+                          content={() => componentRef1.current}
                         />
                       </div>
                     </div>
@@ -200,7 +200,7 @@ function Test(props) {
           <div class="col-md-12">
             <div class="modal fade" id="secondModal">
               <div class="modal-dialog modal-sm">
-                <div class="modal-content">
+                <div class="modal-content" ref={componentRef2}>
                   <div class="modal-header">
                     <h1>GPA</h1>
                   </div>
@@ -225,6 +225,12 @@ function Test(props) {
                     >
                       Exit
                     </button>
+                    <div>
+                        <ReactToPrint
+                          trigger={() => <button>Print this out!</button>}
+                          content={() => componentRef1.current}
+                        />
+                      </div>
                   </div>
                 </div>
               </div>
@@ -234,7 +240,7 @@ function Test(props) {
           <div class="col-md-12">
             <div class="modal fade" id="thirdModal">
               <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+                <div class="modal-content" ref={componentRef3}>
                   <div class="modal-header">
                     <h1>All Courses</h1>
                   </div>
@@ -267,7 +273,6 @@ function Test(props) {
                         })}
                     </Table>
 
-                    <button>heelo</button>
                   </div>
                   <div class="modal-footer">
                     <div className="col align-items-center">
@@ -278,7 +283,10 @@ function Test(props) {
                       >
                         Exit
                       </button>
-                      <button>gg</button>
+                      <ReactToPrint
+                          trigger={() => <button>Print this out!</button>}
+                          content={() => componentRef3.current}
+                        />
                     </div>
                   </div>
                 </div>
@@ -287,6 +295,7 @@ function Test(props) {
           </div>
         </div>
       </div>
+
       <div className="my-5">
         <Buttond
           variant="light"
