@@ -132,3 +132,36 @@ a.navbar-brand.fs-1 {
   font-weight: bold;
   font-family: "Fira Sans", sans-serif;
 }
+
+/* animation */
+form > .auth-wrapper > .auth-inner {
+  animation: slideInLeft 2900ms both;
+}
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.App > form > .navbar {
+  animation: vanishIn 3400ms both;
+}
+
+@keyframes vanishIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(2, 2, 2);
+    filter: blur(90px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+    filter: blur(0px);
+  }
+}
