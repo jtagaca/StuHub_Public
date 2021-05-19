@@ -20,6 +20,10 @@
   margin-right: 0%;
 }
 
+.customcontainer {
+  height: 600px;
+  width: 100px;
+}
 .fontButton {
   font-size: 10px;
   color: white;
@@ -74,6 +78,9 @@ div.myClass {
   -o-transform: translate3d(0%, 0, 0);
   transform: translate3d(0%, 0, 0);
 }
+div#react-tabs-1 {
+  background-color: #ffffff;
+}
 
 .modal.right .modal-content {
   height: 100%;
@@ -82,6 +89,12 @@ div.myClass {
 
 .modal.right .modal-body {
   padding: 15px 15px 80px;
+}
+
+button.sc-iCoGMd.dFFDVS {
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
 }
 
 /*Right*/
@@ -134,6 +147,42 @@ a.navbar-brand.fs-1 {
 }
 
 /* animation */
+
+.App > div > div {
+  animation: rotateInRight 4000ms both;
+}
+
+.App > div > .navbar {
+  animation: zoomInRight 2800ms both;
+}
+
+@keyframes zoomInRight {
+  from {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+
+@keyframes rotateInRight {
+  from {
+    transform-origin: right bottom;
+    transform: rotate3d(0, 0, 1, 45deg);
+    opacity: 0;
+  }
+
+  to {
+    transform-origin: right bottom;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
 form > .auth-wrapper > .auth-inner {
   animation: slideInLeft 2900ms both;
 }

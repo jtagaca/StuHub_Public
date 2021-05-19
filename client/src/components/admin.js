@@ -271,9 +271,7 @@ function Admin() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
-          <Link className="navbar-brand" to={"/sign-in"}>
-            StuHuB
-          </Link>
+          <Link className="navbar-brand">StuHuB</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
@@ -285,7 +283,7 @@ function Admin() {
           </div>
         </div>
       </nav>
-      <div>
+      <div className="">
         <Tabs className="myClass">
           <TabList>
             <Tab>Find User</Tab>
@@ -317,7 +315,10 @@ function Admin() {
               </div>
             </form>
 
-            <OpenModalButton handlClick={() => findUserValidation()}>
+            <OpenModalButton
+              className="btn btn-primary "
+              handlClick={() => findUserValidation()}
+            >
               Find
             </OpenModalButton>
           </TabPanel>
@@ -605,7 +606,6 @@ function Admin() {
                     Show Students
                   </button>
                 </div>
-                <Button onClick={logout}>Logout</Button>
               </div>
             </form>
           </TabPanel>
@@ -734,7 +734,7 @@ function Admin() {
 
                       {student.Login_ID ? (
                         <div>
-                          s{/* <h1>{student.sLogin_ID}</h1> */}
+                          {/* <h1>{student.sLogin_ID}</h1> */}
                           <h1>{student.Login_ID}</h1>
                         </div>
                       ) : (
