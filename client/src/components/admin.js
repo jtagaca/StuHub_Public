@@ -349,73 +349,77 @@ function Admin() {
                           Update
                         </Button>
                       </div>
-                      <DropdownButton
-                        alignRight
-                        title="Tables"
-                        id="dropdown-menu-align-right"
-                        onSelect={handleSelect}
-                      >
-                        <Dropdown.Item eventKey="User">User</Dropdown.Item>
-                        <Dropdown.Item eventKey="Department">
-                          Department
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="Student">
-                          Student
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="Course">Course</Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item eventKey="Major">Major</Dropdown.Item>
-                      </DropdownButton>
-                      <DropdownButton
-                        alignRight
-                        title="Column"
-                        id="dropdown-menu-align-right"
-                        onSelect={(g) => setCol(g)}
-                      >
-                        {arrCol &&
-                          arrCol.map((tb) => {
-                            return (
-                              <Dropdown.Item
-                                key={tb.COLUMN_NAME}
-                                eventKey={tb.COLUMN_NAME}
-                              >
-                                {tb.COLUMN_NAME}
-                              </Dropdown.Item>
-                            );
-                          })}
-                      </DropdownButton>
-                      {/* <h4>You selected {col}</h4> */}
-                      <DropdownButton
-                        alignRight
-                        title="Condition Column"
-                        id="dropdown-menu-align-right"
-                        onSelect={(g) => setConditioncol(g)}
-                      >
-                        {arrCol &&
-                          arrCol.map((tb) => {
-                            return (
-                              <Dropdown.Item
-                                key={tb.COLUMN_NAME}
-                                eventKey={tb.COLUMN_NAME}
-                              >
-                                {tb.COLUMN_NAME}
-                              </Dropdown.Item>
-                            );
-                          })}
-                      </DropdownButton>
+                      <div className="float-start">
+                        <DropdownButton
+                          alignRight
+                          title="Tables"
+                          id="dropdown-menu-align-right"
+                          onSelect={handleSelect}
+                        >
+                          <Dropdown.Item eventKey="User">User</Dropdown.Item>
+                          <Dropdown.Item eventKey="Department">
+                            Department
+                          </Dropdown.Item>
+                          <Dropdown.Item eventKey="Student">
+                            Student
+                          </Dropdown.Item>
+                          <Dropdown.Item eventKey="Course">
+                            Course
+                          </Dropdown.Item>
+                          <Dropdown.Divider />
+                          <Dropdown.Item eventKey="Major">Major</Dropdown.Item>
+                        </DropdownButton>
+                        <DropdownButton
+                          alignRight
+                          title="Column"
+                          id="dropdown-menu-align-right"
+                          onSelect={(g) => setCol(g)}
+                        >
+                          {arrCol &&
+                            arrCol.map((tb) => {
+                              return (
+                                <Dropdown.Item
+                                  key={tb.COLUMN_NAME}
+                                  eventKey={tb.COLUMN_NAME}
+                                >
+                                  {tb.COLUMN_NAME}
+                                </Dropdown.Item>
+                              );
+                            })}
+                        </DropdownButton>
+                        {/* <h4>You selected {col}</h4> */}
+                        <DropdownButton
+                          alignRight
+                          title="Condition Column"
+                          id="dropdown-menu-align-right"
+                          onSelect={(g) => setConditioncol(g)}
+                        >
+                          {arrCol &&
+                            arrCol.map((tb) => {
+                              return (
+                                <Dropdown.Item
+                                  key={tb.COLUMN_NAME}
+                                  eventKey={tb.COLUMN_NAME}
+                                >
+                                  {tb.COLUMN_NAME}
+                                </Dropdown.Item>
+                              );
+                            })}
+                        </DropdownButton>
+                      </div>
                     </div>
+                    <div>
+                      <h5>Selected table: {table}</h5>
+                      <h5>
+                        {col}
+                        Selected Column:
+                      </h5>
 
-                    <h5>
-                      {" "}
-                      This is the table: {table}, This is the column that we
-                      want to change {col}, this is the value that will be used
-                      to change the conditional value: {value}
-                    </h5>
-                    <h5>
-                      this is where we want the update to happen:
-                      {conditionValue}, what column are we trying to update:{" "}
-                      {conditioncol}
-                    </h5>
+                      <h5>
+                        Selected Conditional Column:
+                        {conditioncol}
+                      </h5>
+                    </div>
                     <div>
                       {/* <div>
               <Buttond variant="primary"></Buttond>{" "}
@@ -612,92 +616,83 @@ function Admin() {
             </div>
 
             <div class="modal-body">
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Login ID</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                {actionQuery.length == 0 ? (
-                  <h1>Empty Result</h1>
-                ) : (
-                  actionQuery &&
-                  actionQuery.map((student) => {
-                    console.log(student);
-                    return (
-                      <div key={student.Login_ID} style={{ textAlign: "left" }}>
-                        {student.sLogin_ID ? (
-                          <h1>{student.sLogin_ID}</h1>
-                        ) : (
-                          <div></div>
-                        )}
+              {actionQuery.length == 0 ? (
+                <h1>Empty Result</h1>
+              ) : (
+                actionQuery &&
+                actionQuery.map((student) => {
+                  console.log(student);
+                  return (
+                    <div key={student.Login_ID} style={{ textAlign: "left" }}>
+                      {student.sLogin_ID ? (
+                        <h1>{student.sLogin_ID}</h1>
+                      ) : (
+                        <div></div>
+                      )}
 
-                        {student.Address ? (
-                          <div>
-                            {/* <h1>{student.sLogin_ID}</h1> */}
-                            <h1>{student.Address}</h1>
-                          </div>
-                        ) : (
-                          <div></div>
-                        )}
+                      {student.Address ? (
+                        <div>
+                          {/* <h1>{student.sLogin_ID}</h1> */}
+                          <h1>{student.Address}</h1>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
 
-                        {student.Login_ID ? (
-                          <div>
-                            s{/* <h1>{student.sLogin_ID}</h1> */}
-                            <h1>{student.Login_ID}</h1>
-                          </div>
-                        ) : (
-                          <div></div>
-                        )}
-                        {student.First_Name ? (
-                          <div>
-                            {/* <h1>{student.sLogin_ID}</h1> */}
-                            <h1>{student.First_Name}</h1>
-                          </div>
-                        ) : (
-                          <div></div>
-                        )}
+                      {student.Login_ID ? (
+                        <div>
+                          s{/* <h1>{student.sLogin_ID}</h1> */}
+                          <h1>{student.Login_ID}</h1>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                      {student.First_Name ? (
+                        <div>
+                          {/* <h1>{student.sLogin_ID}</h1> */}
+                          <h1>{student.First_Name}</h1>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
 
-                        {student.Last_Name ? (
-                          <div>
-                            {/* <h1>{student.sLogin_ID}</h1> */}
-                            <h1>{student.Last_Name}</h1>
-                          </div>
-                        ) : (
-                          <div></div>
-                        )}
+                      {student.Last_Name ? (
+                        <div>
+                          {/* <h1>{student.sLogin_ID}</h1> */}
+                          <h1>{student.Last_Name}</h1>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
 
-                        {student.Email ? (
-                          <div>
-                            {/* <h1>{student.sLogin_ID}</h1> */}
-                            <h1>{student.Email}</h1>
-                          </div>
-                        ) : (
-                          <div></div>
-                        )}
-                        {student.Phone ? (
-                          <div>
-                            {/* <h1>{student.sLogin_ID}</h1> */}
-                            <h1>{student.Phone}</h1>
-                          </div>
-                        ) : (
-                          <div></div>
-                        )}
-                        {student.OverallGPA ? (
-                          <div>
-                            {/* <h1>{student.sLogin_ID}</h1> */}
-                            <h1>{student.OverallGPA}</h1>
-                          </div>
-                        ) : (
-                          <div></div>
-                        )}
-                      </div>
-                    );
-                  })
-                )}
-              </Table>
+                      {student.Email ? (
+                        <div>
+                          {/* <h1>{student.sLogin_ID}</h1> */}
+                          <h1>{student.Email}</h1>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                      {student.Phone ? (
+                        <div>
+                          {/* <h1>{student.sLogin_ID}</h1> */}
+                          <h1>{student.Phone}</h1>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                      {student.OverallGPA ? (
+                        <div>
+                          {/* <h1>{student.sLogin_ID}</h1> */}
+                          <h1>{student.OverallGPA}</h1>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                    </div>
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
