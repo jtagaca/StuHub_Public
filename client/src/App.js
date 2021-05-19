@@ -20,57 +20,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-          <div className="container">
-            <Link className="navbar-brand" to={"/sign-in"}>
-              StuHuB
-            </Link>
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/sign-in"}>
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/sign-up"}>
-                    Sign up
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/test"}>
-                    test
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/Profile"}>
-                    Profile
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/ptest"}>
-                    ptest
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/etest"}>
-                    etest
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/ktest"}>
-                    ktest
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/ptest2"}>
-                    ptest2
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/main" component={Main} />
@@ -87,8 +36,6 @@ function App() {
           <Route path="/ktest" component={ktest} />
           <Route path="/ptest2" component={ptest2} />
           <Route path="/addusertemp" component={Adduser} />
-
-          {/* <Route path="/Profile" component={} /> */}
         </Switch>
       </div>
     </Router>

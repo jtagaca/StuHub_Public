@@ -91,15 +91,7 @@ function Admin() {
         console.log(err);
       });
   };
-  const inputValidation = () => {
-    if (usernameReg.length > 6 && passwordReg.length > 7 && phone.length > 5) {
-      register();
-    } else {
-      alert(
-        "Username or Password or Phone does not adhear to our Security Policy"
-      );
-    }
-  };
+
   const handleClear = () => {
     Array.from(document.querySelectorAll("input")).forEach(
       (input) => (input.value = "")
@@ -198,6 +190,87 @@ function Admin() {
       console.log("success");
     });
   };
+
+  //input validation for add user
+  const regEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+  const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const regInt = /\d/;
+  const regChar = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+  const regLetter = /[a-zA-Z]/;
+
+  const inputValidation = () => {
+    //userID validator
+    if (usernameReg.length === 0)
+    {
+      alert("Invalid User ID. Field cannot be empty");
+      return;
+    }
+    else if (regLetter.test(usernameReg) || parseInt(usernameReg) < 1)
+    {
+      alert("Invalid User ID. Field can only contain positive integers");
+      return;
+    }
+    //first and last name validator
+    if (fname.length === 0 || lname.length === 0)
+    {
+      alert("Invalid First or Last Name. Fields cannot be empty");
+      return;
+    }
+    else if (regInt.test(fname) || regInt.test(lname) || regChar.test(fname) || regChar.test(lname))
+    {
+      alert("Invalid First or Last Name. First and last names cannot contain numbers or special characters");
+      return;
+    }
+    //password validator
+    if (!regPassword.test(passwordReg))
+    {
+      alert("Invalid Password. Your password must have at least 8 characters, 1 uppercase letter, 1 lowercase letter, a number, and a special character.");
+      return;
+    }
+    //email validator
+    if (!regEmail.test(email))
+    {
+      alert("Invalid Email");
+      return;
+    }
+    //phone validator
+    if (phone.length !== 10 || regChar.test(phone) || regLetter.test(phone))
+    {
+      alert("Invalid Phone Number. Phone numbers cannot contain letters or special characters.");
+      return;
+    }
+    register();
+  };
+
+  //find user validator
+  const findUserValidation = () => {
+    if (lID.length === 0)
+    {
+      alert("Invalid User ID. Field cannot be empty");
+      return;
+    }
+    else if (regLetter.test(lID) || parseInt(lID) < 1)
+    {
+      alert("Invalid User ID. Field can only contain positive integers");
+      return;
+    }
+    handlOpenModal(true);
+  };
+
+  //delete user validation
+  const deleteUserValidation = () => {
+    if (delId.length === 0)
+    {
+      alert("Invalid User ID. Field cannot be empty");
+      return;
+    }
+    else if (regLetter.test(delId) || parseInt(delId) < 1)
+    {
+      alert("Invalid User ID. Field can only contain positive integers");
+      return;
+    }
+    deleteUser(delId);
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
@@ -248,7 +321,7 @@ function Admin() {
               </div>
             </form>
 
-            <OpenModalButton handlClick={() => handlOpenModal(true)}>
+            <OpenModalButton handlClick={() => findUserValidation()}>
               Open modal
             </OpenModalButton>
           </TabPanel>
@@ -473,7 +546,7 @@ function Admin() {
                     color="primary"
                     aria-label="add"
                     // onClick={() => deleteUser(delId)}
-                    onClick={() => confirmation(delId)}
+                    onClick={() => deleteUserValidation()}
                   >
                     <RemoveIcon />
                   </Fab>

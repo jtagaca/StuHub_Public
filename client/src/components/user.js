@@ -246,7 +246,16 @@ function User(props) {
                             key={student.Login_ID}
                             style={{ textAlign: "left" }}
                           >
-                            <p style={{ fontSize: 32, textAlign: "center", fontWeight: "bold" }}> Overall GPA: {student.OverallGPA}</p>
+                            <p
+                              style={{
+                                fontSize: 32,
+                                textAlign: "center",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {" "}
+                              Overall GPA: {student.OverallGPA}
+                            </p>
                           </div>
                         );
                       })}
@@ -275,9 +284,9 @@ function User(props) {
                 <div class="modal-content" ref={componentRef3}>
                   <div class="modal-header">
                     <h1>All Courses</h1>
-                    <DropdownButton 
+                    <DropdownButton
                       size="sm"
-                      id="dropdown-basic-button" 
+                      id="dropdown-basic-button"
                       title="Course Subject"
                       onSelect={handleDropDown}
                     >
@@ -364,11 +373,7 @@ function User(props) {
         >
           Search Courses
         </Buttond>{" "}
-        <Buttond
-          variant="light"
-        >
-          View Personal Information
-        </Buttond>
+        <Buttond variant="light">View Personal Information</Buttond>
       </div>
     </div>
   );
