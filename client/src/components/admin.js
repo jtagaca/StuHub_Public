@@ -500,96 +500,19 @@ function Admin() {
                       <h1>{eventKey}</h1>
                     </div>
                   </div>
+                  <button
+                    type="button"
+                    class="btn btn-demo"
+                    data-toggle="modal"
+                    data-target="#myModal3"
+                  >
+                    Show Students
+                  </button>
                 </div>
               </div>
             </form>
           </TabPanel>
         </Tabs>
-      </div>
-      <div
-        id="rightbox"
-        style={{
-          float: "right",
-          background: "white",
-          width: "50%",
-          height: "100%",
-        }}
-      >
-        <h3>Query Results</h3>
-
-        {actionQuery.length == 0 ? (
-          <h1>Empty Result</h1>
-        ) : (
-          actionQuery &&
-          actionQuery.map((student) => {
-            console.log(student);
-            return (
-              <div key={student.Login_ID} style={{ textAlign: "left" }}>
-                {student.sLogin_ID ? <h1>{student.sLogin_ID}</h1> : <div></div>}
-
-                {student.Address ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Address}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-
-                {student.Login_ID ? (
-                  <div>
-                    s{/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Login_ID}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-                {student.First_Name ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.First_Name}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-
-                {student.Last_Name ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Last_Name}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-
-                {student.Email ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Email}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-                {student.Phone ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Phone}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-                {student.OverallGPA ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.OverallGPA}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-              </div>
-            );
-          })
-        )}
       </div>
 
       <Modal isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
@@ -697,39 +620,86 @@ function Admin() {
                     <th>Email</th>
                   </tr>
                 </thead>
-                {allstudentlist &&
-                  allstudentlist.map((student) => {
+                {actionQuery.length == 0 ? (
+                  <h1>Empty Result</h1>
+                ) : (
+                  actionQuery &&
+                  actionQuery.map((student) => {
+                    console.log(student);
                     return (
-                      <tbody
-                        key={student.Login_ID}
-                        style={{ textAlign: "left" }}
-                      >
-                        <tr>
-                          <td>
-                            {student.First_Name} {student.Last_Name}
-                          </td>
-                          <td>{student.Login_ID}</td>
-                          <td>{student.email}</td>
-                        </tr>
-                      </tbody>
+                      <div key={student.Login_ID} style={{ textAlign: "left" }}>
+                        {student.sLogin_ID ? (
+                          <h1>{student.sLogin_ID}</h1>
+                        ) : (
+                          <div></div>
+                        )}
+
+                        {student.Address ? (
+                          <div>
+                            {/* <h1>{student.sLogin_ID}</h1> */}
+                            <h1>{student.Address}</h1>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+
+                        {student.Login_ID ? (
+                          <div>
+                            s{/* <h1>{student.sLogin_ID}</h1> */}
+                            <h1>{student.Login_ID}</h1>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                        {student.First_Name ? (
+                          <div>
+                            {/* <h1>{student.sLogin_ID}</h1> */}
+                            <h1>{student.First_Name}</h1>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+
+                        {student.Last_Name ? (
+                          <div>
+                            {/* <h1>{student.sLogin_ID}</h1> */}
+                            <h1>{student.Last_Name}</h1>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+
+                        {student.Email ? (
+                          <div>
+                            {/* <h1>{student.sLogin_ID}</h1> */}
+                            <h1>{student.Email}</h1>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                        {student.Phone ? (
+                          <div>
+                            {/* <h1>{student.sLogin_ID}</h1> */}
+                            <h1>{student.Phone}</h1>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                        {student.OverallGPA ? (
+                          <div>
+                            {/* <h1>{student.sLogin_ID}</h1> */}
+                            <h1>{student.OverallGPA}</h1>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                      </div>
                     );
-                  })}
+                  })
+                )}
               </Table>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div>
-        <div style={{ backgroundColor: "green" }}>
-          <button
-            type="button"
-            class="btn btn-demo"
-            data-toggle="modal"
-            data-target="#myModal2"
-          >
-            Show Students
-          </button>
         </div>
       </div>
     </div>
