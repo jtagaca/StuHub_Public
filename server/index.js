@@ -240,7 +240,7 @@ app.get("/studentUser", (req, res) => {
 
 
 
-app.delete("http://localhost:3001/delete/:id", (req, res) => {
+app.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
   console.log("running this" + id);
   db.query("DELETE FROM User WHERE Login_ID = ?", [id], (err, result) => {
