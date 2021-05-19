@@ -1,4 +1,4 @@
-import { React, Component, useState } from "react";
+import { React, Component, useState, useEffect } from "react";
 import { Button, ButtonGroup, Fab, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Buttond from "react-bootstrap/Button";
@@ -56,6 +56,10 @@ function Admin() {
     searchUser();
     toggle(open);
   }
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
   const handleSelect = (e) => {
     console.log(e);
     setTable(e);
@@ -100,7 +104,6 @@ function Admin() {
     Axios.delete(`/delete/${id}`)
       .then((response) => {
         console.log("gg");
-        debugger;
         getAllUsers();
       })
       .then((response) => {
@@ -109,7 +112,22 @@ function Admin() {
             return val.sLogin_ID != id;
           })
         );
+
+        handleClear();
       });
+  };
+  const confirmation = (id) => {
+    if (
+      window.confirm(
+        "Are you sure you want to save this thing into the database?"
+      )
+    ) {
+      // Save it!
+      deleteUser(id);
+    } else {
+      // Do nothing!
+      console.log("Thing was not saved to the database.");
+    }
   };
 
   // var idcounter = 0;
@@ -427,7 +445,8 @@ function Admin() {
                   <Fab
                     color="primary"
                     aria-label="add"
-                    onClick={() => deleteUser(delId)}
+                    // onClick={() => deleteUser(delId)}
+                    onClick={() => confirmation(delId)}
                   >
                     <RemoveIcon />
                   </Fab>
@@ -438,7 +457,7 @@ function Admin() {
                     data-toggle="modal"
                     data-target="#myModal2"
                   >
-                    Right Sidebar Modal
+                    Show Students
                   </button>
                 </div>
               </div>
@@ -604,44 +623,51 @@ function Admin() {
         </ModalContent>
       </Modal>
 
-      <div
-        class="modal right fade"
-        id="myModal2"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel2"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 class="modal-title" id="myModalLabel2">
-                Right Sidebar
-              </h4>
-            </div>
+      {/* not working float */}
+      <div className="alignnerRight">
+        <div
+          class="modal right fade"
+          id="myModal2"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel2"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">
+                  Students
+                </h4>
+              </div>
 
-            <div class="modal-body">
-              {allstudentlist &&
-                allstudentlist.map((student) => {
-                  return (
-                    <tbody key={student.Login_ID} style={{ textAlign: "left" }}>
-                      <tr>
-                        <td>
-                          {student.First_Name} {student.Last_Name}
-                        </td>
-                        <td>{student.Login_ID}</td>
-                        <td>{student.Email}</td>
-                      </tr>
-                    </tbody>
-                  );
-                })}
+              <div class="modal-body">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Login ID</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  {allstudentlist &&
+                    allstudentlist.map((student) => {
+                      return (
+                        <tbody
+                          key={student.Login_ID}
+                          style={{ textAlign: "left" }}
+                        >
+                          <tr>
+                            <td>
+                              {student.First_Name} {student.Last_Name}
+                            </td>
+                            <td>{student.Login_ID}</td>
+                            <td>{student.email}</td>
+                          </tr>
+                        </tbody>
+                      );
+                    })}
+                </Table>
+              </div>
             </div>
           </div>
         </div>
