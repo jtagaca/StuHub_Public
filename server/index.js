@@ -293,17 +293,22 @@ app.post("/login", (req, res) => {
    
       // console.log(result[0].Password);
       if (result.length > 0) {
-        bcrypt.compare(password, result[0].Password, (error, response) => {
 
-          // console.log(response.session);
           if (response) {
             req.session.user = result;
             console.log(req.session.user);
             res.send(result);
-          } else {
-            res.send({ message: "Wrong username/password combination!" });
-          }
-        });
+        // bcrypt.compare(password, result[0].Password, (error, response) => {
+
+        //   // console.log(response.session);
+        //   if (response) {
+        //     req.session.user = result;
+        //     console.log(req.session.user);
+        //     res.send(result);
+        //   } else {
+        //     res.send({ message: "Wrong username/password combination!" });
+        //   }
+        // });
       } else {
         console.log("user don't exist");
         res.send({ message: "User doesn't exist" });

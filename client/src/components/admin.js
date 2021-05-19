@@ -673,7 +673,65 @@ function Admin() {
         </div>
       </div>
 
-      <div></div>
+      <div
+        class="modal "
+        id="myModal3"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel2"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">
+                Students
+              </h4>
+            </div>
+
+            <div class="modal-body">
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Login ID</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                {allstudentlist &&
+                  allstudentlist.map((student) => {
+                    return (
+                      <tbody
+                        key={student.Login_ID}
+                        style={{ textAlign: "left" }}
+                      >
+                        <tr>
+                          <td>
+                            {student.First_Name} {student.Last_Name}
+                          </td>
+                          <td>{student.Login_ID}</td>
+                          <td>{student.email}</td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+              </Table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style={{ backgroundColor: "green" }}>
+          <button
+            type="button"
+            class="btn btn-demo"
+            data-toggle="modal"
+            data-target="#myModal2"
+          >
+            Show Students
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
