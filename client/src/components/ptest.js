@@ -1,653 +1,337 @@
-import { React, Component, useState } from "react";
-import { Button, ButtonGroup, Fab, TextField } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import React, { useRef } from "react";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
 import Buttond from "react-bootstrap/Button";
-import RemoveIcon from "@material-ui/icons/Remove";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { Dropdown, Row, Col, Table } from "react-bootstrap";
-import Formb from "react-bootstrap/Form";
-import Carousel from "react-bootstrap/Carousel";
-import "./gg.css";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css";
-import "../index.css";
-import styled from "styled-components";
-import Modal from "./Modal";
+import "./component.scss";
+import { useState, useEffect } from "react";
 import Axios from "axios";
-import Result from "./result.js";
-import OpenModalButton from "./OpenModalButton";
+import Moment from "react-moment";
+import "moment-timezone";
+import Clock from "react-live-clock";
+import { useReactToPrint } from "react-to-print";
+import ReactToPrint from "react-to-print";
 
-const ModalContent = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  h1 {
-    color: #5c3aff;
-  }
-`;
+import "./gg.css";
+import Table from "react-bootstrap/Table";
+
+import Pdf from "react-to-pdf";
+
 //refactor code- JT
 function Ptest() {
-  const [usernameReg, setUsernameReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [eventKey, setEventKey] = useState(0);
-
-  const [lID, setld] = useState("");
-  const [delId, setDeleteid] = useState("");
-  // let arrTable = ["User", "Department", "Major", "Courses", "Student"];
-  const [value, setValue] = useState("");
-  const [col, setCol] = useState("");
-  const [table, setTable] = useState("");
-  const [arrCol, setArrcol] = useState([]);
-  const [actionQuery, setActionQuery] = useState([]);
-
-  const [conditionValue, setconditionValue] = useState("");
-  const [conditioncol, setConditioncol] = useState("");
-
-  const [isOpen, toggle] = useState(false);
-
-  function handlOpenModal(open) {
-    searchUser();
-    toggle(open);
-  }
-  const handleSelect = (e) => {
-    console.log(e);
-    setTable(e);
-    Axios.get("/col", {
-      params: { table: table },
-    })
-      .then((response) => {
-        console.log(response.data);
-        setArrcol(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  //input validation for add user
-  const regEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-  const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  const regInt = /\d/;
-  const regChar = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
-  const regLetter = /[a-zA-Z]/;
-
-  const inputValidation = () => {
-    //userID validator
-    if (usernameReg.length === 0)
-    {
-      alert("Invalid User ID. Field cannot be empty");
-      return;
-    }
-    else if (regLetter.test(usernameReg) || parseInt(usernameReg) < 1)
-    {
-      alert("Invalid User ID. Field can only contain positive integers");
-      return;
-    }
-    //first and last name validator
-    if (fname.length === 0 || lname.length === 0)
-    {
-      alert("Invalid First or Last Name. Fields cannot be empty");
-      return;
-    }
-    else if (regInt.test(fname) || regInt.test(lname) || regChar.test(fname) || regChar.test(lname))
-    {
-      alert("Invalid First or Last Name. First and last names cannot contain numbers or special characters");
-      return;
-    }
-    //password validator
-    if (!regPassword.test(passwordReg))
-    {
-      alert("Invalid Password. Your password must have at least 8 characters, 1 uppercase letter, 1 lowercase letter, a number, and a special character.");
-      return;
-    }
-    //email validator
-    if (!regEmail.test(email))
-    {
-      alert("Invalid Email");
-      return;
-    }
-    //phone validator
-    if (phone.length !== 10 || regChar.test(phone) || regLetter.test(phone))
-    {
-      alert("Invalid Phone Number. Phone numbers cannot contain letters or special characters.");
-      return;
-    }
-    register();
-  };
-  const handleClear = () => {
-    Array.from(document.querySelectorAll("input")).forEach(
-      (input) => (input.value = "")
-    );
-  };
-
-  const findUserValidation = () => {
-    if (lID.length === 0)
-    {
-      alert("Invalid User ID. Field cannot be empty");
-      return;
-    }
-    else if (regLetter.test(lID) || parseInt(lID) < 1)
-    {
-      alert("Invalid User ID. Field can only contain positive integers");
-      return;
-    }
-    handlOpenModal(true);
-  };
-
-  const deleteUserValidation = () => {
-    if (delId.length === 0)
-    {
-      alert("Invalid User ID. Field cannot be empty");
-      return;
-    }
-    else if (regLetter.test(delId) || parseInt(delId) < 1)
-    {
-      alert("Invalid User ID. Field can only contain positive integers");
-      return;
-    }
-    deleteUser(delId);
-  };
-  var objectStructure = ["sLogin_ID"];
-  const deleteUser = (id) => {
-    Axios.delete(`/delete/${id}`).then((response) => {
-      // setAllStudentlist(
-      //   allstudentlist.filter((val) => {
-      //     return val.sLogin_ID != id;
-      //   })
-      // );
-      console.log("success");
-    });
-  };
-
-  // var idcounter = 0;
-  const QuerySelect = (h) => {
-    setEventKey(h);
-    Axios.get("/query", {
-      params: { eventKey: eventKey },
-    })
-      .then((response) => {
-        console.log(response.data);
-        setActionQuery(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const register = () => {
-    Axios.post("/register", {
-      username: usernameReg,
-      first: fname,
-      lastname: lname,
-      password: passwordReg,
-      phone: phone,
-      email: email,
-    })
-
-      .then((response) => {
-        console.log(usernameReg);
-
-        alert("User was added successfully");
-        handleClear();
-      })
-      .catch((err) => {
-        alert("Please make sure to fill all the input boxes");
-      });
-  };
-  const [studentlist, setStudentList] = useState();
-  const searchUser = () => {
-    Axios.get("/getuser", {
-      params: { LoginID: lID },
-    })
-      .then((response) => {
-        setStudentList(response.data); //error here
-        // console.log(fname);
-        // console.log(studentlist);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const updateUSer = () => {
-    Axios.put("/update", {
-      conditionValue: conditionValue,
-      conditioncol: conditioncol,
-      updateval: value,
-      table: table,
-      col: col,
-    }).then((response) => {
-      console.log("success");
-    });
-  };
-  return (
-    <div>
-      <div>
-        <Tabs className="myClass">
-          <TabList>
-            <Tab>Find User</Tab>
-            <Tab>Add User</Tab>
-            <Tab>Update User</Tab>
-            <Tab style={{ color: "red" }}>Delete User</Tab>
-            <Tab>Actions</Tab>
-          </TabList>
-          <TabPanel>
-            <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
-                  <h3>Enter User ID</h3>
-                  <div className="form-group">
-                    <label>User ID</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="e.g. 100001"
-                      onChange={(e) => {
-                        setld(e.target.value);
-                      }}
-                    />
-                  </div>
-
-                  {/* <h1>{studentlist}</h1> */}
-                  {/* <Result student={studentlist} /> */}
-                </div>
-              </div>
-            </form>
-
-           {/* <OpenModalButton handlClick={() => handlOpenModal(true)}> */}
-           <OpenModalButton handlClick={() => findUserValidation()}>
-              Open modal
-            </OpenModalButton>
-          </TabPanel>
-          <TabPanel>
-            <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
-                  <h3>Enter New User Profile</h3>
-                  <div className="form-group">
-                    <label>User ID</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="e.g. 100001"
-                      onChange={(e) => {
-                        setUsernameReg(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>First Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="e.g. John"
-                      onChange={(e) => {
-                        setFname(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Last Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="e.g. Smith"
-                      onChange={(e) => {
-                        setLname(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Password</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Enter password"
-                      onChange={(e) => {
-                        setPasswordReg(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Email</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="e.g. jsmith123@gmail.com"
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Phone</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="e.g. 9097284455"
-                      onChange={(e) => {
-                        setPhone(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <Fab color="primary" aria-label="add">
-                    <AddIcon onClick={inputValidation} />
-                  </Fab>
-                  <Button onClick={handleClear}>clear</Button>
-                </div>
-              </div>
-            </form>
-          </TabPanel>
-          <TabPanel>
-            <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
-                  <div>
-                    <div>
-                      <div className="marginleft">
-                        <div className="float-left mx-2">
-                          <form>
-                            <TextField
-                              id="standard-basic"
-                              label="Value"
-                              onChange={(e) => {
-                                setValue(e.target.value);
-                              }}
-                            />
-                          </form>
-                        </div>
-                        <div className="float-left ml-5">
-                          <form>
-                            <TextField
-                              id="standard-basic"
-                              label="Update conditionValue"
-                              onChange={(e) => {
-                                setconditionValue(e.target.value);
-                              }}
-                            />
-                          </form>
-                        </div>
-                      </div>
-                      <div className="w-2">
-                        <Button
-                          className="w-5"
-                          variant="primary
-                        "
-                          // onClick={updateUSer}
-                          onClick={updateUSer}
-                        >
-                          Update
-                        </Button>
-                      </div>
-                      <DropdownButton
-                        alignRight
-                        title="Tables"
-                        id="dropdown-menu-align-right"
-                        onSelect={handleSelect}
-                      >
-                        <Dropdown.Item eventKey="User">User</Dropdown.Item>
-                        <Dropdown.Item eventKey="Department">
-                          Department
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="Student">
-                          Student
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="Course">Course</Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item eventKey="Major">Major</Dropdown.Item>
-                      </DropdownButton>
-                      <DropdownButton
-                        alignRight
-                        title="Column"
-                        id="dropdown-menu-align-right"
-                        onSelect={(g) => setCol(g)}
-                      >
-                        {arrCol &&
-                          arrCol.map((tb) => {
-                            return (
-                              <Dropdown.Item
-                                key={tb.COLUMN_NAME}
-                                eventKey={tb.COLUMN_NAME}
-                              >
-                                {tb.COLUMN_NAME}
-                              </Dropdown.Item>
-                            );
-                          })}
-                      </DropdownButton>
-                      {/* <h4>You selected {col}</h4> */}
-                      <DropdownButton
-                        alignRight
-                        title="Condition Column"
-                        id="dropdown-menu-align-right"
-                        onSelect={(g) => setConditioncol(g)}
-                      >
-                        {arrCol &&
-                          arrCol.map((tb) => {
-                            return (
-                              <Dropdown.Item
-                                key={tb.COLUMN_NAME}
-                                eventKey={tb.COLUMN_NAME}
-                              >
-                                {tb.COLUMN_NAME}
-                              </Dropdown.Item>
-                            );
-                          })}
-                      </DropdownButton>
-                    </div>
-
-                    <h5>
-                      {" "}
-                      This is the table: {table}, This is the column that we
-                      want to change {col}, this is the value that will be used
-                      to change the conditional value: {value}
-                    </h5>
-                    <h5>
-                      this is where we want the update to happen:
-                      {conditionValue}, what column are we trying to update:{" "}
-                      {conditioncol}
-                    </h5>
-                    <div>
-                      {/* <div>
-              <Buttond variant="primary"></Buttond>{" "}
-            </div> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </TabPanel>
-          <TabPanel>
-            <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
-                  <h3>Enter User ID to Delete</h3>
-                  <div className="form-group">
-                    <label>Student ID</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="e.g. 100001"
-                      onChange={(e) => {
-                        setDeleteid(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <Fab
-                    color="primary"
-                    aria-label="add"
-                    onClick={() => deleteUserValidation()}
-                  >
-                    <RemoveIcon />
-                  </Fab>
-                </div>
-              </div>
-            </form>
-          </TabPanel>
-          <TabPanel>
-            <form>
-              <div className="auth-wrapper">
-                <div className="auth-inner">
-                  <h3>Queries</h3>
-                  <div className="form-group">
-                    <div>
-                      <DropdownButton
-                        as={ButtonGroup}
-                        menuAlign={{ lg: "right" }}
-                        title="More Queries"
-                        id="dropdown-menu-align-responsive-1"
-                        onSelect={QuerySelect}
-                      >
-                        <Dropdown.Item eventKey="1">
-                          Show students who do not have a GPA
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="2">
-                          Select the faculty that advises the most students.
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="3">
-                          Show a letter grade every student has in common.
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="4">
-                          Select student ID’s taking least 1 course in the
-                          current semester.
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="5">
-                          Select the student ID with the highest GPA.
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="6">
-                          Show courses that are taken by all students
-                        </Dropdown.Item>
-                      </DropdownButton>
-                      <h1>{eventKey}</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </TabPanel>
-        </Tabs>
-      </div>
-      <div
-        id="rightbox"
-        style={{
-          float: "right",
-          background: "white",
-          width: "50%",
-          height: "100%",
-        }}
-      >
-        <h3>Query Results</h3>
-
-        {actionQuery.length == 0 ? (
-          <h1>Empty Result</h1>
-        ) : (
-          actionQuery &&
-          actionQuery.map((student) => {
-            console.log(student);
-            return (
-              <div key={student.Login_ID} style={{ textAlign: "left" }}>
-                {student.sLogin_ID ? <h1>{student.sLogin_ID}</h1> : <div></div>}
-
-                {student.Address ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Address}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-
-                {student.Login_ID ? (
-                  <div>
-                    s{/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Login_ID}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-                {student.First_Name ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.First_Name}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-
-                {student.Last_Name ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Last_Name}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-
-                {student.Email ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Email}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-                {student.Phone ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.Phone}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-                {student.OverallGPA ? (
-                  <div>
-                    {/* <h1>{student.sLogin_ID}</h1> */}
-                    <h1>{student.OverallGPA}</h1>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-              </div>
-            );
-          })
-        )}
-      </div>
-
-      <Modal isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
-        <h1>Query Result</h1>
-
-        <ModalContent>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Student Name</th>
-                <th>Student ID</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-
-            {studentlist &&
-              studentlist.map((student) => {
-                return (
-                  <tbody key={student.Login_ID} style={{ textAlign: "left" }}>
-                    <tr>
-                      <td>
-                        {student.First_Name} {student.Last_Name}
-                      </td>
-                      <td>{student.Login_ID}</td>
-                      <td>{student.Email}</td>
-                    </tr>
-                  </tbody>
-                );
-              })}
-          </Table>
-        </ModalContent>
-      </Modal>
-    </div>
-  );
+   //hooks here
+   const [coursesTaken, setCoursesTaken] = useState([]);
+   const [ownGPA, setOwnGPA] = useState();
+   const [coursesAv, setCoursesAv] = useState([]);
+ 
+   const QueryViewCoursesTaken = () => {
+     Axios.get("/getStuCourses", {
+       params: { LoginID: 100002 },
+     })
+       .then((response) => {
+         console.log(response.data);
+         setCoursesTaken(response.data);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   };
+   const QueryViewGPA = () => {
+     Axios.get("/getOwnGPA", {
+       params: { LoginID: 100002 },
+     })
+       .then((response) => {
+         console.log(response.data);
+         setOwnGPA(response.data);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   };
+   const QueryViewCoursesAv = () => {
+     Axios.get("/getAllCourses", {
+       params: { LoginID: 100002 },
+     })
+       .then((response) => {
+         console.log(response.data);
+         setCoursesAv(response.data);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   };
+ 
+   const componentRef1 = useRef();
+   const componentRef2 = useRef();
+   const componentRef3 = useRef();
+ 
+   var ReactFitText = require("react-fittext");
+   return (
+     <div>
+       <div class="row"></div>
+       <div className="float-start my-0">
+         <div className="cloud front">
+           <span className="left-front"></span>
+ 
+           <span className="right-front"></span>
+         </div>
+         <span className="sun sunshine"></span>
+         <span className="sun"></span>
+         <div className="cloud back">
+           <span className="left-back"></span>
+           <span className="right-back"></span>
+         </div>
+       </div>
+       <div>
+         <div className="circle-wrapper">
+           <div className="warning circle"></div>
+           <div className="icon">
+             <i classname="fa fa-exclamation"></i>
+           </div>
+         </div>
+       </div>
+       <div className="uicontainer container-fluid py-2 mt-5">
+         <Row>
+           <Col lg={12}>
+             <h1>
+               <Clock format={"h:mm:ssa"} interval={1000} ticking={true} />
+             </h1>
+           </Col>
+         </Row>
+ 
+         <div className="mx-5">
+           <Row className="container-fluid mx-0 animate-271724">
+             <Col lg={6} className="border bordercolor ">
+               <h1>Welcome</h1>
+               <h2>$First name $last Name</h2>
+             </Col>
+ 
+             <Col lg={6} className="border bordercolor">
+               <div>
+                 <h1>To the University of CSA, Bakersfield</h1>
+               </div>
+             </Col>
+           </Row>
+         </div>
+         <div className="mb-4">
+           <div className="borderhello bordercolor">
+             <div className="col align-items-center">
+               <h1 className="animate-801856">Hello there</h1>
+             </div>
+ 
+             <div>
+               <Row>
+                 <Col xl={12} className="border">
+                   <h1>Student ID: $1000001</h1>
+                 </Col>
+               </Row>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="container">
+         <div class="row">
+           <div class="col-md-12">
+             <div class="modal fade" id="myModal">
+               <div class="modal-dialog modal-md">
+                 <div class="modal-content" ref={componentRef1}>
+                   <div class="modal-header">
+                     <h1>Course History</h1>
+                   </div>
+                   <div class="modal-body">
+                     <p style={{ textAlign: "center", fontWeight: "bold" }}>
+                       *WIP = Work in Progress
+                     </p>
+                     <Table striped bordered hover>
+                       <thead>
+                         <tr>
+                           <th>CRN</th>
+                           <th>Course ID</th>
+                           <th>Course Name</th>
+                           <th>Term</th>
+                           <th>Grade</th>
+                         </tr>
+                       </thead>
+ 
+                       {coursesTaken &&
+                         coursesTaken.map((student) => {
+                           return (
+                             <tbody
+                               key={student.Login_ID}
+                               style={{ textAlign: "left" }}
+                             >
+                               <tr>
+                                 <td>{student.CRN}</td>
+                                 <td>{student.Course_ID}</td>
+                                 <td>{student.Course_Name}</td>
+                                 <td>{student.Term}</td>
+                                 {student.Grade ? (
+                                   <td>{student.Grade}</td>
+                                 ) : (
+                                   <td>WIP</td>
+                                 )}
+                               </tr>
+                             </tbody>
+                           );
+                         })}
+                     </Table>
+                   </div>
+                   <div class="modal-footer">
+                     <div className="col align-items-center">
+                       <button
+                         class="btn btn-primary"
+                         data-dismiss="modal"
+                         value="Close"
+                       >
+                         Exit
+                       </button>
+                       <div>
+                         <ReactToPrint
+                           trigger={() => <button>Print this out!</button>}
+                           content={() => componentRef1.current}
+                         />
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+ 
+           <div class="col-md-12">
+             <div class="modal fade" id="secondModal">
+               <div class="modal-dialog modal-sm">
+                 <div class="modal-content" ref={componentRef2}>
+                   <div class="modal-header">
+                     <h1>GPA</h1>
+                   </div>
+                   <div class="modal-body">
+                     {ownGPA &&
+                       ownGPA.map((student) => {
+                         return (
+                           <div
+                             key={student.Login_ID}
+                             style={{ textAlign: "left" }}
+                           >
+                             <p> {student.OverallGPA} </p>
+                           </div>
+                         );
+                       })}
+                   </div>
+                   <div class="modal-footer">
+                     <button
+                       class="btn btn-primary"
+                       data-dismiss="modal"
+                       value="Close"
+                     >
+                       Exit
+                     </button>
+                     <div>
+                         <ReactToPrint
+                           trigger={() => <button>Print this out!</button>}
+                           content={() => componentRef1.current}
+                         />
+                       </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+ 
+           <div class="col-md-12">
+             <div class="modal fade" id="thirdModal">
+               <div class="modal-dialog modal-lg">
+                 <div class="modal-content" ref={componentRef3}>
+                   <div class="modal-header">
+                     <h1>All Courses</h1>
+                   </div>
+                   <div class="modal-body">
+                     <Table striped bordered hover>
+                       <thead>
+                         <tr>
+                           <th>Add</th>
+                           <th>CRN</th>
+                           <th>Course ID</th>
+                           <th>Course Name</th>
+                           <th>Term</th>
+                         </tr>
+                       </thead>
+ 
+                       {coursesAv &&
+                         coursesAv.map((all) => {
+                           return (
+                             <tbody
+                               key={all.Login_ID}
+                               style={{ textAlign: "left" }}
+                             >
+                               <tr>
+                                 <td><input type="checkbox"/></td>
+                                 <td>{all.CRN}</td>
+                                 <td>{all.Course_ID}</td>
+                                 <td>{all.Course_Name}</td>
+                                 <td>{all.Term}</td>
+                               </tr>
+                             </tbody>
+                           );
+                         })}
+                     </Table>
+ 
+                   </div>
+                   <div class="modal-footer">
+                     <div className="col align-items-center">
+                       <button
+                         class="btn btn-primary"
+                         data-dismiss="modal"
+                         value="Close"
+                       >
+                         Exit
+                       </button>
+                       <ReactToPrint
+                           trigger={() => <button>Print this out!</button>}
+                           content={() => componentRef3.current}
+                         />
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+ 
+       <div className="my-5">
+         <Buttond
+           variant="light"
+           data-toggle="modal"
+           data-target="#myModal"
+           onClick={QueryViewCoursesTaken}
+         >
+           View all Courses taken
+         </Buttond>{" "}
+         <Buttond
+           variant="light"
+           data-toggle="modal"
+           data-target="#secondModal"
+           onClick={QueryViewGPA}
+         >
+           View GPA
+         </Buttond>{" "}
+         <Buttond
+           variant="light"
+           data-toggle="modal"
+           data-target="#thirdModal"
+           onClick={QueryViewCoursesAv}
+         >
+           Search Courses
+         </Buttond>{" "}
+       </div>
+       {/* <div className="Post" styles={{ backgroundColor: "green" }} ref={ref}>
+         <h1>hello</h1>
+       </div>
+       <Pdf targetRef={ref} filename="post.pdf">
+         {({ toPdf }) => <button onClick={toPdf}>Capture as PDF</button>}
+       </Pdf> */}
+     </div>
+   );
 }
 export default Ptest;

@@ -118,7 +118,7 @@ function Admin() {
   const confirmation = (id) => {
     if (
       window.confirm(
-        "Are you sure you want to save this thing into the database?"
+        "Are you sure you want to delete this user?"
       )
     ) {
       // Save it!
@@ -269,7 +269,7 @@ function Admin() {
       alert("Invalid User ID. Field can only contain positive integers");
       return;
     }
-    deleteUser(delId);
+    confirmation(delId);
   };
   return (
     <div>
