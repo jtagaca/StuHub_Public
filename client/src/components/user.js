@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Buttond from "react-bootstrap/Button";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import "./component.scss";
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -16,6 +17,7 @@ import "./gg.css";
 import Table from "react-bootstrap/Table";
 
 import Pdf from "react-to-pdf";
+import { Dropdown } from "react-bootstrap";
 
 function User(props) {
   //hooks here
@@ -76,6 +78,7 @@ function User(props) {
       });
   };
 
+
   var ReactFitText = require("react-fittext");
   return (
     <div>
@@ -135,7 +138,7 @@ function User(props) {
             <div>
               <Row>
                 <Col xl={12} className="border">
-                  <h1>Student ID: {id}</h1> 
+                  <h1>Student ID: {id}</h1>
                 </Col>
               </Row>
             </div>
@@ -201,10 +204,10 @@ function User(props) {
                       >
                         Exit
                       </button>
-                        <ReactToPrint
-                          trigger={() => <button>Print</button>}
-                          content={() => componentRef1.current}
-                        />
+                      <ReactToPrint
+                        trigger={() => <button>Print</button>}
+                        content={() => componentRef1.current}
+                      />
                     </div>
                   </div>
                 </div>
@@ -256,6 +259,19 @@ function User(props) {
                 <div class="modal-content" ref={componentRef3}>
                   <div class="modal-header">
                     <h1>All Courses</h1>
+                    <DropdownButton 
+                      size="sm"
+                      id="dropdown-basic-button" 
+                      title="Course Subject"
+                      //onSelect={handleSelect}
+                    >
+                      <Dropdown.Item eventKey="MTH">Math</Dropdown.Item>
+                      <Dropdown.Item eventKey="ENG">English</Dropdown.Item>
+                      <Dropdown.Item eventKey="SCI">Science</Dropdown.Item>
+                      <Dropdown.Item eventKey="CS">Computer Science</Dropdown.Item>
+                      <Dropdown.Item eventKey="BS">Business</Dropdown.Item>
+                     
+                    </DropdownButton>
                   </div>
                   <div class="modal-body">
                     <Table striped bordered hover>
@@ -267,7 +283,6 @@ function User(props) {
                           <th>Term</th>
                         </tr>
                       </thead>
-
                       {coursesAv &&
                         coursesAv.map((all) => {
                           return (
@@ -295,10 +310,10 @@ function User(props) {
                       >
                         Exit
                       </button>
-                        <ReactToPrint
-                          trigger={() => <button>Print</button>}
-                          content={() => componentRef3.current}
-                        />
+                      <ReactToPrint
+                        trigger={() => <button>Print</button>}
+                        content={() => componentRef3.current}
+                      />
                     </div>
                   </div>
                 </div>
