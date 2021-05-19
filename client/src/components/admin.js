@@ -16,7 +16,7 @@ import Modal from "./Modal";
 import Axios from "axios";
 import Result from "./result.js";
 import OpenModalButton from "./OpenModalButton";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const ModalContent = styled.div`
   height: 100%;
@@ -200,6 +200,22 @@ function Admin() {
   };
   return (
     <div>
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+        <div className="container">
+          <Link className="navbar-brand" to={"/sign-in"}>
+            StuHuB
+          </Link>
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to={"/"}>
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <div>
         <Tabs className="myClass">
           <TabList>
