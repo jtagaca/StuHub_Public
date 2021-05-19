@@ -252,6 +252,25 @@ app.delete("/delete/:id", (req, res) => {
   });
 });
 
+
+app.get("/getPersonalinfo", (req, res) => {
+  const login_id = req.query.LoginID;
+
+  db.query(
+    "SELECT Students_No_Password.*, Student.Address, User.role FROM Students_No_Password INNER JOIN Student ON Student.sLogin_ID = Students_No_Password.Login_ID INNER JOIN User ON User.Login_ID = Students_No_Password.Login_ID WHERE Students_No_Password.Login_ID = ?;",
+    [login_id],
+
+    (err, result) => {
+      if (err) {
+        console.log("ERROR");
+        console.log(err);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  )
+});
 app.put("/update", (req, res) => {
   const value = req.body.updateval;
   const table = req.body.table;

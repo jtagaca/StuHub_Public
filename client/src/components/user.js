@@ -31,6 +31,7 @@ function User(props) {
   const [depID, setDepID] = useState("");
   const componentRef1 = useRef();
   const componentRef2 = useRef();
+  const [personalInfo, setPersonalInfo] = useState([]);
   const componentRef3 = useRef();
 
   useEffect(() => {
@@ -42,6 +43,19 @@ function User(props) {
       setStudentID(response.data[0].Login_ID);
     });
   }, []);
+
+
+  const QueryViewPersonalInfo = () => {
+    Axios.get("/getPersonalinfo", {
+      params: { LoginID: id }, 
+    }).then((response) => {
+      console.log(response.data);
+      setPersonalInfo(response.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+const [per
 
   const QueryViewCoursesTaken = () => {
     Axios.get("/getStuCourses", {
@@ -388,7 +402,14 @@ function User(props) {
         >
           Search Courses
         </Buttond>{" "}
-        <Buttond variant="light">View Personal Information</Buttond>
+        <Buttond
+          variant="light"
+          data-toggle="modal"
+          data-target="#fourthModal"
+          onClick={QueryViewPersonalInfo}
+        >
+          View Personal Information
+        </Buttond>
       </div>
     </div>
   );
