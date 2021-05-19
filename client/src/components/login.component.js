@@ -28,6 +28,20 @@ function LoginComponent(props) {
       }
     });
   };
+  //login validator
+  const loginValidate = () => {
+    if(username.length === 0)
+    {
+      alert("Username cannot be empty.");
+      return;
+    }
+    if(password.length === 0)
+    {
+      alert("Password cannot be empty.");
+      return;
+    }
+    login();
+  };
 
   return (
     <form>
@@ -60,7 +74,7 @@ function LoginComponent(props) {
           </div>
 
           <button
-            onClick={login}
+            onClick={loginValidate}
             type="button"
             className="btn btn-primary btn-block"
           >
