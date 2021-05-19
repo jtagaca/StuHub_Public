@@ -13,7 +13,7 @@ import Clock from "react-live-clock";
 import { useReactToPrint } from "react-to-print";
 import ReactToPrint from "react-to-print";
 
-import "./gg.css";
+import "./useranimate.css";
 import Table from "react-bootstrap/Table";
 
 import Pdf from "react-to-pdf";
@@ -97,7 +97,7 @@ function User(props) {
 
   var ReactFitText = require("react-fittext");
   return (
-    <div>
+    <div className="user">
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
           <Link className="navbar-brand">StuHuB</Link>
