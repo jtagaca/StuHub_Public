@@ -411,6 +411,58 @@ function User(props) {
           View Personal Information
         </Buttond>
       </div>
+
+      <div class="col-md-12">
+        <div class="modal fade" id="fourthModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1>Your Personal Info</h1>
+              </div>
+              <div class="modal-body">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Address</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  {personalInfo &&
+                    personalInfo.map((me) => {
+                      return (
+                        <tbody key={me.Login_ID} style={{ textAlign: "left" }}>
+                          <tr>
+                            <td>{me.First_Name}</td>
+                            <td>{me.Last_Name}</td>
+                            <td>{me.Email}</td>
+                            <td>{me.Phone}</td>
+                            <td>{me.Address}</td>
+                            <td>{me.role}</td>
+                          </tr>
+                        </tbody>
+                      );
+                    })}
+                </Table>
+              </div>
+              <div class="modal-footer">
+                <div className="col align-items-center">
+                  <button
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                    value="Close"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
