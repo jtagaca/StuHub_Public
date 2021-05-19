@@ -16,6 +16,7 @@ import Modal from "./Modal";
 import Axios from "axios";
 import Result from "./result.js";
 import OpenModalButton from "./OpenModalButton";
+import { useHistory } from "react-router-dom";
 
 const ModalContent = styled.div`
   height: 100%;
@@ -29,6 +30,7 @@ const ModalContent = styled.div`
 `;
 //refactor code- JT
 function Admin() {
+  let history = useHistory();
   const [usernameReg, setUsernameReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
   const [fname, setFname] = useState("");
@@ -37,9 +39,14 @@ function Admin() {
   const [email, setEmail] = useState("");
   const [eventKey, setEventKey] = useState(0);
 
+  const [loggedOut, setLoggedOut] = useState(false);
+
+  const logout = () => {
+    history.push("/");
+  };
+
   const [lID, setld] = useState("");
   const [delId, setDeleteid] = useState("");
-  // let arrTable = ["User", "Department", "Major", "Courses", "Student"];
   const [value, setValue] = useState("");
   const [col, setCol] = useState("");
   const [table, setTable] = useState("");
@@ -513,6 +520,7 @@ function Admin() {
                     Show Students
                   </button>
                 </div>
+                <Button onClick={logout}>Logout</Button>
               </div>
             </form>
           </TabPanel>
