@@ -171,7 +171,7 @@ a.navbar-brand.fs-1 {
   animation: rotateInRight 4000ms both;
 }
 
-.admin > div > .navbar {
+.App > .admin > .navbar {
   animation: zoomInRight 2800ms both;
 }
 

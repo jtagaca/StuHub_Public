@@ -268,7 +268,7 @@ function Admin() {
     confirmation(delId);
   };
   return (
-    <div>
+    <div className="admin">
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
           <Link className="navbar-brand">StuHuB</Link>
