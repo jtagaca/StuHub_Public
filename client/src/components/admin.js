@@ -176,6 +176,7 @@ function Admin() {
       });
   };
 
+  // Cors error JT
   const updateUSer = () => {
     Axios.put("/update", {
       conditionValue: conditionValue,
@@ -184,6 +185,7 @@ function Admin() {
       table: table,
       col: col,
     }).then((response) => {
+      console.log(response);
       console.log("success");
     });
   };

@@ -273,11 +273,19 @@ app.get("/getPersonalinfo", (req, res) => {
   )
 });
 app.put("/update", (req, res) => {
+  console.log(req.body.table)
   const value = req.body.updateval;
+  console.log('value:', value)
   const table = req.body.table;
+  console.log('table:', table)
+
   const conditioncol = req.body.conditioncol;
+  console.log('conditioncol:', conditioncol)
   const conditionvalue = req.body.conditionValue;
+  console.log(conditionvalue)
   const column = req.body.col;
+  console.log(column)
+
   console.log("this is running");
   db.query(
     "UPDATE ?? SET ?? = ? WHERE ?? = ?",
