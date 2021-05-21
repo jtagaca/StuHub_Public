@@ -37,10 +37,10 @@ app.use(
 );
 
 const db = mysql.createConnection({
-  user: "admin",
-  host: "database-1.co2pklgzywdb.us-east-1.rds.amazonaws.com",
-  password: "admin12345",
-  database: "StuHub",
+  user: "your username",
+  host: "yourhost",
+  password: "yourpassword",
+  database: "yourdatabase",
   port: "3306",
 });
 
