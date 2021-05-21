@@ -7,14 +7,13 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { Dropdown, Row, Col, Table } from "react-bootstrap";
 import Formb from "react-bootstrap/Form";
 import Carousel from "react-bootstrap/Carousel";
-import "./gg.css";
+import "../Styling/gg.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import styled from "styled-components";
 import Modal from "./Modal";
 import Axios from "axios";
-import Result from "./result.js";
 import OpenModalButton from "./OpenModalButton";
 import { useHistory, Link } from "react-router-dom";
 

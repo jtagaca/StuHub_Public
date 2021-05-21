@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Buttond from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import "./component.scss";
+import "../Styling/component.scss";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import Moment from "react-moment";
