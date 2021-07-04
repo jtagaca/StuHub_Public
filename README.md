@@ -3,7 +3,7 @@ StuHub is an all-in-one student management service that would allow students to 
 
 
 <img 
-      src="/public/1sb.png" 
+      src="/client/public/1sb.png" 
       height=200px 
    />
 
